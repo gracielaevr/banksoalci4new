@@ -4,7 +4,7 @@ var table;
 
 $(document).ready(function() {
     table = $('#tb').DataTable({
-        ajax: "<?php echo base_url(); ?>/admininstansi/ajaxlist",
+        ajax: "<?php echo base_url(); ?>admininstansi/ajaxlist",
         scrollx: true,
         responsive: true
     });
@@ -39,9 +39,9 @@ function save() {
 
         var url = "";
         if (save_method === 'add') {
-            url = "<?php echo base_url(); ?>/admininstansi/ajax_add";
+            url = "<?php echo base_url(); ?>admininstansi/ajax_add";
         } else {
-            url = "<?php echo base_url(); ?>/admininstansi/ajax_edit";
+            url = "<?php echo base_url(); ?>admininstansi/ajax_edit";
         }
 
         var form_data = new FormData();
@@ -81,7 +81,7 @@ function hapus(id, nama) {
     if (confirm("Apakah anda yakin menghapus " + nama +
             " ini ? \n*Semua data terkait akan terhapus *")) {
         $.ajax({
-            url: "<?php echo base_url(); ?>/admininstansi/hapus/" + id,
+            url: "<?php echo base_url(); ?>admininstansi/hapus/" + id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
@@ -101,7 +101,7 @@ function ganti(id) {
     $('#modal_form').modal('show');
     $('.modal-title').text('Ganti Admin Instansi');
     $.ajax({
-        url: "<?php echo base_url(); ?>/admininstansi/ganti/" + id,
+        url: "<?php echo base_url(); ?>admininstansi/ganti/" + id,
         type: "POST",
         dataType: "JSON",
         success: function(data) {

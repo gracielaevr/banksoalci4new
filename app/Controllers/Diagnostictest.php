@@ -15,7 +15,7 @@ class Diagnostictest extends BaseController{
     }
     
     public function start(){
-        $kode =  $this->modul->dekrip_url($this->request->uri->getSegment(3));
+        $kode =  $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
         $data['kode'] = $this->modul->enkrip_url($kode);
 
         $nama = $this->model->getAllQR("select namabidang from bidang where idbidang = '".$kode."'")->namabidang;
@@ -33,7 +33,7 @@ class Diagnostictest extends BaseController{
     }
 
     public function exam(){
-        $kode = $this->request->uri->getSegment(3);
+        $kode = $this->request->getUri()->getSegment(3);
         $data['kode'] = $kode;
 
         $data['model'] = $this->model;
@@ -53,7 +53,7 @@ class Diagnostictest extends BaseController{
     }
 
     public function narasi(){
-        $kode =  $this->modul->dekrip_url($this->request->uri->getSegment(3));
+        $kode =  $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
         $data['kode'] = $this->modul->enkrip_url($kode);
 
         $idn = $this->model->getAllQR("select idnarasi from subtopik s, narasi n where s.idsubtopik = n.idsubtopik and n.idsubtopik = '".$kode."' order by rand() limit 1")->idnarasi;
@@ -74,7 +74,7 @@ class Diagnostictest extends BaseController{
     }
 
     public function done(){
-        $kode = $this->modul->dekrip_url($this->request->uri->getSegment(3));
+        $kode = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
         $data['kode'] = $kode;
 
         $data['score'] = $this->model->getAllQR("select * from pesertabtob where idpeserta = '".$kode."'")->poin;
@@ -95,7 +95,7 @@ class Diagnostictest extends BaseController{
     }
 
     public function ajaxlist() {
-        $kode = $this->request->uri->getSegment(3);
+        $kode = $this->request->getUri()->getSegment(3);
 
         $id = $this->request->getPost('query');
         $hasil = '';
@@ -130,7 +130,7 @@ class Diagnostictest extends BaseController{
 
     //TEST
     public function begin(){
-        $kode = $this->modul->dekrip_url($this->request->uri->getSegment(3));        
+        $kode = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));        
         $data['kode'] = $kode;
 
         $data['model'] = $this->model;
@@ -163,7 +163,7 @@ class Diagnostictest extends BaseController{
             'instansi' => $this->request->getPost('instansi'),
             'email' => $this->request->getPost('email'),
             'nohp' => $this->request->getPost('tlp'),
-            'idbidang' => $this->modul->dekrip_url($this->request->uri->getSegment(3))
+            'idbidang' => $this->modul->dekrip_url($this->request->getUri()->getSegment(3))
         );
 
         $simpan = $this->model->add("pesertabtob",$datape);
@@ -286,7 +286,7 @@ class Diagnostictest extends BaseController{
 
     public function checkmail() {
         if(session()->get("logged_admin")){
-            $email = $this->model->getAllQR("select count(*) as jml from pesertabtob where email = '".$this->request->uri->getSegment(3)."'")->jml;
+            $email = $this->model->getAllQR("select count(*) as jml from pesertabtob where email = '".$this->request->getUri()->getSegment(3)."'")->jml;
             if($email > 1){
                 $status = "ada";
             }else{

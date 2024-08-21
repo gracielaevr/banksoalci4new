@@ -81,7 +81,7 @@ class Bidang extends BaseController {
     
     public function ganti(){
         if(session()->get("logged_admin")){
-            $kondisi['idbidang'] = $this->request->uri->getSegment(3);
+            $kondisi['idbidang'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("bidang", $kondisi);
             echo json_encode($data);
         }else{
@@ -110,7 +110,7 @@ class Bidang extends BaseController {
     
     public function hapus() {
         if(session()->get("logged_admin")){
-            $kond['idbidang'] = $this->request->uri->getSegment(3);
+            $kond['idbidang'] = $this->request->getUri()->getSegment(3);
             $hapus = $this->model->delete("bidang",$kond);
             if($hapus == 1){
                 $status = "Data terhapus";
