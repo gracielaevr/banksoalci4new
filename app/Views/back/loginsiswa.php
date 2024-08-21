@@ -4,11 +4,11 @@
         <div class="row login-card">
             <div class="col-md-6 side-image">
                 <div class="logo">
-                    <a href="<?php echo base_url(); ?>/"><img src="<?php echo base_url(); ?>/front/images/leapverse.png"
+                    <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>front/images/leapverse.png"
                             class="img-fluid" alt="logo" width="150px" height="70px"></a>
                 </div>
                 <div class="icon">
-                    <a href="<?php echo base_url(); ?>/"><img src="<?php echo base_url(); ?>/front/images/icon.png"
+                    <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>front/images/icon.png"
                             class="img-fluid" alt="icon" width="550px" height="100px"></a>
                 </div>
             </div>
@@ -49,9 +49,9 @@
 </div>
 </div>
 
-<script src="<?php echo base_url(); ?>/back/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="<?php echo base_url(); ?>/back/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>/back/plugins/iCheck/icheck.min.js"></script>
+<script src="<?php echo base_url(); ?>back/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>back/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>back/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#email').keypress(function(e) {
@@ -88,7 +88,7 @@ function proses() {
         form_data.append('pass', pass);
 
         $.ajax({
-            url: "<?php echo base_url(); ?>/loginsiswa/proses",
+            url: "<?php echo base_url(); ?>loginsiswa/proses",
             dataType: 'JSON',
             cache: false,
             contentType: false,
@@ -100,7 +100,7 @@ function proses() {
                 $('#btnProses').attr('disabled', false);
 
                 if (response.status === "ok_siswa") {
-                    window.location.href = "<?php echo base_url(); ?>/homesiswa";
+                    window.location.href = "<?php echo base_url(); ?>homesiswa";
                 } else {
                     displayModal(response.status);
                 }
@@ -127,7 +127,7 @@ function displayModal(message, redirect = false) {
     // Redirect jika diperlukan setelah beberapa detik
     if (redirect) {
         setTimeout(function() {
-            window.location.href = "<?php echo base_url(); ?>/loginsiswa";
+            window.location.href = "<?php echo base_url(); ?>loginsiswa";
         }, 3000); // Redirect setelah 3 detik (sesuaikan sesuai kebutuhan)
     }
 }

@@ -28,7 +28,7 @@ class Instansi extends BaseController
             // membaca profile orang tersebut
             $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
 
-            $data['menu'] = $this->request->uri->getSegment(1);
+            $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
             $def_foto = base_url() . '/images/noimg.jpg';
@@ -126,7 +126,7 @@ class Instansi extends BaseController
     public function ganti()
     {
         if (session()->get("logged_admin")) {
-            $kondisi['idinstansi'] = $this->request->uri->getSegment(3);
+            $kondisi['idinstansi'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("instansi", $kondisi);
             echo json_encode($data);
         } else {
@@ -160,7 +160,7 @@ class Instansi extends BaseController
     public function hapus()
     {
         if (session()->get("logged_admin")) {
-            $kond['idinstansi'] = $this->request->uri->getSegment(3);
+            $kond['idinstansi'] = $this->request->getUri()->getSegment(3);
             $hapus = $this->model->delete("instansi", $kond);
             if ($hapus == 1) {
                 $status = "Data terhapus";

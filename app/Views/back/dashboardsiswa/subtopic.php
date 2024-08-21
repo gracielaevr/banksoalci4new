@@ -46,15 +46,15 @@
             <?php
 
             foreach ($subtopics as $subtopic): ?>
-                <div class="col-12 col-md-4 col-lg-4 ">
-                    <a href="<?= base_url("start/{$subtopic->idsubtopik}") ?>">
-                        <div class="card shadow-leap2 mb-2">
-                            <div class="card-header-centered search-sub">
-                                <h5><?= $subtopic->nama ?></h5>
-                            </div>
+            <div class="col-12 col-md-4 col-lg-4 ">
+                <a href="<?= base_url("start/{$subtopic->idsubtopik}") ?>">
+                    <div class="card shadow-leap2 mb-2">
+                        <div class="card-header-centered search-sub">
+                            <h5><?= $subtopic->nama ?></h5>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
+            </div>
             <?php endforeach; ?>
         </div>
 

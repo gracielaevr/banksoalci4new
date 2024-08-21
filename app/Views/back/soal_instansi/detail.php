@@ -26,7 +26,7 @@ tinymce.init({
 
 $(document).ready(function() {
     table = $('#tb').DataTable({
-        ajax: "<?php echo base_url(); ?>/soalinstansi/ajaxdetil/<?php echo $head->idsubtopik; ?>",
+        ajax: "<?php echo base_url(); ?>soalinstansi/ajaxdetil/<?php echo $head->idsubtopik; ?>",
         scrollx: true,
         responsive: true
     });
@@ -90,9 +90,9 @@ function simpan() {
 
         var url = "";
         if (kode === '') {
-            url = "<?php echo base_url(); ?>/soalinstansi/ajax_add";
+            url = "<?php echo base_url(); ?>soalinstansi/ajax_add";
         } else {
-            url = "<?php echo base_url(); ?>/soalinstansi/ajax_edit";
+            url = "<?php echo base_url(); ?>soalinstansi/ajax_edit";
         }
 
         var form_data = new FormData();
@@ -161,7 +161,7 @@ function savepindah() {
         });
 
         var url = "";
-        url = "<?php echo base_url(); ?>/soalinstansi/pindah";
+        url = "<?php echo base_url(); ?>soalinstansi/pindah";
 
         var form_data = new FormData();
         form_data.append('idsubtopik', idsub);
@@ -197,7 +197,7 @@ function savepindah() {
 function hapus(id, nama) {
     if (confirm("Apakah anda yakin menghapus soal ini ?")) {
         $.ajax({
-            url: "<?php echo base_url(); ?>/soalinstansi/hapus/" + id,
+            url: "<?php echo base_url(); ?>soalinstansi/hapus/" + id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
@@ -222,7 +222,7 @@ function deleteall() {
                 kodesoal.push($(this).val());
             });
             var url = "";
-            url = "<?php echo base_url(); ?>/soalinstansi/hapussemua";
+            url = "<?php echo base_url(); ?>soalinstansi/hapussemua";
 
             var form_data = new FormData();
             form_data.append('hasil', kodesoal);
@@ -266,13 +266,13 @@ function deselectall() {
 }
 
 function kembali() {
-    window.location.href = "<?php echo base_url(); ?>/soalinstansi/";
+    window.location.href = "<?php echo base_url(); ?>soalinstansi/";
 }
 
 function ganti(id) {
     save_method = 'update';
     $.ajax({
-        url: "<?php echo base_url(); ?>/soalinstansi/ganti/" + id,
+        url: "<?php echo base_url(); ?>soalinstansi/ganti/" + id,
         type: "POST",
         dataType: "JSON",
         success: function(data) {
@@ -285,7 +285,7 @@ function ganti(id) {
 
             // akses soalyang banyak
             $.ajax({
-                url: "<?php echo base_url(); ?>/soalinstansi/aksespilihan/" + idsoal,
+                url: "<?php echo base_url(); ?>soalinstansi/aksespilihan/" + idsoal,
                 type: "POST",
                 dataType: "JSON",
                 success: function(data1) {
@@ -301,7 +301,7 @@ function ganti(id) {
 
             // akses soalyang banyak
             $.ajax({
-                url: "<?php echo base_url(); ?>/soalinstansi/aksesjawaban/" + idsoal,
+                url: "<?php echo base_url(); ?>soalinstansi/aksesjawaban/" + idsoal,
                 type: "POST",
                 dataType: "JSON",
                 success: function(data1) {
@@ -376,7 +376,7 @@ function showimg(kode) {
     $('#modal_show_img').modal('show');
     document.getElementById('kode').value = kode;
     $.ajax({
-        url: "<?php echo base_url(); ?>/soalinstansi/load_gambar/" + kode,
+        url: "<?php echo base_url(); ?>soalinstansi/load_gambar/" + kode,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -393,7 +393,7 @@ function showimg(kode) {
     <section class="content-header">
         <h1>Detail Soal <small>Maintenance data soal</small></h1>
         <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>/soalinstansi"> Soal</a></li>
+            <li><a href="<?php echo base_url(); ?>soalinstansi"> Soal</a></li>
             <li class="active">Detil Soal</li>
         </ol>
     </section>

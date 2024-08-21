@@ -7,11 +7,11 @@
     <title>Bank Soal</title>
     <link rel="icon" href="<?php echo $logo; ?>" type="image/x-icon">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/back/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/back/bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/back/bower_components/Ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/back/dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/back/plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>back/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>back/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>back/bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>back/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>back/plugins/iCheck/square/blue.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -22,7 +22,7 @@
             <div class="login-logo">
                 <img src="<?php echo $logo; ?>" style="width: 80px;">
                 <br>
-                <a href="<?php echo base_url(); ?>/loginsiswa">BANK<b>SOAL</b></a>
+                <a href="<?php echo base_url(); ?>loginsiswa">BANK<b>SOAL</b></a>
                 <p style="font-size: 14px;"><b>LEAP ENGLISH AND DIGITAL</b></p>
             </div>
             <p style="font-size: 12px; text-align: center;">Enter Your Information</p>
@@ -65,9 +65,9 @@
                 -->
         </div>
     </div>
-    <script src="<?php echo base_url(); ?>/back/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="<?php echo base_url(); ?>/back/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>/back/plugins/iCheck/icheck.min.js"></script>
+    <script src="<?php echo base_url(); ?>back/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>back/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>back/plugins/iCheck/icheck.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         $('#email').keypress(function(e) {
@@ -104,7 +104,7 @@
             form_data.append('pass', pass);
 
             $.ajax({
-                url: "<?php echo base_url(); ?>/loginsiswa/proses",
+                url: "<?php echo base_url(); ?>loginsiswa/proses",
                 dataType: 'JSON',
                 cache: false,
                 contentType: false,
@@ -116,9 +116,9 @@
                     $('#btnProses').attr('disabled', false);
 
                     if (response.status === "ok_siswa") {
-                        window.location.href = "<?php echo base_url(); ?>/homesiswa";
+                        window.location.href = "<?php echo base_url(); ?>homesiswa";
                     } else if (response.status === "ok_instansi") {
-                        window.location.href = "<?php echo base_url(); ?>/homeinstansi"
+                        window.location.href = "<?php echo base_url(); ?>homeinstansi"
                     } else {
                         alert(response.status);
                     }

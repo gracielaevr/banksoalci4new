@@ -28,7 +28,7 @@ class Pengguna extends BaseController
             // membaca profile orang tersebut
             $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
 
-            $data['menu'] = $this->request->uri->getSegment(1);
+            $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
             $def_foto = base_url() . '/images/noimg.jpg';
@@ -170,7 +170,7 @@ class Pengguna extends BaseController
     public function hapus()
     {
         if (session()->get("logged_in")) {
-            $id = $this->request->uri->getSegment(3);
+            $id = $this->request->getUri()->getSegment(3);
             $lawas = $this->model->getAllQR("SELECT foto FROM users where idusers = '" . $id . "';")->foto;
             if (strlen($lawas) > 0) {
                 if (file_exists($this->modul->getPathApp() . $lawas)) {
@@ -194,7 +194,7 @@ class Pengguna extends BaseController
     public function reset()
     {
         if (session()->get("logged_in")) {
-            $id = $this->request->uri->getSegment(3);
+            $id = $this->request->getUri()->getSegment(3);
             $data = array(
                 'pass' => $this->modul->enkrip_pass('123'),
             );
@@ -214,7 +214,7 @@ class Pengguna extends BaseController
     public function ganti()
     {
         if (session()->get("logged_in")) {
-            $kondisi['idusers'] = $this->request->uri->getSegment(3);
+            $kondisi['idusers'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("users", $kondisi);
             echo json_encode($data);
         } else {

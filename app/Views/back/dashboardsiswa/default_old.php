@@ -8,16 +8,16 @@
 
     <!-- General CSS Files -->
     <link href="front/images/leapverse.png" rel="icon">
-    <link rel="stylesheet" href="<?= base_url() ?>/front/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/assets/css/bootstrap.min.css">
     <!-- <link rel="stylesheet"
-        href="<?= base_url() ?>/front/dashboard/node_modules/@fortawesome/fontawesome-free/css/all.min.css"> -->
+        href="<?= base_url() ?>front/dashboard/node_modules/@fortawesome/fontawesome-free/css/all.min.css"> -->
 
     <!-- CSS Libraries -->
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard/assets/css/style.css">
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard/assets/css/components.css">
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard/assets/css/custom.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/assets/css/style.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/assets/css/components.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/assets/css/custom.css">
 </head>
 
 <body>
@@ -59,19 +59,19 @@
                             </div>
                             <div class="search-item">
                                 <a href="#">
-                                    <img class="mr-3 rounded" width="30" src="<?= base_url() ?>/front/dashboard/assets/img/products/product-3-50.png" alt="product">
+                                    <img class="mr-3 rounded" width="30" src="<?= base_url() ?>front/dashboard/assets/img/products/product-3-50.png" alt="product">
                                     oPhone S9 Limited Edition
                                 </a>
                             </div>
                             <div class="search-item">
                                 <a href="#">
-                                    <img class="mr-3 rounded" width="30" src="<?= base_url() ?>/front/dashboard/assets/img/products/product-2-50.png" alt="product">
+                                    <img class="mr-3 rounded" width="30" src="<?= base_url() ?>front/dashboard/assets/img/products/product-2-50.png" alt="product">
                                     Drone X2 New Gen-7
                                 </a>
                             </div>
                             <div class="search-item">
                                 <a href="#">
-                                    <img class="mr-3 rounded" width="30" src="<?= base_url() ?>/front/dashboard/assets/img/products/product-1-50.png" alt="product">
+                                    <img class="mr-3 rounded" width="30" src="<?= base_url() ?>front/dashboard/assets/img/products/product-1-50.png" alt="product">
                                     Headphone Blitz
                                 </a>
                             </div>
@@ -111,7 +111,7 @@
                             <div class="dropdown-list-content dropdown-list-message">
                                 <a href="#" class="dropdown-item dropdown-item-unread">
                                     <div class="dropdown-item-avatar">
-                                        <img alt="image" src="<?= base_url() ?>/front/dashboard/assets/img/avatar/avatar-1.png" class="rounded-circle">
+                                        <img alt="image" src="<?= base_url() ?>front/dashboard/assets/img/avatar/avatar-1.png" class="rounded-circle">
                                         <div class="is-online"></div>
                                     </div>
                                     <div class="dropdown-item-desc">
@@ -122,7 +122,7 @@
                                 </a>
                                 <a href="#" class="dropdown-item dropdown-item-unread">
                                     <div class="dropdown-item-avatar">
-                                        <img alt="image" src="<?= base_url() ?>/front/dashboard/assets/img/avatar/avatar-2.png" class="rounded-circle">
+                                        <img alt="image" src="<?= base_url() ?>front/dashboard/assets/img/avatar/avatar-2.png" class="rounded-circle">
                                     </div>
                                     <div class="dropdown-item-desc">
                                         <b>Dedik Sugiharto</b>
@@ -132,7 +132,7 @@
                                 </a>
                                 <a href="#" class="dropdown-item dropdown-item-unread">
                                     <div class="dropdown-item-avatar">
-                                        <img alt="image" src="<?= base_url() ?>/front/dashboard/assets/img/avatar/avatar-3.png" class="rounded-circle">
+                                        <img alt="image" src="<?= base_url() ?>front/dashboard/assets/img/avatar/avatar-3.png" class="rounded-circle">
                                         <div class="is-online"></div>
                                     </div>
                                     <div class="dropdown-item-desc">
@@ -143,7 +143,7 @@
                                 </a>
                                 <a href="#" class="dropdown-item">
                                     <div class="dropdown-item-avatar">
-                                        <img alt="image" src="<?= base_url() ?>/front/dashboard/assets/img/avatar/avatar-4.png" class="rounded-circle">
+                                        <img alt="image" src="<?= base_url() ?>front/dashboard/assets/img/avatar/avatar-4.png" class="rounded-circle">
                                     </div>
                                     <div class="dropdown-item-desc">
                                         <b>Ardian Rahardiansyah</b>
@@ -153,7 +153,7 @@
                                 </a>
                                 <a href="#" class="dropdown-item">
                                     <div class="dropdown-item-avatar">
-                                        <img alt="image" src="<?= base_url() ?>/front/dashboard/assets/img/avatar/avatar-5.png" class="rounded-circle">
+                                        <img alt="image" src="<?= base_url() ?>front/dashboard/assets/img/avatar/avatar-5.png" class="rounded-circle">
                                     </div>
                                     <div class="dropdown-item-desc">
                                         <b>Alfa Zulkarnain</b>
@@ -231,8 +231,7 @@
 
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="<?= base_url() ?>/front/images/avatar.png"
-                                class="rounded-circle mr-1">
+                            <img alt="image" src="<?= base_url() ?>front/images/avatar.png" class="rounded-circle mr-1">
                             <div class="d-sm-none d-lg-inline-block">Hi, Budi</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
@@ -251,24 +250,24 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <img src="<?= base_url() ?>/front/images/leapverse.png" alt="" width="80px">
+                        <img src="<?= base_url() ?>front/images/leapverse.png" alt="" width="80px">
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <img src="<?= base_url() ?>/front/images/leapverse.png" alt="" width="40px">
+                        <img src="<?= base_url() ?>front/images/leapverse.png" alt="" width="40px">
                     </div>
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
                         <li class="<?= ($current_page == 'Dashboard') ? 'active' : ''; ?>"><a class="nav-link"
-                                href="<?= base_url() ?>/homesiswa"><i class="fas fa-school"></i>
+                                href="<?= base_url() ?>homesiswa"><i class="fas fa-school"></i>
                                 <span>Dashboard</span></a></li>
                         <li class="<?= ($current_page == 'History') ? 'active' : ''; ?>"><a class="nav-link"
-                                href="<?= base_url() ?>/history"><i class="fas fa-hourglass-half"></i>
+                                href="<?= base_url() ?>history"><i class="fas fa-hourglass-half"></i>
                                 <span>History</span></a></li>
                         <li class="<?= ($current_page == 'Session') ? 'active' : ''; ?>"><a class="nav-link"
-                                href="<?= base_url() ?>/session"><i class="fas fa-book"></i> <span>Session</span></a>
+                                href="<?= base_url() ?>session"><i class="fas fa-book"></i> <span>Session</span></a>
                         </li>
                         <li class="<?= ($current_page == 'Subscribe') ? 'active' : ''; ?>"><a
-                                href="<?= base_url() ?>/subscribe" class="nav-link"><i class="fas fa-rocket"></i>
+                                href="<?= base_url() ?>subscribe" class="nav-link"><i class="fas fa-rocket"></i>
                                 <span>Subscribe</span>
                             </a></li>
                     </ul>
@@ -300,8 +299,8 @@
     </div>
 
     <!-- General JS Scripts -->
-    <script src="<?= base_url() ?>/front/assets/js/jquery.min.js"></script>
-    <script src="<?= base_url() ?>/front/assets/js/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>front/assets/js/jquery.min.js"></script>
+    <script src="<?= base_url() ?>front/assets/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"
@@ -316,13 +315,13 @@
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/stisla.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/stisla.js"></script>
 
     <!-- JS Libraies -->
 
     <!-- Template JS File -->
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/scripts.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/custom.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/scripts.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/custom.js"></script>
 
     <!-- Page Specific JS File -->
     <!-- Code injected by live-server -->

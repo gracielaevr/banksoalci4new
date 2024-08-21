@@ -5,17 +5,20 @@ namespace App\Controllers;
 use App\Models\Mcustom;
 use App\Libraries\Modul;
 
-class Komentar extends BaseController {
+class Komentar extends BaseController
+{
 
     private $model;
     private $modul;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->model = new Mcustom();
         $this->modul = new Modul();
     }
 
-    public function detil() {
+    public function detil()
+    {
         if (session()->get("logged_in")) {
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
@@ -23,7 +26,7 @@ class Komentar extends BaseController {
             $idrole = session()->get("role");
             $data['nm_role'] = session()->get("nama_role");
             $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
-            $data['menu'] = $this->request->uri->getSegment(1);
+            $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
             $def_foto = base_url() . '/images/noimg.jpg';
@@ -58,7 +61,7 @@ class Komentar extends BaseController {
                 $data['logo'] = base_url() . '/images/noimg.jpg';
             }
 
-            $kode = $this->request->uri->getSegment(3);
+            $kode = $this->request->getUri()->getSegment(3);
             $data['head'] = $this->model->getAllQR("SELECT * FROM bidang where idbidang = '" . $kode . "';");
             $data['bidang'] = $this->model->getAllQ("SELECT * FROM bidang where status = 'Aktif'");
 
@@ -73,9 +76,10 @@ class Komentar extends BaseController {
         }
     }
 
-    public function ajaxdetil() {
+    public function ajaxdetil()
+    {
         if (session()->get("logged_in")) {
-            $kode = $this->request->uri->getSegment(3);
+            $kode = $this->request->getUri()->getSegment(3);
             $data = array();
             $no = 1;
             $list = $this->model->getAllQ("select * from komentar where idbidang = '" . $kode . "';");
@@ -86,9 +90,9 @@ class Komentar extends BaseController {
                 $val[] = $row->max;
                 $val[] = $row->komentar;
                 $val[] = '<div style="text-align: center;">'
-                        . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="ganti(' . "'" . $row->idkomentar . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
-                        . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus(' . "'" . $row->idkomentar . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>'
-                        . '</div>';
+                    . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="ganti(' . "'" . $row->idkomentar . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
+                    . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus(' . "'" . $row->idkomentar . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>'
+                    . '</div>';
                 $data[] = $val;
 
                 $no++;
@@ -100,70 +104,73 @@ class Komentar extends BaseController {
         }
     }
 
-    public function ajax_add() {
-        if(session()->get("logged_admin")){
+    public function ajax_add()
+    {
+        if (session()->get("logged_admin")) {
             $data = array(
-                'idkomentar' => $this->model->autokode("K","idkomentar","komentar", 2, 7),
+                'idkomentar' => $this->model->autokode("K", "idkomentar", "komentar", 2, 7),
                 'idbidang' => $this->request->getPost('idbidang'),
                 'komentar' => $this->request->getPost('komentar'),
                 'min' => $this->request->getPost('min'),
                 'max' => $this->request->getPost('max'),
             );
-            $simpan = $this->model->add("komentar",$data);
-            if($simpan == 1){
+            $simpan = $this->model->add("komentar", $data);
+            if ($simpan == 1) {
                 $status = "Data tersimpan";
-            }else{
+            } else {
                 $status = "Data gagal tersimpan";
             }
             echo json_encode(array("status" => $status));
-        }else{
+        } else {
             $this->modul->halaman('login');
         }
     }
-    
-    public function ganti(){
-        if(session()->get("logged_admin")){
-            $kondisi['idkomentar'] = $this->request->uri->getSegment(3);
+
+    public function ganti()
+    {
+        if (session()->get("logged_admin")) {
+            $kondisi['idkomentar'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("komentar", $kondisi);
             echo json_encode($data);
-        }else{
+        } else {
             $this->modul->halaman('login');
         }
     }
-    
-    public function ajax_edit() {
-        if(session()->get("logged_admin")){
+
+    public function ajax_edit()
+    {
+        if (session()->get("logged_admin")) {
             $data = array(
                 'komentar' => $this->request->getPost('komentar'),
                 'min' => $this->request->getPost('min'),
                 'max' => $this->request->getPost('max'),
             );
             $kond['idkomentar'] = $this->request->getPost('kode');
-            $update = $this->model->update("komentar",$data, $kond);
-            if($update == 1){
+            $update = $this->model->update("komentar", $data, $kond);
+            if ($update == 1) {
                 $status = "Data terupdate";
-            }else{
+            } else {
                 $status = "Data gagal terupdate";
             }
             echo json_encode(array("status" => $status));
-        }else{
-            $this->modul->halaman('login');
-        }
-    }
-    
-    public function hapus() {
-        if(session()->get("logged_admin")){
-            $kond['idkomentar'] = $this->request->uri->getSegment(3);
-            $hapus = $this->model->delete("komentar",$kond);
-            if($hapus == 1){
-                $status = "Data terhapus";
-            }else{
-                $status = "Data gagal terhapus";
-            }
-            echo json_encode(array("status" => $status));
-        }else{
+        } else {
             $this->modul->halaman('login');
         }
     }
 
+    public function hapus()
+    {
+        if (session()->get("logged_admin")) {
+            $kond['idkomentar'] = $this->request->getUri()->getSegment(3);
+            $hapus = $this->model->delete("komentar", $kond);
+            if ($hapus == 1) {
+                $status = "Data terhapus";
+            } else {
+                $status = "Data gagal terhapus";
+            }
+            echo json_encode(array("status" => $status));
+        } else {
+            $this->modul->halaman('login');
+        }
+    }
 }

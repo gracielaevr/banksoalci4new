@@ -19,20 +19,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/front/assets/css/aos.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/front/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/front/assets/css/bootstrap-icons.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/front/assets/css/boxicons.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/front/assets/css/glightbox.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/front/assets/css/remixicon.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/front/assets/css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/front/assets/css/line-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>front/assets/css/aos.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>front/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>front/assets/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>front/assets/css/boxicons.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>front/assets/css/glightbox.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>front/assets/css/remixicon.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>front/assets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>front/assets/css/line-awesome.min.css">
     <!-- Option 1: Include in HTML -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
     <!-- Template Main CSS File -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/front/src/css/home.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/front/src/css/login.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>front/src/css/home.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>front/src/css/login.css">
 
     <!-- =======================================================
   * Template Name: Arsha

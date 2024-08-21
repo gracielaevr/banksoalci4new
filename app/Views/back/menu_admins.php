@@ -16,18 +16,18 @@
 
             <li class="<?php if ($menu == "homesiswa") {
                             echo 'active';
-                        } ?>"><a href="<?php echo base_url(); ?>/homesiswa"><i class="fa fa-home"></i>
+                        } ?>"><a href="<?php echo base_url(); ?>homesiswa"><i class="fa fa-home"></i>
                     <span>Beranda</span></a></li>
             <li class="header">Master Data</li>
             <li class="<?php if ($menu == "soalinstansi") {
                             echo 'active';
-                        } ?>"><a href="<?php echo base_url(); ?>/soalinstansi/index"><i class="fa fa-book"></i>
+                        } ?>"><a href="<?php echo base_url(); ?>soalinstansi/index"><i class="fa fa-book"></i>
                     <span>Soal</span></a>
             </li>
             <li class="header">Hasil</li>
             <li class="<?php if ($menu == "soal" | $menu == "soalnarasi") {
                             echo 'active';
-                        } ?>"><a href="<?php echo base_url(); ?>/soal"><i class="fa fa-book"></i>
+                        } ?>"><a href="<?php echo base_url(); ?>soal"><i class="fa fa-book"></i>
                     <span>Results</span></a></li>
             <li class="header">Pengaturan</li>
             <li class="<?php if ($menu == "profilsiswa" || $menu == "gantipass") {
@@ -43,11 +43,11 @@
                 <ul class="treeview-menu">
                     <li class="<?php if ($menu == "profilsiswa") {
                                     echo 'active';
-                                } ?>"><a href="<?php echo base_url(); ?>/profilsiswa"><i class="fa fa-circle-o"></i>
+                                } ?>"><a href="<?php echo base_url(); ?>profilsiswa"><i class="fa fa-circle-o"></i>
                             Profil</a></li>
                     <li class="<?php if ($menu == "gantipasssiswa") {
                                     echo 'active';
-                                } ?>"><a href="<?php echo base_url(); ?>/gantipasssiswa"><i class="fa fa-circle-o"></i>
+                                } ?>"><a href="<?php echo base_url(); ?>gantipasssiswa"><i class="fa fa-circle-o"></i>
                             Ganti
                             Password</a></li>
                 </ul>

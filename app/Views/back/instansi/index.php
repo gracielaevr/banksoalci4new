@@ -4,7 +4,7 @@ var table;
 
 $(document).ready(function() {
     table = $('#tb').DataTable({
-        ajax: "<?php echo base_url(); ?>/instansi/ajaxlist",
+        ajax: "<?php echo base_url(); ?>instansi/ajaxlist",
         scrollx: true,
         responsive: true
     });
@@ -22,7 +22,7 @@ function add() {
 }
 
 // function subtopik(kode) {
-//     window.location.href = "<?php echo base_url(); ?>/subtopik/detil/" + kode;
+//     window.location.href = "<?php echo base_url(); ?>subtopik/detil/" + kode;
 // }
 
 function save() {
@@ -46,9 +46,9 @@ function save() {
 
         var url = "";
         if (save_method === 'add') {
-            url = "<?php echo base_url(); ?>/instansi/ajax_add";
+            url = "<?php echo base_url(); ?>instansi/ajax_add";
         } else {
-            url = "<?php echo base_url(); ?>/instansi/ajax_edit";
+            url = "<?php echo base_url(); ?>instansi/ajax_edit";
         }
 
         var form_data = new FormData();
@@ -89,7 +89,7 @@ function hapus(id, nama) {
     if (confirm("Apakah anda yakin menghapus Instansi " + nama +
             " ini ? \n*Semua data terkait akan terhapus *")) {
         $.ajax({
-            url: "<?php echo base_url(); ?>/instansi/hapus/" + id,
+            url: "<?php echo base_url(); ?>instansi/hapus/" + id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
@@ -109,7 +109,7 @@ function ganti(id) {
     $('#modal_form').modal('show');
     $('.modal-title').text('Ganti Instansi');
     $.ajax({
-        url: "<?php echo base_url(); ?>/instansi/ganti/" + id,
+        url: "<?php echo base_url(); ?>instansi/ganti/" + id,
         type: "POST",
         dataType: "JSON",
         success: function(data) {

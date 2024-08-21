@@ -1,20 +1,23 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\Mcustom;
 use App\Libraries\Modul;
 
-class Message extends BaseController{
-    
-    private $model;
-    private $modul;
-    
-    public function __construct() {
-        $this->model = new Mcustom();
-        $this->modul= new Modul();
-    }
-    
-    public function messages()
+class Message extends BaseController
+{
+
+	private $model;
+	private $modul;
+
+	public function __construct()
+	{
+		$this->model = new Mcustom();
+		$this->modul = new Modul();
+	}
+
+	public function messages()
 	{
 		// Flash messages settings
 
@@ -28,5 +31,4 @@ class Message extends BaseController{
 
 		return view("sweetalert-notification");
 	}
-
 }

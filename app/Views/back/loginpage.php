@@ -4,11 +4,11 @@
         <div class="row login-card">
             <div class="col-md-6 side-image">
                 <div class="logo">
-                    <a href="<?php echo base_url(); ?>/"><img src="<?php echo base_url(); ?>/front/images/leapverse.png"
+                    <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>front/images/leapverse.png"
                             class="img-fluid" alt="logo" width="150px" height="70px"></a>
                 </div>
                 <div class="icon">
-                    <a href="<?php echo base_url(); ?>/"><img src="<?php echo base_url(); ?>/front/images/icon.png"
+                    <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>front/images/icon.png"
                             class="img-fluid" alt="icon" width="550px" height="100px"></a>
                 </div>
             </div>

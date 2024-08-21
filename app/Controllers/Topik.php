@@ -28,7 +28,7 @@ class Topik extends BaseController
             // membaca profile orang tersebut
             $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
 
-            $data['menu'] = $this->request->uri->getSegment(1);
+            $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
             $def_foto = base_url() . '/images/noimg.jpg';
@@ -144,7 +144,7 @@ class Topik extends BaseController
     public function ganti()
     {
         if (session()->get("logged_admin")) {
-            $kondisi['idtopik'] = $this->request->uri->getSegment(3);
+            $kondisi['idtopik'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("topik", $kondisi);
             echo json_encode($data);
         } else {
@@ -176,7 +176,7 @@ class Topik extends BaseController
     public function hapus()
     {
         if (session()->get("logged_admin")) {
-            $kond['idtopik'] = $this->request->uri->getSegment(3);
+            $kond['idtopik'] = $this->request->getUri()->getSegment(3);
             $hapus = $this->model->delete("topik", $kond);
             if ($hapus == 1) {
                 $status = "Data terhapus";

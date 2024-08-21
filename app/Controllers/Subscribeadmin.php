@@ -28,7 +28,7 @@ class Subscribeadmin extends BaseController
             // membaca profile orang tersebut
             $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
 
-            $data['menu'] = $this->request->uri->getSegment(1);
+            $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
             $def_foto = base_url() . '/images/noimg.jpg';
@@ -133,7 +133,7 @@ class Subscribeadmin extends BaseController
     public function ganti()
     {
         if (session()->get("logged_admin")) {
-            $kondisi['idsubscribe'] = $this->request->uri->getSegment(3);
+            $kondisi['idsubscribe'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("subscribe", $kondisi);
             echo json_encode($data);
         } else {
@@ -171,7 +171,7 @@ class Subscribeadmin extends BaseController
     public function hapus()
     {
         if (session()->get("logged_admin")) {
-            $kond['idsubscribe'] = $this->request->uri->getSegment(3);
+            $kond['idsubscribe'] = $this->request->getUri()->getSegment(3);
             $hapus = $this->model->delete("subscribe", $kond);
             if ($hapus == 1) {
                 $status = "Data terhapus";

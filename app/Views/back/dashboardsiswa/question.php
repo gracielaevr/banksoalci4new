@@ -4,30 +4,30 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>/front/dashboard_new/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="<?= base_url() ?>/front/images/leapverse.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>front/dashboard_new/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="<?= base_url() ?>front/images/leapverse.png">
     <title>Leapverse Question Bank</title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 
     <!-- Nucleo Icons -->
-    <link href="<?= base_url() ?>/front/dashboard_new/assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="<?= base_url() ?>/front/dashboard_new/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>front/dashboard_new/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>front/dashboard_new/assets/css/nucleo-svg.css" rel="stylesheet" />
 
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="<?= base_url() ?>/front/dashboard_new/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>front/dashboard_new/assets/css/nucleo-svg.css" rel="stylesheet" />
 
 
     <!-- CSS Files -->
-    <link id="pagestyle" href="<?= base_url() ?>/front/dashboard_new/assets/css/argon-dashboard.css?v=2.0.4"
+    <link id="pagestyle" href="<?= base_url() ?>front/dashboard_new/assets/css/argon-dashboard.css?v=2.0.4"
         rel="stylesheet" />
 
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard/assets/css/custom.css">
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard/assets/css/components.css">
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard_new/assets/css/style.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/assets/css/custom.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/assets/css/components.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard_new/assets/css/style.css">
 </head>
 
 
@@ -36,13 +36,13 @@
         <nav class="navbar navbar-expand-lg main-navbar d-flex justify-content-between pt-3 pb-3 ps-5 pe-5 " style="background: rgb(255,255,255);
 background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 100%);
 ">
-            <img src="<?= base_url() ?>/front/images/leapverse.png" alt="" width="80px">
+            <img src="<?= base_url() ?>front/images/leapverse.png" alt="" width="80px">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="ms-3">Muhammad Jefry</span>
-                        <img src="<?= base_url() ?>/front/dashboard_new/assets/img/team-2.jpg"
+                        <img src="<?= base_url() ?>front/dashboard_new/assets/img/team-2.jpg"
                             class="avatar avatar-sm  ms-3" aria-hidden="true">
 
                     </a>
@@ -67,19 +67,19 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
 
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="<?= base_url() ?>/homesiswa" class="nav-link text-center"><i
+                    <a href="<?= base_url() ?>homesiswa" class="nav-link text-center"><i
                             class="ni ni-tv-2 text-primary text-sm opacity-10 me-2"></i><span>Dashboard</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url() ?>/history" class="nav-link text-center"><i
+                    <a href="<?= base_url() ?>history" class="nav-link text-center"><i
                             class="ni ni-bullet-list-67 text-warning text-sm opacity-10 me-2"></i><span>History</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url() ?>/session" class="nav-link text-center"><i
+                    <a href="<?= base_url() ?>session" class="nav-link text-center"><i
                             class="ni ni-app text-info text-sm opacity-10 me-2"></i><span>Session</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url() ?>/subscribe" class="nav-link text-center"><i
+                    <a href="<?= base_url() ?>subscribe" class="nav-link text-center"><i
                             class="ni ni-like-2 text-danger text-sm opacity-10 me-2"></i><span>Subscribe</span></a>
                 </li>
             </ul>
@@ -170,14 +170,14 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
     </div>
 
     <!--   Core JS Files   -->
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/core/popper.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/core/bootstrap.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/plugins/chartjs.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/core/popper.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/core/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/plugins/chartjs.min.js"></script>
     <!-- General JS Scripts -->
-    <script src="<?= base_url() ?>/front/assets/js/jquery.min.js"></script>
-    <script src="<?= base_url() ?>/front/assets/js/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>front/assets/js/jquery.min.js"></script>
+    <script src="<?= base_url() ?>front/assets/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"
@@ -192,13 +192,13 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/stisla.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/stisla.js"></script>
 
     <!-- JS Libraies -->
 
     <!-- Template JS File -->
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/scripts.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/custom.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/scripts.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/custom.js"></script>
 
 </body>
 

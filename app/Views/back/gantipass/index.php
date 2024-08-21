@@ -1,48 +1,47 @@
 <script type="text/javascript">
+$(document).ready(function() {
 
-    $(document).ready(function () {
+});
 
-    });
+function proses() {
+    var lama = document.getElementById('lama').value;
+    var baru = document.getElementById('baru').value;
 
-    function proses() {
-        var lama = document.getElementById('lama').value;
-        var baru = document.getElementById('baru').value;
-        
-        if(lama === ""){
-            alert("Password lama tidak boleh kosong");
-        }else if(baru === ""){
-            alert("Password baru tidak boleh kosong");
-        }else{
-            $('#btnSave').text('Saving...');
-            $('#btnSave').attr('disabled',true);
+    if (lama === "") {
+        alert("Password lama tidak boleh kosong");
+    } else if (baru === "") {
+        alert("Password baru tidak boleh kosong");
+    } else {
+        $('#btnSave').text('Saving...');
+        $('#btnSave').attr('disabled', true);
 
-            var form_data = new FormData();
-            form_data.append('lama', lama);
-            form_data.append('baru', baru);
+        var form_data = new FormData();
+        form_data.append('lama', lama);
+        form_data.append('baru', baru);
 
-            $.ajax({
-                url: "<?php echo base_url(); ?>/gantipass/proses",
-                dataType: 'JSON',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'POST',
-                success: function (response) {
-                    alert(response.status);
-                    location.reload();
+        $.ajax({
+            url: "<?php echo base_url(); ?>gantipass/proses",
+            dataType: 'JSON',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'POST',
+            success: function(response) {
+                alert(response.status);
+                location.reload();
 
-                    $('#btnSave').text('Save');
-                    $('#btnSave').attr('disabled', false);
-                },error: function (response) {
-                    alert(response.status);
-                    $('#btnSave').text('Save');
-                    $('#btnSave').attr('disabled', false);
-                }
-            });
-        }
+                $('#btnSave').text('Save');
+                $('#btnSave').attr('disabled', false);
+            },
+            error: function(response) {
+                alert(response.status);
+                $('#btnSave').text('Save');
+                $('#btnSave').attr('disabled', false);
+            }
+        });
     }
-
+}
 </script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -78,7 +77,8 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button id="btnSave" type="button" class="btn btn-primary" onclick="proses();">Simpan</button>
+                            <button id="btnSave" type="button" class="btn btn-primary"
+                                onclick="proses();">Simpan</button>
                             <button type="button" class="btn btn-default">Batal</button>
                         </div>
                     </div>

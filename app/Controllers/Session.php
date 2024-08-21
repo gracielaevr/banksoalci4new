@@ -34,7 +34,7 @@ class Session extends BaseController
             $data['role'] = session()->get("role");
             $data['nm_role'] = session()->get("nama_role");
 
-            $data['menu'] = $this->request->uri->getSegment(1);
+            $data['menu'] = $this->request->getUri()->getSegment(1);
 
 
             $jml_user = $this->model->getAllQR("SELECT count(*) as jml FROM users WHERE idusers = '" . session()->get("idusers") . "';")->jml;

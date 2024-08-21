@@ -4,11 +4,11 @@
         <div class="row login-card">
             <div class="col-md-6 side-image">
                 <div class="logo">
-                    <a href="<?php echo base_url(); ?>/"><img src="<?php echo base_url(); ?>/front/images/leapverse.png"
+                    <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>front/images/leapverse.png"
                             class="img-fluid" alt="logo" width="150px" height="70px"></a>
                 </div>
                 <div class="icon">
-                    <a href="<?php echo base_url(); ?>/"><img src="<?php echo base_url(); ?>/front/images/icon.png"
+                    <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>front/images/icon.png"
                             class="img-fluid" alt="icon" width="550px" height="100px"></a>
                 </div>
             </div>
@@ -48,75 +48,75 @@
 </div>
 </div>
 
-<script src="<?php echo base_url(); ?>/back/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="<?php echo base_url(); ?>/back/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>/back/plugins/iCheck/icheck.min.js"></script>
+<script src="<?php echo base_url(); ?>back/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>back/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>back/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript">
-
 $(document).ready(function() {
-    $('#email').keypress(function (e){
+    $('#email').keypress(function(e) {
         var key = e.which;
-        if(key === 13){
+        if (key === 13) {
             $('#pass').focus();
             $('#pass').select();
         }
     });
 
-    $('#pass').keypress(function (e){
+    $('#pass').keypress(function(e) {
         var key = e.which;
-        if(key === 13){
+        if (key === 13) {
             proses();
         }
     });
 });
 
-            function proses(){
+function proses() {
 
-                var email = document.getElementById('email').value;
-                var pass = document.getElementById('pass').value;
+    var email = document.getElementById('email').value;
+    var pass = document.getElementById('pass').value;
 
-                if(email === ""){
-                    alert("Email tidak boleh kosong");
-                }else if(pass === ""){
-                    alert("Password lama tidak boleh kosong");
-                }else{
-                    $('#btnProses').text('Prosessing...');
-                    $('#btnProses').attr('disabled',true);
+    if (email === "") {
+        alert("Email tidak boleh kosong");
+    } else if (pass === "") {
+        alert("Password lama tidak boleh kosong");
+    } else {
+        $('#btnProses').text('Prosessing...');
+        $('#btnProses').attr('disabled', true);
 
-                    var form_data = new FormData();
-                    form_data.append('email', email);
-                    form_data.append('pass', pass);
+        var form_data = new FormData();
+        form_data.append('email', email);
+        form_data.append('pass', pass);
 
-                    $.ajax({
-                        url: "<?php echo base_url(); ?>/logininstansi/proses",
-                        dataType: 'JSON',
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        data: form_data,
-                        type: 'POST',
-                        success: function (response) {
-                            $('#btnProses').text('Sign In');
-                            $('#btnProses').attr('disabled', false);
-                            
-                            if(response.status === "ok_instansi"){
-                                window.location.href = "<?php echo base_url(); ?>/homeinstansi";
-                            }else if(response.status === "ok_admins"){
-                                window.location.href = "<?php echo base_url(); ?>/homeadmins";
-                            }else if(response.status === "ok_gurus"){
-                                window.location.href = "<?php echo base_url(); ?>/homegurus";
-                            }else{
-                                alert(response.status);
-                            }
+        $.ajax({
+            url: "<?php echo base_url(); ?>logininstansi/proses",
+            dataType: 'JSON',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'POST',
+            success: function(response) {
+                $('#btnProses').text('Sign In');
+                $('#btnProses').attr('disabled', false);
 
-                        },error: function (response) {
-                            alert(response.status);
-                            $('#btnProses').text('Sign In');
-                            $('#btnProses').attr('disabled', false);
-                        }
-                    });
+                if (response.status === "ok_instansi") {
+                    window.location.href = "<?php echo base_url(); ?>homeinstansi";
+                } else if (response.status === "ok_admins") {
+                    window.location.href = "<?php echo base_url(); ?>homeadmins";
+                } else if (response.status === "ok_gurus") {
+                    window.location.href = "<?php echo base_url(); ?>homegurus";
+                } else {
+                    alert(response.status);
                 }
+
+            },
+            error: function(response) {
+                alert(response.status);
+                $('#btnProses').text('Sign In');
+                $('#btnProses').attr('disabled', false);
             }
+        });
+    }
+}
 
 function displayModal(message, redirect = false) {
     var modal = document.getElementById('registrationModal');
@@ -130,7 +130,7 @@ function displayModal(message, redirect = false) {
     // Redirect jika diperlukan setelah beberapa detik
     if (redirect) {
         setTimeout(function() {
-            window.location.href = "<?php echo base_url(); ?>/logininstansi";
+            window.location.href = "<?php echo base_url(); ?>logininstansi";
         }, 3000); // Redirect setelah 3 detik (sesuaikan sesuai kebutuhan)
     }
 }

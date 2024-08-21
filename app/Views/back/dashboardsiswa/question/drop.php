@@ -4,7 +4,7 @@
         <nav class="navbar navbar-expand-lg main-navbar d-flex justify-content-between pt-3 pb-3 ps-5 pe-5 " style="background: rgb(255,255,255);
 background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 100%);
 ">
-            <img src="<?= base_url() ?>/front/images/leapverse.png" alt="" width="80px">
+            <img src="<?= base_url() ?>front/images/leapverse.png" alt="" width="80px">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"
@@ -16,7 +16,7 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
                     <ul class="dropdown-menu  dropdown-menu-end  px-2 py-2 me-sm-n2"
                         aria-labelledby="dropdownMenuButton">
                         <li>
-                            <a class="dropdown-item border-radius-md" href="<?= base_url() ?>/logout">
+                            <a class="dropdown-item border-radius-md" href="<?= base_url() ?>logout">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
                                         <i class="ni ni-bold-right text-danger me-3 text-center"></i>Logout
@@ -25,7 +25,7 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item border-radius-md" href="<?= base_url() ?>/profilestudent">
+                            <a class="dropdown-item border-radius-md" href="<?= base_url() ?>profilestudent">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
                                         <i class="ni ni-single-02 text-success me-3"></i>Profile
@@ -43,19 +43,19 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
 
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="<?= base_url() ?>/homesiswa" class="nav-link text-center"><i
+                    <a href="<?= base_url() ?>homesiswa" class="nav-link text-center"><i
                             class="ni ni-tv-2 text-primary text-sm opacity-10 me-2"></i><span>Dashboard</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url() ?>/history" class="nav-link text-center"><i
+                    <a href="<?= base_url() ?>history" class="nav-link text-center"><i
                             class="ni ni-bullet-list-67 text-warning text-sm opacity-10 me-2"></i><span>History</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url() ?>/session" class="nav-link text-center"><i
+                    <a href="<?= base_url() ?>session" class="nav-link text-center"><i
                             class="ni ni-app text-info text-sm opacity-10 me-2"></i><span>Session</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url() ?>/subscribe" class="nav-link text-center"><i
+                    <a href="<?= base_url() ?>subscribe" class="nav-link text-center"><i
                             class="ni ni-like-2 text-danger text-sm opacity-10 me-2"></i><span>Subscribe</span></a>
                 </li>
             </ul>
@@ -186,7 +186,7 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
     //     if (tot < jml - 1) {
     //         alert("Fill all the question first!");
     //     } else {
-    //         var url = "<?php echo base_url(); ?>/question/finish";
+    //         var url = "<?php echo base_url(); ?>question/finish";
 
     //         var form_data = new FormData();
     //         form_data.append('idsubtopik', idsubtopik);
@@ -207,7 +207,7 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
     //             type: 'POST',
     //             success: function(data) {
     //                 if (data.status === "ok") {
-    //                     window.location.href = "<?php echo base_url(); ?>/question/score/" + data.id;
+    //                     window.location.href = "<?php echo base_url(); ?>question/score/" + data.id;
     //                 }
 
     //                 $('#btnSimpan').text('Save'); //change button text
@@ -256,7 +256,7 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
         if (tot < jml - 1) {
             alert("Fill all the question first!");
         } else {
-            var url = "<?php echo base_url(); ?>/question/finish";
+            var url = "<?php echo base_url(); ?>question/finish";
 
             var form_data = new FormData();
             form_data.append('nama', nama);
@@ -278,7 +278,7 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
                 type: 'POST',
                 success: function(data) {
                     if (data.status === "ok") {
-                        window.location.href = "<?php echo base_url(); ?>/question/score/" + data.id;
+                        window.location.href = "<?php echo base_url(); ?>question/score/" + data.id;
                     }
 
                     $('#btnSimpan').text('Save'); //change button text

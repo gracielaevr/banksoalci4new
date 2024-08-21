@@ -81,3 +81,441 @@ in APPPATH\Controllers\Homesiswa.php on line 53.
  5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
 INFO - 2024-08-21 02:47:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 05:59:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 06:09:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 06:09:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 06:09:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 06:16:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:16:18 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:16:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 06:16:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 06:16:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 06:16:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 06:16:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 06:16:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 06:17:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:17:03 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:17:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:17:59 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:20:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:20:53 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:22:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:22:00 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:23:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:23:59 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:25:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 06:25:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 06:25:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:25:36 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:25:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:25:46 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:25:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:25:51 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:26:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:26:28 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:26:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:26:31 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:26:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:26:32 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:26:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:26:33 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:26:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:26:33 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:26:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:26:33 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:26:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:26:33 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:26:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:26:34 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 06:26:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 06:26:34 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 08:19:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 08:19:00 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 08:20:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 08:20:08 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 08:32:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 08:32:26 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 08:32:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 08:32:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 08:32:31 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 08:32:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 08:33:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 08:33:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 08:34:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 08:34:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 08:34:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 08:34:48 --> ErrorException: Attempt to read property "nama" on null
+[Method: GET, Route: subtopic1/T00001]
+in APPPATH\Views\back\dashboardsiswa\subtopic.php on line 11.
+ 1 APPPATH\Views\back\dashboardsiswa\subtopic.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nama" on null', 'C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php', 11)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\banksoalci4new-main\\app\\Views\\back\\dashboardsiswa\\subtopic.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('back/dashboardsiswa/subtopic', [], true)
+ 5 APPPATH\Controllers\Subtopic1.php(75): view('back/dashboardsiswa/subtopic', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subtopic1->index('')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subtopic1))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 08:34:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 08:34:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 08:35:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 08:35:00 --> Error: Cannot access protected property CodeIgniter\HTTP\IncomingRequest::$uri
+[Method: GET, Route: session]
+in APPPATH\Controllers\Session.php on line 37.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Session->index()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 08:39:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 08:39:44 --> Error: Cannot access protected property CodeIgniter\HTTP\IncomingRequest::$uri
+[Method: GET, Route: session]
+in APPPATH\Controllers\Session.php on line 37.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Session->index()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 08:40:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 08:40:11 --> Error: Cannot access protected property CodeIgniter\HTTP\IncomingRequest::$uri
+[Method: GET, Route: session]
+in APPPATH\Controllers\Session.php on line 37.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Session->index()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 08:40:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 08:40:12 --> Error: Cannot access protected property CodeIgniter\HTTP\IncomingRequest::$uri
+[Method: GET, Route: session]
+in APPPATH\Controllers\Session.php on line 37.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Session->index()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 08:40:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 08:40:14 --> Error: Cannot access protected property CodeIgniter\HTTP\IncomingRequest::$uri
+[Method: GET, Route: session]
+in APPPATH\Controllers\Session.php on line 37.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Session->index()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 08:40:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 08:40:14 --> Error: Cannot access protected property CodeIgniter\HTTP\IncomingRequest::$uri
+[Method: GET, Route: session]
+in APPPATH\Controllers\Session.php on line 37.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Session->index()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 08:40:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-21 08:40:15 --> Error: Cannot access protected property CodeIgniter\HTTP\IncomingRequest::$uri
+[Method: GET, Route: session]
+in APPPATH\Controllers\Session.php on line 37.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Session->index()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-08-21 08:40:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 08:40:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-21 08:40:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

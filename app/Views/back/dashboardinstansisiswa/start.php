@@ -8,17 +8,17 @@
 
     <!-- General CSS Files -->
     <link href="front/images/leapverse.png" rel="icon">
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet"
-        href="<?= base_url() ?>/front/dashboard/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+        href="<?= base_url() ?>front/dashboard/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
 
 
     <!-- CSS Libraries -->
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard/assets/css/style.css">
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard/assets/css/components.css">
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard/assets/css/custom.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/assets/css/style.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/assets/css/components.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/assets/css/custom.css">
 </head>
 
 <body class="layout-3">
@@ -26,13 +26,12 @@
         <div class="main-wrapper container">
             <div class="navbar-bg"></div>
             <nav class="navbar navbar-expand-lg main-navbar">
-                <img src="<?= base_url() ?>/front/images/leapverse.png" alt="" width="80px">
+                <img src="<?= base_url() ?>front/images/leapverse.png" alt="" width="80px">
                 <a href="#" class="nav-link sidebar-gone-show" data-toggle="sidebar"><i class="fas fa-bars"></i></a>
                 <ul class="navbar-nav ml-auto">
                     <li class="dropdown"><a href="#" data-toggle="dropdown"
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="<?= base_url() ?>/front/images/avatar.png"
-                                class="rounded-circle mr-1">
+                            <img alt="image" src="<?= base_url() ?>front/images/avatar.png" class="rounded-circle mr-1">
                             <div class="d-sm-none d-lg-inline-block">Hi, Budi</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
@@ -59,15 +58,15 @@
                 <div class="container">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="<?= base_url() ?>/homesiswa" class="nav-link"><i
+                            <a href="<?= base_url() ?>homesiswa" class="nav-link"><i
                                     class="fas fa-school"></i><span>Dashboard</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url() ?>/history" class="nav-link"><i
+                            <a href="<?= base_url() ?>history" class="nav-link"><i
                                     class="fas fa-hourglass-half"></i><span>History</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url() ?>/session" class="nav-link"><i
+                            <a href="<?= base_url() ?>session" class="nav-link"><i
                                     class="fas fa-book"></i><span>Session</span></a>
                         </li>
                     </ul>
@@ -122,23 +121,23 @@
     </div>
 
     <!-- General JS Scripts -->
-    <script src="<?= base_url() ?>/front/dashboard/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard/node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js">
+    <script src="<?= base_url() ?>front/dashboard/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js">
     </script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
     <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/stisla.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/stisla.js"></script>
 
     <!-- JS Libraies -->
 
     <!-- Page Specific JS File -->
 
     <!-- Template JS File -->
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/scripts.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/custom.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/scripts.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/custom.js"></script>
 </body>
 
 </html>

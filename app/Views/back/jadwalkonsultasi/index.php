@@ -4,7 +4,7 @@ var table;
 
 $(document).ready(function() {
     table = $('#tb').DataTable({
-        ajax: "<?php echo base_url(); ?>/jadwalkonsultasi/ajaxlist",
+        ajax: "<?php echo base_url(); ?>jadwalkonsultasi/ajaxlist",
         scrollx: true,
         responsive: true
     });
@@ -47,9 +47,9 @@ function save() {
 
         var url = "";
         if (save_method === 'add') {
-            url = "<?php echo base_url(); ?>/jadwalkonsultasi/ajax_add";
+            url = "<?php echo base_url(); ?>jadwalkonsultasi/ajax_add";
         } else {
-            url = "<?php echo base_url(); ?>/jadwalkonsultasi/ajax_edit";
+            url = "<?php echo base_url(); ?>jadwalkonsultasi/ajax_edit";
         }
 
         var form_data = new FormData();
@@ -92,7 +92,7 @@ function hapus(id, nama) {
     if (confirm("Apakah anda yakin menghapus Jadwal Konsultasi " + nama +
             " ini ? \n*Semua data terkait akan terhapus *")) {
         $.ajax({
-            url: "<?php echo base_url(); ?>/jadwalkonsultasi/hapus/" + id,
+            url: "<?php echo base_url(); ?>jadwalkonsultasi/hapus/" + id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
@@ -112,7 +112,7 @@ function ganti(id) {
     $('#modal_form').modal('show');
     $('.modal-title').text('Ganti Jadwal');
     $.ajax({
-        url: "<?php echo base_url(); ?>/jadwalkonsultasi/ganti/" + id,
+        url: "<?php echo base_url(); ?>jadwalkonsultasi/ganti/" + id,
         type: "POST",
         dataType: "JSON",
         success: function(data) {

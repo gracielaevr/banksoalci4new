@@ -4,12 +4,12 @@
             <div class="col">
                 <div class="navigation">
                     <div class="logo">
-                        <a href="<?php echo base_url(); ?>/"><img
-                                src="<?php echo base_url(); ?>/front/images/leapverse.png" class="img-fluid" alt="logo"
+                        <a href="<?php echo base_url(); ?>"><img
+                                src="<?php echo base_url(); ?>front/images/leapverse.png" class="img-fluid" alt="logo"
                                 style="height: 70px;"></a>
                     </div>
                     <div class="nav-btns">
-                        <a href="<?php echo base_url(); ?>/" class="get">Back to Main</span> Home</a>
+                        <a href="<?php echo base_url(); ?>" class="get">Back to Main</span> Home</a>
                     </div>
                 </div>
             </div>
@@ -155,7 +155,7 @@ function simpan() {
 
 
     if (tot === 3) {
-        var url = "<?php echo base_url(); ?>/test/process/<?php echo $kode; ?>";
+        var url = "<?php echo base_url(); ?>test/process/<?php echo $kode; ?>";
 
         var form_data = new FormData();
         // form_data.append('idpeserta', idpeserta);
@@ -174,7 +174,7 @@ function simpan() {
             type: 'POST',
             success: function(data) {
                 if (data.status === "ok") {
-                    window.location.href = "<?php echo base_url(); ?>/test/score/" + data.id;
+                    window.location.href = "<?php echo base_url(); ?>test/score/" + data.id;
                 }
 
                 $('#btnSimpan').text('Save'); //change button text

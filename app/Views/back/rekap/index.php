@@ -1,20 +1,18 @@
 <script type="text/javascript">
+var save_method; //for save method string
+var table;
 
-    var save_method; //for save method string
-    var table;
-
-    $(document).ready(function () {
-        table = $('#tb').DataTable({
-            ajax: "<?php echo base_url(); ?>/rekap/ajaxlist",
-            scrollx: true,
-            responsive: true
-        });
+$(document).ready(function() {
+    table = $('#tb').DataTable({
+        ajax: "<?php echo base_url(); ?>rekap/ajaxlist",
+        scrollx: true,
+        responsive: true
     });
+});
 
-    function soal(id) {
-        window.location.href = "<?php echo base_url(); ?>/rekap/detil/"+id;
-    }
-
+function soal(id) {
+    window.location.href = "<?php echo base_url(); ?>rekap/detil/" + id;
+}
 </script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -64,7 +62,8 @@
             <div class="modal-body">
                 <form id="form" class="form-horizontal">
                     <input type="hidden" name="kode" id="kode">
-                    <input type="hidden" name="idsubtopik" id="idsubtopik" value="<?php //echo $head->idsubtopik; ?>">
+                    <input type="hidden" name="idsubtopik" id="idsubtopik" value="<?php //echo $head->idsubtopik; 
+                                                                                    ?>">
                     <div class="form-group row">
                         <label for="subtopik" class="col-sm-3 control-label">Judul Subtopik</label>
                         <div class="col-sm-9">

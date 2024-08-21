@@ -4,7 +4,7 @@ var table;
 
 $(document).ready(function() {
     table = $('#tb').DataTable({
-        ajax: "<?php echo base_url(); ?>/soalinstansi/ajaxlist",
+        ajax: "<?php echo base_url(); ?>soalinstansi/ajaxlist",
         scrollx: true,
         responsive: true
     });
@@ -15,11 +15,11 @@ function reload() {
 }
 
 function subtopik(kode) {
-    window.location.href = "<?php echo base_url(); ?>/soalinstansi/detil/" + kode;
+    window.location.href = "<?php echo base_url(); ?>soalinstansi/detil/" + kode;
 }
 
 function soal(kode) {
-    window.location.href = "<?php echo base_url(); ?>/narasi/detil/" + kode;
+    window.location.href = "<?php echo base_url(); ?>narasi/detil/" + kode;
 }
 
 function importExcel() {
@@ -48,7 +48,7 @@ function save() {
     form_data.append('jenis', jenis);
 
     $.ajax({
-        url: "<?php echo base_url(); ?>/soalinstansi/ajax_upload",
+        url: "<?php echo base_url(); ?>soalinstansi/ajax_upload",
         dataType: 'JSON',
         cache: false,
         contentType: false,
@@ -153,7 +153,7 @@ function save() {
                 </form>
             </div>
             <div class="modal-footer">
-                <img id="imgLoading" src="<?php echo base_url(); ?>/back/images/loading.gif"
+                <img id="imgLoading" src="<?php echo base_url(); ?>back/images/loading.gif"
                     style="width:30px; display : none;">
                 &nbsp;
                 <label id="lbLoading" class="control-label" style="display : none;">Loading...</label>

@@ -3,7 +3,7 @@
 
 <section class="section">
     <div class="section-header">
-        <h1>Welcome Back <br><?= $nama ?> <img alt="image" src="<?= base_url() ?>/front/images/wave.png" width="20px">
+        <h1>Welcome Back <br><?= $nama ?> <img alt="image" src="<?= base_url() ?>front/images/wave.png" width="20px">
         </h1>
         <div class="date-box section-header-breadcrumb">
             <p><span id="current-day"></span>, <span id="current-date"></span></p>
@@ -19,12 +19,12 @@
         <h2 class="section-title">Popular Topics</h2>
         <div class="row">
             <?php $count = 0;
-            foreach ($topik as $key => $value): 
-                if ($count < 3):?>
+            foreach ($topik as $key => $value):
+                if ($count < 3): ?>
             <div class="col-12 col-md-4 col-lg-4">
                 <div class="card">
                     <div class="card-header">
-                        <?php $badgeClass = ($key % 3 == 0) ? 'badge-blue2' : (($key % 3 == 1) ? 'badge-yellow' : 'badge-blue');?>
+                        <?php $badgeClass = ($key % 3 == 0) ? 'badge-blue2' : (($key % 3 == 1) ? 'badge-yellow' : 'badge-blue'); ?>
                         <h4><span class="badge <?= $badgeClass ?>"><?= $value->nama ?></span></h4>
                     </div>
                     <div class="card-body">
@@ -36,15 +36,15 @@
                         <p><i class="fas fa-sticky-note"></i> <?= $value->jumlah_subtopik ?> Subtopics</p>
                         <div class="ml-auto">
                             <a href="<?= base_url('subtopic1/' . $value->idtopik) ?>">
-                                <img alt="image" src="<?= base_url() ?>/front/images/arrow1.png" width="30px">
+                                <img alt="image" src="<?= base_url() ?>front/images/arrow1.png" width="30px">
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
             <?php $count++; // Tambahkan hitungan setiap kali iterasi
-                    endif;
-                    endforeach; ?>
+                endif;
+            endforeach; ?>
         </div>
         <div class="d-flex align-items-center justify-content-between">
             <h2 class="section-title">Other Topics</h2>
@@ -64,13 +64,13 @@
         <div class="badge-custom">
             <div class="d-flex searchable">
                 <?php
-                $badgeClass = ($key % 3 == 0) ? 'badge-blue2' : (($key % 3 == 1) ? 'badge-yellow' : 'badge-blue');
-            ?>
+                    $badgeClass = ($key % 3 == 0) ? 'badge-blue2' : (($key % 3 == 1) ? 'badge-yellow' : 'badge-blue');
+                    ?>
                 <h4><span class="badge <?= $badgeClass ?>"><?= $value->nama ?></span></h4>
                 <p class="ml-auto"><i class="fas fa-sticky-note"></i> <?= $value->jumlah_subtopik ?> Subtopics</p>
                 <div class="ml-3">
                     <a href="<?= site_url('subtopic1/' . $value->idtopik) ?>">
-                        <img alt="image" src="<?= base_url() ?>/front/images/arrow1.png" width="30px">
+                        <img alt="image" src="<?= base_url() ?>front/images/arrow1.png" width="30px">
                     </a>
                 </div>
             </div>

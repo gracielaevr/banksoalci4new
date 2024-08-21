@@ -1,135 +1,137 @@
 <script type="text/javascript">
+var save_method; //for save method string
+var table;
 
-    var save_method; //for save method string
-    var table;
-
-    $(document).ready(function () {
-        table = $('#tb').DataTable({
-            ajax: "<?php echo base_url(); ?>/pengguna/ajaxlist",
-            scrollx: true,
-            responsive: true
-        });
+$(document).ready(function() {
+    table = $('#tb').DataTable({
+        ajax: "<?php echo base_url(); ?>pengguna/ajaxlist",
+        scrollx: true,
+        responsive: true
     });
+});
 
-    function reload() {
-        table.ajax.reload(null, false); //reload datatable ajax
-    }
+function reload() {
+    table.ajax.reload(null, false); //reload datatable ajax
+}
 
-    function add() {
-        save_method = 'add';
-        $('#form')[0].reset();
-        $('#modal_form').modal('show');
-        $('.modal-title').text('Tambah pengguna');
-    }
+function add() {
+    save_method = 'add';
+    $('#form')[0].reset();
+    $('#modal_form').modal('show');
+    $('.modal-title').text('Tambah pengguna');
+}
 
-    function subtopik(kode) {
-        window.location.href = "<?php echo base_url(); ?>/pengguna/detil/"+kode;
-    }
+function subtopik(kode) {
+    window.location.href = "<?php echo base_url(); ?>pengguna/detil/" + kode;
+}
 
-    function save() {
-        var kode = document.getElementById('kode').value;
-        var email = document.getElementById('email').value;
-        var idrole = document.getElementById('idrole').value;
-        
-        if (email === '') {
-            alert("Email tidak boleh kosong");
+function save() {
+    var kode = document.getElementById('kode').value;
+    var email = document.getElementById('email').value;
+    var idrole = document.getElementById('idrole').value;
+
+    if (email === '') {
+        alert("Email tidak boleh kosong");
+    } else {
+        $('#btnSave').text('Saving...'); //change button text
+        $('#btnSave').attr('disabled', true); //set button disable 
+
+        var url = "";
+        if (save_method === 'add') {
+            url = "<?php echo base_url(); ?>pengguna/ajax_add";
         } else {
-            $('#btnSave').text('Saving...'); //change button text
-            $('#btnSave').attr('disabled', true); //set button disable 
-
-            var url = "";
-            if (save_method === 'add') {
-                url = "<?php echo base_url(); ?>/pengguna/ajax_add";
-            } else {
-                url = "<?php echo base_url(); ?>/pengguna/ajax_edit";
-            }
-            
-            var form_data = new FormData();
-            form_data.append('kode', kode);
-            form_data.append('email', email);
-            form_data.append('idrole', idrole);
-            
-            // ajax adding data to database
-            $.ajax({
-                url: url,
-                dataType: 'JSON',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'POST',
-                success: function (data) {
-                    alert(data.status);
-                    $('#modal_form').modal('hide');
-                    reload();
-
-                    $('#btnSave').text('Save'); //change button text
-                    $('#btnSave').attr('disabled', false); //set button enable 
-                }, error: function (jqXHR, textStatus, errorThrown) {
-                    alert("Error json " + errorThrown);
-
-                    $('#btnSave').text('Save'); //change button text
-                    $('#btnSave').attr('disabled', false); //set button enable 
-                }
-            });
+            url = "<?php echo base_url(); ?>pengguna/ajax_edit";
         }
-    }
 
-    function hapus(id, nama) {
-        if (confirm("Apakah anda yakin menghapus pengguna " + nama + " ini ?")) {
-            $.ajax({
-                url: "<?php echo base_url(); ?>/pengguna/hapus/" + id,
-                type: "POST",
-                dataType: "JSON",
-                success: function (data) {
-                    alert(data.status);
-                    reload();
-                }, error: function (jqXHR, textStatus, errorThrown) {
-                    alert('Error hapus data');
-                }
-            });
-        }
-    }
+        var form_data = new FormData();
+        form_data.append('kode', kode);
+        form_data.append('email', email);
+        form_data.append('idrole', idrole);
 
-    function ganti(id) {
-        save_method = 'update';
-        $('#form')[0].reset();
-        $('#modal_form').modal('show');
-        $('.modal-title').text('Ganti Pengguna');
+        // ajax adding data to database
         $.ajax({
-            url: "<?php echo base_url(); ?>/pengguna/ganti/" + id,
+            url: url,
+            dataType: 'JSON',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'POST',
+            success: function(data) {
+                alert(data.status);
+                $('#modal_form').modal('hide');
+                reload();
+
+                $('#btnSave').text('Save'); //change button text
+                $('#btnSave').attr('disabled', false); //set button enable 
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("Error json " + errorThrown);
+
+                $('#btnSave').text('Save'); //change button text
+                $('#btnSave').attr('disabled', false); //set button enable 
+            }
+        });
+    }
+}
+
+function hapus(id, nama) {
+    if (confirm("Apakah anda yakin menghapus pengguna " + nama + " ini ?")) {
+        $.ajax({
+            url: "<?php echo base_url(); ?>pengguna/hapus/" + id,
             type: "POST",
             dataType: "JSON",
-            success: function (data) {
-                $('[name="kode"]').val(data.idusers);
-                $('[name="email"]').val(data.email);
-                $('[name="idrole"]').val(data.idrole);
-            }, error: function (jqXHR, textStatus, errorThrown) {
-                alert('Error get data');
+            success: function(data) {
+                alert(data.status);
+                reload();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error hapus data');
             }
         });
     }
-    
-    function lock(id) {
-        if (confirm("Apakah anda yakin mereset password pengguna ini ?")) {
-            $.ajax({
-                url: "<?php echo base_url(); ?>/pengguna/reset/" + id,
-                type: "POST",
-                dataType: "JSON",
-                success: function (data) {
-                    alert(data.status);
-                    reload();
-                }, error: function (jqXHR, textStatus, errorThrown) {
-                    alert('Error reset password');
-                }
-            });
-        }
-    }
+}
 
-    function closemodal(){
-        $('#modal_form').modal('hide');
+function ganti(id) {
+    save_method = 'update';
+    $('#form')[0].reset();
+    $('#modal_form').modal('show');
+    $('.modal-title').text('Ganti Pengguna');
+    $.ajax({
+        url: "<?php echo base_url(); ?>pengguna/ganti/" + id,
+        type: "POST",
+        dataType: "JSON",
+        success: function(data) {
+            $('[name="kode"]').val(data.idusers);
+            $('[name="email"]').val(data.email);
+            $('[name="idrole"]').val(data.idrole);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('Error get data');
+        }
+    });
+}
+
+function lock(id) {
+    if (confirm("Apakah anda yakin mereset password pengguna ini ?")) {
+        $.ajax({
+            url: "<?php echo base_url(); ?>pengguna/reset/" + id,
+            type: "POST",
+            dataType: "JSON",
+            success: function(data) {
+                alert(data.status);
+                reload();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error reset password');
+            }
+        });
     }
-    
+}
+
+function closemodal() {
+    $('#modal_form').modal('hide');
+}
 </script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -163,7 +165,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -187,7 +189,8 @@
                     <div class="form-group row">
                         <label for="nama" class="col-sm-3 control-label">Email</label>
                         <div class="col-sm-9">
-                            <input class="form-control" type="email" name="email" id="email" placeholder="Masukkan email">
+                            <input class="form-control" type="email" name="email" id="email"
+                                placeholder="Masukkan email">
                         </div>
                     </div>
                     <div class="form-group row">

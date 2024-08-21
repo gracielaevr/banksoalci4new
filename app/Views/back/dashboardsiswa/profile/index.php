@@ -4,32 +4,32 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>/front/dashboard_new/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="<?= base_url() ?>/front/images/leapverse.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>front/dashboard_new/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="<?= base_url() ?>front/images/leapverse.png">
     <title>Leapverse Question Bank</title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 
     <!-- Nucleo Icons -->
-    <link href="<?= base_url() ?>/front/dashboard_new/assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="<?= base_url() ?>/front/dashboard_new/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>front/dashboard_new/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>front/dashboard_new/assets/css/nucleo-svg.css" rel="stylesheet" />
 
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="<?= base_url() ?>/front/dashboard_new/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>front/dashboard_new/assets/css/nucleo-svg.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- CSS Files -->
-    <link id="pagestyle" href="<?= base_url() ?>/front/dashboard_new/assets/css/argon-dashboard.css?v=2.0.4"
+    <link id="pagestyle" href="<?= base_url() ?>front/dashboard_new/assets/css/argon-dashboard.css?v=2.0.4"
         rel="stylesheet" />
 
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard/assets/css/custom.css">
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard/assets/css/components.css">
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard_new/assets/css/style.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/assets/css/custom.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/assets/css/components.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard_new/assets/css/style.css">
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -41,14 +41,14 @@ height:27%"></div>
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <div class="sidenav-header d-block align-items-center mt-2 mb-2 text-center">
-            <img src="<?= base_url() ?>/front/images/leapverse.png" class="navbar-br and-img" alt="main_logo"
-                width="40%" height="80%">
+            <img src="<?= base_url() ?>front/images/leapverse.png" class="navbar-br and-img" alt="main_logo" width="40%"
+                height="80%">
         </div>
         <hr class="horizontal dark mb-0 mt-0">
         <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link side-leap side-dashboard" href="<?= base_url() ?>/homesiswa">
+                    <a class="nav-link side-leap side-dashboard" href="<?= base_url() ?>homesiswa">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
@@ -58,7 +58,7 @@ height:27%"></div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link side-leap side-history" href="<?= base_url() ?>/history">
+                    <a class="nav-link side-leap side-history" href="<?= base_url() ?>history">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-bullet-list-67 text-warning text-sm opacity-10"></i>
@@ -67,7 +67,7 @@ height:27%"></div>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link side-leap side-session" href="<?= base_url() ?>/session">
+                    <a class="nav-link side-leap side-session" href="<?= base_url() ?>session">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-app text-info text-sm opacity-10"></i>
@@ -76,7 +76,7 @@ height:27%"></div>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link side-leap side-subscribe" href="<?= base_url() ?>/Subscribe">
+                    <a class="nav-link side-leap side-subscribe" href="<?= base_url() ?>Subscribe">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-like-2 text-danger text-sm opacity-10"></i>
@@ -133,7 +133,7 @@ height:27%"></div>
                             <ul class="dropdown-menu  dropdown-menu-end  px-2 py-2 me-sm-n2"
                                 aria-labelledby="dropdownMenuButton">
                                 <li>
-                                    <a class="dropdown-item border-radius-md" href="<?= base_url() ?>/logout">
+                                    <a class="dropdown-item border-radius-md" href="<?= base_url() ?>logout">
                                         <div class="d-flex py-1">
                                             <div class="my-auto">
                                                 <i class="ni ni-bold-right text-danger me-3 text-center"></i>Logout
@@ -142,7 +142,7 @@ height:27%"></div>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item border-radius-md" href="<?= base_url() ?>/profilestudent">
+                                    <a class="dropdown-item border-radius-md" href="<?= base_url() ?>profilestudent">
                                         <div class="d-flex py-1">
                                             <div class="my-auto">
                                                 <i class="ni ni-single-02 text-success me-3"></i>Profile
@@ -269,7 +269,7 @@ height:27%"></div>
             form_data.append('file', foto);
 
             $.ajax({
-                url: "<?php echo base_url(); ?>/profilestudent/proses",
+                url: "<?php echo base_url(); ?>profilestudent/proses",
                 dataType: 'JSON',
                 cache: false,
                 contentType: false,
@@ -294,14 +294,14 @@ height:27%"></div>
     </script>
 
     <!--   Core JS Files   -->
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/core/popper.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/core/bootstrap.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/plugins/chartjs.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/core/popper.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/core/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/plugins/chartjs.min.js"></script>
     <!-- General JS Scripts -->
-    <script src="<?= base_url() ?>/front/assets/js/jquery.min.js"></script>
-    <script src="<?= base_url() ?>/front/assets/js/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>front/assets/js/jquery.min.js"></script>
+    <script src="<?= base_url() ?>front/assets/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"
@@ -316,7 +316,7 @@ height:27%"></div>
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/stisla.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/stisla.js"></script>
 
     <!-- JS Libraies -->
 
@@ -339,8 +339,8 @@ height:27%"></div>
     </script>
 
     <!-- Template JS File -->
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/scripts.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/custom.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/scripts.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/custom.js"></script>
 
     <!-- Page Specific JS File -->
     <!-- Code injected by live-server -->
@@ -451,7 +451,7 @@ height:27%"></div>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/argon-dashboard.min.js?v=2.0.4"></script>
 </body>
 
 </html>

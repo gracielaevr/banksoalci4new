@@ -1,170 +1,170 @@
 <script type="text/javascript">
-    var save_method; //for save method string
-    var table;
+var save_method; //for save method string
+var table;
 
-    $(document).ready(function() {
-        table = $('#tb').DataTable({
-            ajax: "<?php echo base_url(); ?>/subscribeadmin/ajaxlist",
-            scrollx: true,
-            responsive: true
-        });
+$(document).ready(function() {
+    table = $('#tb').DataTable({
+        ajax: "<?php echo base_url(); ?>subscribeadmin/ajaxlist",
+        scrollx: true,
+        responsive: true
     });
+});
 
-    var BASE_URL = "<?php echo base_url(); ?>";
-    tinymce.init({
-        selector: "textarea#detail",
-        theme: "modern",
-        height: 250,
-        plugins: [
-            "advlist autolink link image lists charmap print preview hr anchor pagebreak",
-            "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
-            "table contextmenu directionality emoticons paste textcolor responsivefilemanager code"
-        ],
-        toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
-        toolbar2: "| responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | print preview code ",
-        external_filemanager_path: BASE_URL + "/filemanager/",
-        filemanager_title: "File Gallery",
-        relative_urls: false,
-        remove_script_host: false,
-        convert_urls: true,
-        external_plugins: {
-            "filemanager": BASE_URL + "/filemanager/plugin.min.js"
-        }
-    });
-
-    function reload() {
-        table.ajax.reload(null, false); //reload datatable ajax
+var BASE_URL = "<?php echo base_url(); ?>";
+tinymce.init({
+    selector: "textarea#detail",
+    theme: "modern",
+    height: 250,
+    plugins: [
+        "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+        "table contextmenu directionality emoticons paste textcolor responsivefilemanager code"
+    ],
+    toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
+    toolbar2: "| responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | print preview code ",
+    external_filemanager_path: BASE_URL + "/filemanager/",
+    filemanager_title: "File Gallery",
+    relative_urls: false,
+    remove_script_host: false,
+    convert_urls: true,
+    external_plugins: {
+        "filemanager": BASE_URL + "/filemanager/plugin.min.js"
     }
+});
 
-    function add() {
-        save_method = 'add';
-        $('#form')[0].reset();
-        $('#modal_form').modal('show');
-        $('.modal-title').text('Tambah Subscribe');
-    }
+function reload() {
+    table.ajax.reload(null, false); //reload datatable ajax
+}
+
+function add() {
+    save_method = 'add';
+    $('#form')[0].reset();
+    $('#modal_form').modal('show');
+    $('.modal-title').text('Tambah Subscribe');
+}
 
 
-    function save() {
-        var idsubscribe = document.getElementById('idsubscribe').value;
-        var judul = document.getElementById('judul').value;
-        var harga = document.getElementById('harga').value;
-        var detail = tinyMCE.get('detail').getContent();
-        // var detail = document.getElementById('detail').value;
-        var durasi = document.getElementById('durasi').value;
-        var status = document.getElementById('status').value;
-        var sesi = document.getElementById('sesi').value;
-        var bundling = document.getElementById('bundling').value;
+function save() {
+    var idsubscribe = document.getElementById('idsubscribe').value;
+    var judul = document.getElementById('judul').value;
+    var harga = document.getElementById('harga').value;
+    var detail = tinyMCE.get('detail').getContent();
+    // var detail = document.getElementById('detail').value;
+    var durasi = document.getElementById('durasi').value;
+    var status = document.getElementById('status').value;
+    var sesi = document.getElementById('sesi').value;
+    var bundling = document.getElementById('bundling').value;
 
-        if (judul === '') {
-            alert("Judul tidak boleh kosong");
-        } else if (harga === '') {
-            alert("Harga tidak boleh kosong");
-        } else if (detail === '') {
-            alert("detail tidak boleh kosong");
-        } else if (durasi === '') {
-            alert("durasi tidak boleh kosong");
-        } else if (status === '') {
-            alert("Status tidak boleh kosong");
-        } else if (sesi === '') {
-            alert("Sesi tidak boleh kosong");
-        } else if (bundling === '') {
-            alert("Bundling tidak boleh kosong");
+    if (judul === '') {
+        alert("Judul tidak boleh kosong");
+    } else if (harga === '') {
+        alert("Harga tidak boleh kosong");
+    } else if (detail === '') {
+        alert("detail tidak boleh kosong");
+    } else if (durasi === '') {
+        alert("durasi tidak boleh kosong");
+    } else if (status === '') {
+        alert("Status tidak boleh kosong");
+    } else if (sesi === '') {
+        alert("Sesi tidak boleh kosong");
+    } else if (bundling === '') {
+        alert("Bundling tidak boleh kosong");
+    } else {
+        $('#btnSave').text('Menyimpan...'); //change button text
+        $('#btnSave').attr('disabled', true); //set button disable 
+
+        var url = "";
+        if (save_method === 'add') {
+            url = "<?php echo base_url(); ?>subscribeadmin/ajax_add";
         } else {
-            $('#btnSave').text('Menyimpan...'); //change button text
-            $('#btnSave').attr('disabled', true); //set button disable 
-
-            var url = "";
-            if (save_method === 'add') {
-                url = "<?php echo base_url(); ?>/subscribeadmin/ajax_add";
-            } else {
-                url = "<?php echo base_url(); ?>/subscribeadmin/ajax_edit";
-            }
-
-            var form_data = new FormData();
-            form_data.append('idsubscribe', idsubscribe);
-            form_data.append('judul', judul);
-            form_data.append('harga', harga);
-            form_data.append('detail', detail);
-            form_data.append('durasi', durasi);
-            form_data.append('status', status);
-            form_data.append('sesi', sesi);
-            form_data.append('bundling', bundling);
-            // ajax adding data to database
-            $.ajax({
-                url: url,
-                dataType: 'JSON',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'POST',
-                success: function(data) {
-                    alert(data.status);
-                    $('#modal_form').modal('hide');
-                    tinyMCE.get('detail').setContent("");
-
-                    reload();
-
-                    $('#btnSave').text('Simpan'); //change button text
-                    $('#btnSave').attr('disabled', false); //set button enable 
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    alert("Error json " + errorThrown);
-
-                    $('#btnSave').text('Simpan'); //change button text
-                    $('#btnSave').attr('disabled', false); //set button enable 
-                }
-            });
+            url = "<?php echo base_url(); ?>subscribeadmin/ajax_edit";
         }
-    }
 
-    function hapus(id, nama) {
-        if (confirm("Apakah anda yakin menghapus " + nama +
-                " ini ? \n*Semua data terkait akan terhapus *")) {
-            $.ajax({
-                url: "<?php echo base_url(); ?>/subscribeadmin/hapus/" + id,
-                type: "POST",
-                dataType: "JSON",
-                success: function(data) {
-                    alert(data.status);
-                    reload();
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    alert('Error hapus data');
-                }
-            });
-        }
-    }
-
-    function ganti(id) {
-        save_method = 'update';
-        $('#form')[0].reset();
-        $('#modal_form').modal('show');
-        $('.modal-title').text('Ganti Subscribe');
+        var form_data = new FormData();
+        form_data.append('idsubscribe', idsubscribe);
+        form_data.append('judul', judul);
+        form_data.append('harga', harga);
+        form_data.append('detail', detail);
+        form_data.append('durasi', durasi);
+        form_data.append('status', status);
+        form_data.append('sesi', sesi);
+        form_data.append('bundling', bundling);
+        // ajax adding data to database
         $.ajax({
-            url: "<?php echo base_url(); ?>/subscribeadmin/ganti/" + id,
+            url: url,
+            dataType: 'JSON',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'POST',
+            success: function(data) {
+                alert(data.status);
+                $('#modal_form').modal('hide');
+                tinyMCE.get('detail').setContent("");
+
+                reload();
+
+                $('#btnSave').text('Simpan'); //change button text
+                $('#btnSave').attr('disabled', false); //set button enable 
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("Error json " + errorThrown);
+
+                $('#btnSave').text('Simpan'); //change button text
+                $('#btnSave').attr('disabled', false); //set button enable 
+            }
+        });
+    }
+}
+
+function hapus(id, nama) {
+    if (confirm("Apakah anda yakin menghapus " + nama +
+            " ini ? \n*Semua data terkait akan terhapus *")) {
+        $.ajax({
+            url: "<?php echo base_url(); ?>subscribeadmin/hapus/" + id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
-                $('[name="idsubscribe"]').val(data.idsubscribe);
-                $('[name="judul"]').val(data.judul);
-                $('[name="harga"]').val(data.harga);
-                $('[name="detail"]').val(data.detail);
-                $('[name="durasi"]').val(data.durasi);
-                $('[name="status"]').val(data.status);
-                $('[name="sesi"]').val(data.sesi);
-                $('[name="bundling"]').val(data.bundling);
-                tinyMCE.get('detail').setContent(data.detail);
+                alert(data.status);
+                reload();
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                alert('Error get data');
+                alert('Error hapus data');
             }
         });
     }
+}
 
-    function closemodal() {
-        $('#modal_form').modal('hide');
-    }
+function ganti(id) {
+    save_method = 'update';
+    $('#form')[0].reset();
+    $('#modal_form').modal('show');
+    $('.modal-title').text('Ganti Subscribe');
+    $.ajax({
+        url: "<?php echo base_url(); ?>subscribeadmin/ganti/" + id,
+        type: "POST",
+        dataType: "JSON",
+        success: function(data) {
+            $('[name="idsubscribe"]').val(data.idsubscribe);
+            $('[name="judul"]').val(data.judul);
+            $('[name="harga"]').val(data.harga);
+            $('[name="detail"]').val(data.detail);
+            $('[name="durasi"]').val(data.durasi);
+            $('[name="status"]').val(data.status);
+            $('[name="sesi"]').val(data.sesi);
+            $('[name="bundling"]').val(data.bundling);
+            tinyMCE.get('detail').setContent(data.detail);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('Error get data');
+        }
+    });
+}
+
+function closemodal() {
+    $('#modal_form').modal('hide');
+}
 </script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -222,19 +222,22 @@
                     <div class="form-group row">
                         <label for="judul" class="col-sm-3 control-label">Judul</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="judul" name="judul" placeholder="Masukkan judul disini" autocomplete="off">
+                            <input type="text" class="form-control" id="judul" name="judul"
+                                placeholder="Masukkan judul disini" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="harga" class="col-sm-3 control-label">Harga</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="harga" name="harga" placeholder="Masukkan harga disini" autocomplete="off">
+                            <input type="number" class="form-control" id="harga" name="harga"
+                                placeholder="Masukkan harga disini" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="durasi" class="col-sm-3 control-label">Durasi</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="durasi" name="durasi" placeholder="Masukkan durasi disini" autocomplete="off">
+                            <input type="number" class="form-control" id="durasi" name="durasi"
+                                placeholder="Masukkan durasi disini" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -249,13 +252,15 @@
                     <div class="form-group row">
                         <label for="sesi" class="col-sm-3 control-label">Sesi</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="sesi" name="sesi" placeholder="Masukkan sesi disini" autocomplete="off">
+                            <input type="number" class="form-control" id="sesi" name="sesi"
+                                placeholder="Masukkan sesi disini" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="bundling" class="col-sm-3 control-label">Bundling</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="bundling" name="bundling" placeholder="Masukkan bundling disini" autocomplete="off">
+                            <input type="number" class="form-control" id="bundling" name="bundling"
+                                placeholder="Masukkan bundling disini" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">

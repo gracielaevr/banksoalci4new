@@ -5,8 +5,8 @@
         <!--<h1 class="logo me-auto"><a href="index.html">Arsha</a></h1>-->
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-        <a href="<?php echo base_url(); ?>/" class=" me-auto"><img
-                src="<?php echo base_url(); ?>/front/images/leapverse.png" class="img-fluid" alt="logo" width="90px"
+        <a href="<?php echo base_url(); ?>" class=" me-auto"><img
+                src="<?php echo base_url(); ?>front/images/leapverse.png" class="img-fluid" alt="logo" width="90px"
                 height="70px"></a>
 
         <nav id="navbar" class="navbar ml-auto">
@@ -223,7 +223,7 @@
                     <a href="loginpage">
                         <div class="single-menu">
                             <div class="title-div justify-content-between d-flex">
-                                <h4><?=$value->nama?></h4>
+                                <h4><?= $value->nama ?></h4>
                             </div>
                         </div>
                     </a>

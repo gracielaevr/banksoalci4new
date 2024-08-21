@@ -7,3 +7,5 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->setAutoRoute(true);
+$routes->get('subtopic1/(:any)', 'Subtopic1::index/$1');
+$routes->get('start/(:any)', 'Start::index/$1');

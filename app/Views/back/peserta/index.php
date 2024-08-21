@@ -1,34 +1,32 @@
 <script type="text/javascript">
+var save_method; //for save method string
+var table;
 
-    var save_method; //for save method string
-    var table;
-
-    $(document).ready(function () {
-        table = $('#tb').DataTable({
-            ajax: "<?php echo base_url(); ?>/siswa/ajaxlist",
-            scrollx: true,
-            responsive: true
-        });
-
-        $('#tanggalrange').daterangepicker();
+$(document).ready(function() {
+    table = $('#tb').DataTable({
+        ajax: "<?php echo base_url(); ?>siswa/ajaxlist",
+        scrollx: true,
+        responsive: true
     });
 
-    function nilai(id, jenis) {
-        if(jenis === "mg"){
-            window.location.href = "<?php echo base_url(); ?>/siswa/detilmg/"+id;
-        }else{
-            window.location.href = "<?php echo base_url(); ?>/siswa/detil/"+id;
-        }
-    }
+    $('#tanggalrange').daterangepicker();
+});
 
-    function excellap(){
-        var tgl = document.getElementById('tanggalrange').value;
-        var tanggal = tgl.replace("-",":");
-        var tg = tanggal.replaceAll("/","-");
-        var t = tg.replaceAll(" ","")
-        window.open("<?php echo base_url(); ?>/siswa/exportexcel/" + t, "_blank");
+function nilai(id, jenis) {
+    if (jenis === "mg") {
+        window.location.href = "<?php echo base_url(); ?>siswa/detilmg/" + id;
+    } else {
+        window.location.href = "<?php echo base_url(); ?>siswa/detil/" + id;
     }
+}
 
+function excellap() {
+    var tgl = document.getElementById('tanggalrange').value;
+    var tanggal = tgl.replace("-", ":");
+    var tg = tanggal.replaceAll("/", "-");
+    var t = tg.replaceAll(" ", "")
+    window.open("<?php echo base_url(); ?>siswa/exportexcel/" + t, "_blank");
+}
 </script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -46,10 +44,11 @@
                         <div class="input-group margin">
                             <input type="text" class="form-control pull-right" id="tanggalrange">
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-success btn-flat" onclick="excellap();"><i class="fa fa-fw fa-file-excel-o"></i>Export Excel</button>
+                                <button type="button" class="btn btn-success btn-flat" onclick="excellap();"><i
+                                        class="fa fa-fw fa-file-excel-o"></i>Export Excel</button>
                             </span>
                         </div>
-                        
+
                     </div>
                     <div class="box-body">
                         <table id="tb" class="table table-bordered table-striped">

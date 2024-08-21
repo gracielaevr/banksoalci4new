@@ -1,87 +1,86 @@
 <script type="text/javascript">
+var save_method; //for save method string
+var table;
 
-    var save_method; //for save method string
-    var table;
-
-    $(document).ready(function () {
-        table = $('#tb').DataTable({
-            ajax: "<?php echo base_url(); ?>/soal/ajaxlist",
-            scrollx: true,
-            responsive: true
-        });
+$(document).ready(function() {
+    table = $('#tb').DataTable({
+        ajax: "<?php echo base_url(); ?>soal/ajaxlist",
+        scrollx: true,
+        responsive: true
     });
+});
 
-    function reload() {
-        table.ajax.reload(null, false); //reload datatable ajax
-    }
+function reload() {
+    table.ajax.reload(null, false); //reload datatable ajax
+}
 
-    function subtopik(kode) {
-        window.location.href = "<?php echo base_url(); ?>/soal/detil/"+kode;
-    }
+function subtopik(kode) {
+    window.location.href = "<?php echo base_url(); ?>soal/detil/" + kode;
+}
 
-    function soal(kode) {
-        window.location.href = "<?php echo base_url(); ?>/narasi/detil/"+kode;
-    }
-    
-    function importExcel(){
-        $('#form')[0].reset();
-        $('#modal_form').modal('show');
-        $('.modal-title').text('Tambah soal');
-    }
-    
-    function closemodal(){
-        $('#modal_form').modal('hide');
-    }
-    
-    function save(){
+function soal(kode) {
+    window.location.href = "<?php echo base_url(); ?>narasi/detil/" + kode;
+}
 
-        $('#imgLoading').show();
-        $('#lbLoading').show();
+function importExcel() {
+    $('#form')[0].reset();
+    $('#modal_form').modal('show');
+    $('.modal-title').text('Tambah soal');
+}
 
-        $('#btnSave').hide();
-        $('#btnClose').hide();
+function closemodal() {
+    $('#modal_form').modal('hide');
+}
 
-        var jenis = document.getElementById('jenis').value;
-        var file = $('#file').prop('files')[0];
+function save() {
 
-        var form_data = new FormData();
-        form_data.append('file', file);
-        form_data.append('jenis', jenis);
+    $('#imgLoading').show();
+    $('#lbLoading').show();
 
-        $.ajax({
-            url: "<?php echo base_url(); ?>/soal/ajax_upload",
-            dataType: 'JSON',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            type: 'POST',
-            success: function (response) {
-                alert(response.status);
+    $('#btnSave').hide();
+    $('#btnClose').hide();
 
-                $('#btnSave').show();
-                $('#btnClose').show();
-                $('#imgLoading').hide();
-                $('#lbLoading').hide();
+    var jenis = document.getElementById('jenis').value;
+    var file = $('#file').prop('files')[0];
 
-                $('#btnSave').text('Save');
-                $('#btnSave').attr('disabled', false);
-                $('#modal_form').modal('hide');
-                
-            }, error: function (response) {
-                alert(response.status);
+    var form_data = new FormData();
+    form_data.append('file', file);
+    form_data.append('jenis', jenis);
 
-                $('#btnSave').show();
-                $('#btnClose').show();
-                $('#imgLoading').hide();
-                $('#lbLoading').hide();
-                
-                $('#btnSave').text('Save');
-                $('#btnSave').attr('disabled', false);
-            }
-        });
-    }
-    
+    $.ajax({
+        url: "<?php echo base_url(); ?>soal/ajax_upload",
+        dataType: 'JSON',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'POST',
+        success: function(response) {
+            alert(response.status);
+
+            $('#btnSave').show();
+            $('#btnClose').show();
+            $('#imgLoading').hide();
+            $('#lbLoading').hide();
+
+            $('#btnSave').text('Save');
+            $('#btnSave').attr('disabled', false);
+            $('#modal_form').modal('hide');
+
+        },
+        error: function(response) {
+            alert(response.status);
+
+            $('#btnSave').show();
+            $('#btnClose').show();
+            $('#imgLoading').hide();
+            $('#lbLoading').hide();
+
+            $('#btnSave').text('Save');
+            $('#btnSave').attr('disabled', false);
+        }
+    });
+}
 </script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -98,7 +97,8 @@
             <div class="col-lg-12 col-xs-12">
                 <div class="box box">
                     <div class="box-header with-border">
-                        <button type="button" class="btn btn-primary btn-sm" onclick="importExcel();">Import Soal</button>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="importExcel();">Import
+                            Soal</button>
                         <button type="button" class="btn btn-secondary btn-sm" onclick="reload();">Reload</button>
                     </div>
                     <div class="box-body">
@@ -111,7 +111,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -153,11 +153,13 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <img id="imgLoading" src="<?php echo base_url(); ?>/back/images/loading.gif" style="width:30px; display : none;">
+                <img id="imgLoading" src="<?php echo base_url(); ?>back/images/loading.gif"
+                    style="width:30px; display : none;">
                 &nbsp;
                 <label id="lbLoading" class="control-label" style="display : none;">Loading...</label>
                 <button id="btnSave" type="button" class="btn btn-sm btn-primary" onclick="save();">Simpan</button>
-                <button id="btnClose" type="button" class="btn btn-secondary btn-sm" onclick="closemodal();">Tutup</button>
+                <button id="btnClose" type="button" class="btn btn-secondary btn-sm"
+                    onclick="closemodal();">Tutup</button>
             </div>
         </div>
     </div>

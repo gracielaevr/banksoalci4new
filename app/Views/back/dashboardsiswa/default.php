@@ -4,32 +4,32 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>/front/dashboard_new/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="<?= base_url() ?>/front/images/leapverse.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>front/dashboard_new/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="<?= base_url() ?>front/images/leapverse.png">
     <title>Leapverse Question Bank</title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 
     <!-- Nucleo Icons -->
-    <link href="<?= base_url() ?>/front/dashboard_new/assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="<?= base_url() ?>/front/dashboard_new/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>front/dashboard_new/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>front/dashboard_new/assets/css/nucleo-svg.css" rel="stylesheet" />
 
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="<?= base_url() ?>/front/dashboard_new/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>front/dashboard_new/assets/css/nucleo-svg.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- CSS Files -->
-    <link id="pagestyle" href="<?= base_url() ?>/front/dashboard_new/assets/css/argon-dashboard.css?v=2.0.4"
+    <link id="pagestyle" href="<?= base_url() ?>front/dashboard_new/assets/css/argon-dashboard.css?v=2.0.4"
         rel="stylesheet" />
 
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard/assets/css/custom.css">
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard/assets/css/components.css">
-    <link rel="stylesheet" href="<?= base_url() ?>/front/dashboard_new/assets/css/style.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/assets/css/custom.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/assets/css/components.css">
+    <link rel="stylesheet" href="<?= base_url() ?>front/dashboard_new/assets/css/style.css">
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -41,14 +41,14 @@ height:27%"></div>
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <div class="sidenav-header d-block align-items-center mt-2 mb-2 text-center">
-            <img src="<?= base_url() ?>/front/images/leapverse.png" class="navbar-br and-img" alt="main_logo"
-                width="40%" height="80%">
+            <img src="<?= base_url() ?>front/images/leapverse.png" class="navbar-br and-img" alt="main_logo" width="40%"
+                height="80%">
         </div>
         <hr class="horizontal dark mb-0 mt-0">
         <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link side-leap side-dashboard" href="<?= base_url() ?>/homesiswa">
+                    <a class="nav-link side-leap side-dashboard" href="<?= base_url() ?>homesiswa">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
@@ -58,7 +58,7 @@ height:27%"></div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link side-leap side-history" href="<?= base_url() ?>/history">
+                    <a class="nav-link side-leap side-history" href="<?= base_url() ?>history">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-bullet-list-67 text-warning text-sm opacity-10"></i>
@@ -67,7 +67,7 @@ height:27%"></div>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link side-leap side-session" href="<?= base_url() ?>/session">
+                    <a class="nav-link side-leap side-session" href="<?= base_url() ?>session">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-app text-info text-sm opacity-10"></i>
@@ -76,7 +76,7 @@ height:27%"></div>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link side-leap side-subscribe" href="<?= base_url() ?>/Subscribe">
+                    <a class="nav-link side-leap side-subscribe" href="<?= base_url() ?>Subscribe">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-like-2 text-danger text-sm opacity-10"></i>
@@ -137,7 +137,7 @@ height:27%"></div>
                             <ul class="dropdown-menu  dropdown-menu-end  px-2 py-2 me-sm-n2"
                                 aria-labelledby="dropdownMenuButton">
                                 <li>
-                                    <a class="dropdown-item border-radius-md" href="<?= base_url() ?>/logout">
+                                    <a class="dropdown-item border-radius-md" href="<?= base_url() ?>logout">
                                         <div class="d-flex py-1">
                                             <div class="my-auto">
                                                 <i class="ni ni-bold-right text-danger me-3 text-center"></i>Logout
@@ -146,7 +146,7 @@ height:27%"></div>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item border-radius-md" href="<?= base_url() ?>/profilestudent">
+                                    <a class="dropdown-item border-radius-md" href="<?= base_url() ?>profilestudent">
                                         <div class="d-flex py-1">
                                             <div class="my-auto">
                                                 <i class="ni ni-single-02 text-success me-3"></i>Profile
@@ -187,14 +187,14 @@ height:27%"></div>
     </main>
 
     <!--   Core JS Files   -->
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/core/popper.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/core/bootstrap.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/plugins/chartjs.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/core/popper.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/core/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/plugins/chartjs.min.js"></script>
     <!-- General JS Scripts -->
-    <script src="<?= base_url() ?>/front/assets/js/jquery.min.js"></script>
-    <script src="<?= base_url() ?>/front/assets/js/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>front/assets/js/jquery.min.js"></script>
+    <script src="<?= base_url() ?>front/assets/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"
@@ -209,142 +209,142 @@ height:27%"></div>
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/stisla.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/stisla.js"></script>
 
     <!-- JS Libraies -->
 
     <!-- Search Subtopic -->
     <script>
-        var search = document.getElementById("searchInput-sub");
-        var els = document.querySelectorAll(".search-sub");
+    var search = document.getElementById("searchInput-sub");
+    var els = document.querySelectorAll(".search-sub");
 
-        search.addEventListener("keyup", function() {
-            var searchValue = search.value.toLowerCase();
+    search.addEventListener("keyup", function() {
+        var searchValue = search.value.toLowerCase();
 
-            Array.prototype.forEach.call(els, function(el) {
-                if (el.textContent.trim().toLowerCase().indexOf(searchValue) > -1) {
-                    el.style.display = 'block';
-                } else {
-                    el.style.display = 'none';
-                }
-            });
+        Array.prototype.forEach.call(els, function(el) {
+            if (el.textContent.trim().toLowerCase().indexOf(searchValue) > -1) {
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
+            }
         });
+    });
     </script>
 
     <!-- Template JS File -->
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/scripts.js"></script>
-    <script src="<?= base_url() ?>/front/dashboard/assets/js/custom.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/scripts.js"></script>
+    <script src="<?= base_url() ?>front/dashboard/assets/js/custom.js"></script>
 
     <!-- Page Specific JS File -->
     <!-- Code injected by live-server -->
     <script>
-        // <![CDATA[  <-- For SVG support
-        if ('WebSocket' in window) {
-            (function() {
-                function refreshCSS() {
-                    var sheets = [].slice.call(document.getElementsByTagName("link"));
-                    var head = document.getElementsByTagName("head")[0];
-                    for (var i = 0; i < sheets.length; ++i) {
-                        var elem = sheets[i];
-                        var parent = elem.parentElement || head;
-                        parent.removeChild(elem);
-                        var rel = elem.rel;
-                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() ==
-                            "stylesheet") {
-                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date()
-                                .valueOf());
-                        }
-                        parent.appendChild(elem);
+    // <![CDATA[  <-- For SVG support
+    if ('WebSocket' in window) {
+        (function() {
+            function refreshCSS() {
+                var sheets = [].slice.call(document.getElementsByTagName("link"));
+                var head = document.getElementsByTagName("head")[0];
+                for (var i = 0; i < sheets.length; ++i) {
+                    var elem = sheets[i];
+                    var parent = elem.parentElement || head;
+                    parent.removeChild(elem);
+                    var rel = elem.rel;
+                    if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() ==
+                        "stylesheet") {
+                        var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                        elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date()
+                            .valueOf());
                     }
+                    parent.appendChild(elem);
                 }
-                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-                var address = protocol + window.location.host + window.location.pathname + '/ws';
-                var socket = new WebSocket(address);
-                socket.onmessage = function(msg) {
-                    if (msg.data == 'reload') window.location.reload();
-                    else if (msg.data == 'refreshcss') refreshCSS();
-                };
-                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-                    console.log('Live reload enabled.');
-                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-                }
-            })();
-        } else {
-            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-        }
-        // ]]>
+            }
+            var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+            var address = protocol + window.location.host + window.location.pathname + '/ws';
+            var socket = new WebSocket(address);
+            socket.onmessage = function(msg) {
+                if (msg.data == 'reload') window.location.reload();
+                else if (msg.data == 'refreshcss') refreshCSS();
+            };
+            if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                console.log('Live reload enabled.');
+                sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+            }
+        })();
+    } else {
+        console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+    }
+    // ]]>
 
-        // Fungsi untuk mendapatkan tanggal dalam format "dd MMMM yyyy"
-        function getCurrentDate() {
-            const date = new Date();
-            const day = date.getDate().toString().padStart(2, '0'); // Format hari dengan dua digit
-            const month = new Intl.DateTimeFormat('en', {
-                month: 'long'
-            }).format(date); // Nama bulan dalam bahasa Inggris
-            const year = date.getFullYear();
-            return `${day} ${month} ${year}`;
-        }
+    // Fungsi untuk mendapatkan tanggal dalam format "dd MMMM yyyy"
+    function getCurrentDate() {
+        const date = new Date();
+        const day = date.getDate().toString().padStart(2, '0'); // Format hari dengan dua digit
+        const month = new Intl.DateTimeFormat('en', {
+            month: 'long'
+        }).format(date); // Nama bulan dalam bahasa Inggris
+        const year = date.getFullYear();
+        return `${day} ${month} ${year}`;
+    }
 
-        // Fungsi untuk mendapatkan hari saat ini
-        function getCurrentDay() {
-            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            return days[new Date().getDay()];
-        }
+    // Fungsi untuk mendapatkan hari saat ini
+    function getCurrentDay() {
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        return days[new Date().getDay()];
+    }
 
 
-        // Mengisi elemen HTML dengan tanggal dan hari saat ini
-        document.getElementById("current-date").textContent = getCurrentDate();
-        document.getElementById("current-day").textContent = getCurrentDay();
+    // Mengisi elemen HTML dengan tanggal dan hari saat ini
+    document.getElementById("current-date").textContent = getCurrentDate();
+    document.getElementById("current-day").textContent = getCurrentDay();
     </script>
 
     <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
         }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
 
-        //Dashboard Click
+    //Dashboard Click
 
-        const dashboardPaths = [
-            '/public/homesiswa',
-            '/public/subtopic1',
-            '/public/index.php/subtopic1/',
-            'https://kemitraan.leapsurabaya.sch.id/homesiswa',
-            'https://kemitraan.leapsurabaya.sch.id/subtopic1',
-            'https://kemitraan.leapsurabaya.sch.id/index.php/subtopic1'
-        ];
-        const historyPaths = [
-            '/public/history',
-            'https://kemitraan.leapsurabaya.sch.id/history'
-        ];
-        const sessionPaths = [
-            '/public/session',
-            'https://kemitraan.leapsurabaya.sch.id/session'
-        ];
-        const subscribePaths = [
-            '/public/Subscribe',
-            'https://kemitraan.leapsurabaya.sch.id/Subscribe'
-        ];
+    const dashboardPaths = [
+        '/public/homesiswa',
+        '/public/subtopic1',
+        '/public/index.php/subtopic1/',
+        'https://kemitraan.leapsurabaya.sch.id/homesiswa',
+        'https://kemitraan.leapsurabaya.sch.id/subtopic1',
+        'https://kemitraan.leapsurabaya.sch.id/index.php/subtopic1'
+    ];
+    const historyPaths = [
+        '/public/history',
+        'https://kemitraan.leapsurabaya.sch.id/history'
+    ];
+    const sessionPaths = [
+        '/public/session',
+        'https://kemitraan.leapsurabaya.sch.id/session'
+    ];
+    const subscribePaths = [
+        '/public/Subscribe',
+        'https://kemitraan.leapsurabaya.sch.id/Subscribe'
+    ];
 
-        const activePage = window.location.pathname;
-        if (dashboardPaths.some(path => activePage.includes(path))) {
-            document.querySelector('.side-dashboard').classList.add('active');
-        } else if ((historyPaths.some(path => activePage.includes(path)))) {
-            document.querySelector('.side-history').classList.add('active');
-        } else if ((sessionPaths.some(path => activePage.includes(path)))) {
-            document.querySelector('.side-session').classList.add('active');
-        } else if ((subscribePaths.some(path => activePage.includes(path)))) {
-            document.querySelector('.side-subscribe').classList.add('active');
-        }
+    const activePage = window.location.pathname;
+    if (dashboardPaths.some(path => activePage.includes(path))) {
+        document.querySelector('.side-dashboard').classList.add('active');
+    } else if ((historyPaths.some(path => activePage.includes(path)))) {
+        document.querySelector('.side-history').classList.add('active');
+    } else if ((sessionPaths.some(path => activePage.includes(path)))) {
+        document.querySelector('.side-session').classList.add('active');
+    } else if ((subscribePaths.some(path => activePage.includes(path)))) {
+        document.querySelector('.side-subscribe').classList.add('active');
+    }
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="<?= base_url() ?>/front/dashboard_new/assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+    <script src="<?= base_url() ?>front/dashboard_new/assets/js/argon-dashboard.min.js?v=2.0.4"></script>
 </body>
 
 </html>

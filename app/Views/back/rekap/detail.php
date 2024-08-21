@@ -1,27 +1,25 @@
 <script type="text/javascript">
+var save_method; //for save method string
+var table;
 
-    var save_method; //for save method string
-    var table;
-
-    $(document).ready(function () {
-        table = $('#tb').DataTable({
-            ajax: "<?php echo base_url(); ?>/rekap/ajaxdetil/<?php echo $head->idsubtopik; ?>",
-            scrollx: true,
-            responsive: true
-        });
+$(document).ready(function() {
+    table = $('#tb').DataTable({
+        ajax: "<?php echo base_url(); ?>rekap/ajaxdetil/<?php echo $head->idsubtopik; ?>",
+        scrollx: true,
+        responsive: true
     });
+});
 
-    function reload() {
-        table.ajax.reload(null, false); //reload datatable ajax
-    }
-    
+function reload() {
+    table.ajax.reload(null, false); //reload datatable ajax
+}
 </script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>Detil Rekap<small>Maintenance data rekap</small></h1>
         <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>/rekap"> Rekap</a></li>
+            <li><a href="<?php echo base_url(); ?>rekap"> Rekap</a></li>
             <li class="active">Detil Rekap</li>
         </ol>
     </section>
@@ -31,10 +29,11 @@
                 <div class="box">
                     <div class="box-body">
                         <div class="form-horizontal">
-                           <div class="form-group">
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Topik / Subtopik</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" value="<?php echo $head->namatopik.' / '.$head->namasub ?>" readonly>
+                                    <input type="text" class="form-control"
+                                        value="<?php echo $head->namatopik . ' / ' . $head->namasub ?>" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -137,132 +136,141 @@
     </div>
 </div>
 <!-- ChartJS -->
-<script src="<?php echo base_url(); ?>/back/bower_components/chart.js/Chart.js"></script>
+<script src="<?php echo base_url(); ?>back/bower_components/chart.js/Chart.js"></script>
 <script>
-    $(function(){
-        var areaChartData = {
-            labels  : [<?php $bulan = $model->getAllQ("SELECT created_at FROM peserta p where YEAR(created_at) = YEAR(now()) group by MONTH(created_at);"); foreach($bulan->getResult() as $rows){ ?> '<?php echo date('F', strtotime($rows->created_at))?>', <?php }?>],
-            datasets: [
-                <?php foreach($quest->getResult() as $row) {
-                    $hasil = $model->getAllQ("SELECT count(hasil) as benar FROM jawaban_peserta j, peserta p where idsoal = '".$row->idsoal."' and hasil = 1 and j.idpeserta = p.idpeserta group by MONTH(created_at);");?>
-                {
-                label               : '<?php echo strip_tags(preg_replace( "/\r|\n/", "", str_replace("&nbsp;", "", $row->soal))) ?>',
-                strokeColor         : '<?php echo 'rgba('.$row->random.','.$row->random2.','.$row->random3.')' ?>',
-                pointColor          : '<?php echo 'rgba('.$row->random.','.$row->random2.','.$row->random3.')' ?>',
-                data                : [<?php foreach($hasil->getResult() as $rows){ echo $rows->benar.',';}?>]
-                },
-                <?php } ?>
-            ]
-        }
+$(function() {
+    var areaChartData = {
+        labels: [
+            <?php $bulan = $model->getAllQ("SELECT created_at FROM peserta p where YEAR(created_at) = YEAR(now()) group by MONTH(created_at);");
+                foreach ($bulan->getResult() as $rows) { ?> '<?php echo date('F', strtotime($rows->created_at)) ?>',
+            <?php } ?>
+        ],
+        datasets: [
+            <?php foreach ($quest->getResult() as $row) {
+                    $hasil = $model->getAllQ("SELECT count(hasil) as benar FROM jawaban_peserta j, peserta p where idsoal = '" . $row->idsoal . "' and hasil = 1 and j.idpeserta = p.idpeserta group by MONTH(created_at);"); ?> {
+                label: '<?php echo strip_tags(preg_replace("/\r|\n/", "", str_replace("&nbsp;", "", $row->soal))) ?>',
+                strokeColor: '<?php echo 'rgba(' . $row->random . ',' . $row->random2 . ',' . $row->random3 . ')' ?>',
+                pointColor: '<?php echo 'rgba(' . $row->random . ',' . $row->random2 . ',' . $row->random3 . ')' ?>',
+                data: [<?php foreach ($hasil->getResult() as $rows) {
+                                    echo $rows->benar . ',';
+                                } ?>]
+            },
+            <?php } ?>
+        ]
+    }
 
-        var areaChartData2 = {
-            labels  : [<?php $bulan = $model->getAllQ("SELECT created_at FROM peserta p where YEAR(created_at) = YEAR(now()) group by MONTH(created_at);"); foreach($bulan->getResult() as $rows){ ?> '<?php echo date('F', strtotime($rows->created_at))?>', <?php }?>],
-            datasets: [
-                <?php foreach($quest->getResult() as $row) {
-                    $hasil = $model->getAllQ("SELECT count(hasil) as salah FROM jawaban_peserta j, peserta p where idsoal = '".$row->idsoal."' and hasil = 0 and j.idpeserta = p.idpeserta group by MONTH(created_at);");?>
-                {
-                label               : '<?php echo strip_tags(preg_replace( "/\r|\n/", "", str_replace("&nbsp;", "", $row->soal))) ?>',
-                strokeColor         : '<?php echo 'rgba('.$row->random.','.$row->random2.','.$row->random3.')' ?>',
-                pointColor          : '<?php echo 'rgba('.$row->random.','.$row->random2.','.$row->random3.')' ?>',
-                data                : [<?php foreach($hasil->getResult() as $rows){ echo $rows->salah.',';}?>]
-                },
-                <?php } ?>
-            ]
-        }
+    var areaChartData2 = {
+        labels: [
+            <?php $bulan = $model->getAllQ("SELECT created_at FROM peserta p where YEAR(created_at) = YEAR(now()) group by MONTH(created_at);");
+                foreach ($bulan->getResult() as $rows) { ?> '<?php echo date('F', strtotime($rows->created_at)) ?>',
+            <?php } ?>
+        ],
+        datasets: [
+            <?php foreach ($quest->getResult() as $row) {
+                    $hasil = $model->getAllQ("SELECT count(hasil) as salah FROM jawaban_peserta j, peserta p where idsoal = '" . $row->idsoal . "' and hasil = 0 and j.idpeserta = p.idpeserta group by MONTH(created_at);"); ?> {
+                label: '<?php echo strip_tags(preg_replace("/\r|\n/", "", str_replace("&nbsp;", "", $row->soal))) ?>',
+                strokeColor: '<?php echo 'rgba(' . $row->random . ',' . $row->random2 . ',' . $row->random3 . ')' ?>',
+                pointColor: '<?php echo 'rgba(' . $row->random . ',' . $row->random2 . ',' . $row->random3 . ')' ?>',
+                data: [<?php foreach ($hasil->getResult() as $rows) {
+                                    echo $rows->salah . ',';
+                                } ?>]
+            },
+            <?php } ?>
+        ]
+    }
 
-        var areaChartOptions = {
-            //Boolean - If we should show the scale at all
-            showScale               : true,
-            //Boolean - Whether grid lines are shown across the chart
-            scaleShowGridLines      : false,
-            //String - Colour of the grid lines
-            scaleGridLineColor      : 'rgba(0,0,0,.05)',
-            //Number - Width of the grid lines
-            scaleGridLineWidth      : 1,
-            //Boolean - Whether to show horizontal lines (except X axis)
-            scaleShowHorizontalLines: true,
-            //Boolean - Whether to show vertical lines (except Y axis)
-            scaleShowVerticalLines  : true,
-            //Boolean - Whether the line is curved between points
-            bezierCurve             : true,
-            //Number - Tension of the bezier curve between points
-            bezierCurveTension      : 0.3,
-            //Boolean - Whether to show a dot for each point
-            pointDot                : false,
-            //Number - Radius of each point dot in pixels
-            pointDotRadius          : 4,
-            //Number - Pixel width of point dot stroke
-            pointDotStrokeWidth     : 1,
-            //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-            pointHitDetectionRadius : 20,
-            //Boolean - Whether to show a stroke for datasets
-            datasetStroke           : true,
-            //Number - Pixel width of dataset stroke
-            datasetStrokeWidth      : 2,
-            //Boolean - Whether to fill the dataset with a color
-            datasetFill             : true,
-            //String - A legend template
-            legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-            //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-            maintainAspectRatio     : true,
-            //Boolean - whether to make the chart responsive to window resizing
-            responsive              : true
-        }
+    var areaChartOptions = {
+        //Boolean - If we should show the scale at all
+        showScale: true,
+        //Boolean - Whether grid lines are shown across the chart
+        scaleShowGridLines: false,
+        //String - Colour of the grid lines
+        scaleGridLineColor: 'rgba(0,0,0,.05)',
+        //Number - Width of the grid lines
+        scaleGridLineWidth: 1,
+        //Boolean - Whether to show horizontal lines (except X axis)
+        scaleShowHorizontalLines: true,
+        //Boolean - Whether to show vertical lines (except Y axis)
+        scaleShowVerticalLines: true,
+        //Boolean - Whether the line is curved between points
+        bezierCurve: true,
+        //Number - Tension of the bezier curve between points
+        bezierCurveTension: 0.3,
+        //Boolean - Whether to show a dot for each point
+        pointDot: false,
+        //Number - Radius of each point dot in pixels
+        pointDotRadius: 4,
+        //Number - Pixel width of point dot stroke
+        pointDotStrokeWidth: 1,
+        //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+        pointHitDetectionRadius: 20,
+        //Boolean - Whether to show a stroke for datasets
+        datasetStroke: true,
+        //Number - Pixel width of dataset stroke
+        datasetStrokeWidth: 2,
+        //Boolean - Whether to fill the dataset with a color
+        datasetFill: true,
+        //String - A legend template
+        legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+        //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+        maintainAspectRatio: true,
+        //Boolean - whether to make the chart responsive to window resizing
+        responsive: true
+    }
 
-        var areaChartOptions2 = {
-            //Boolean - If we should show the scale at all
-            showScale               : true,
-            //Boolean - Whether grid lines are shown across the chart
-            scaleShowGridLines      : false,
-            //String - Colour of the grid lines
-            scaleGridLineColor      : 'rgba(0,0,0,.05)',
-            //Number - Width of the grid lines
-            scaleGridLineWidth      : 1,
-            //Boolean - Whether to show horizontal lines (except X axis)
-            scaleShowHorizontalLines: true,
-            //Boolean - Whether to show vertical lines (except Y axis)
-            scaleShowVerticalLines  : true,
-            //Boolean - Whether the line is curved between points
-            bezierCurve             : true,
-            //Number - Tension of the bezier curve between points
-            bezierCurveTension      : 0.3,
-            //Boolean - Whether to show a dot for each point
-            pointDot                : false,
-            //Number - Radius of each point dot in pixels
-            pointDotRadius          : 4,
-            //Number - Pixel width of point dot stroke
-            pointDotStrokeWidth     : 1,
-            //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-            pointHitDetectionRadius : 20,
-            //Boolean - Whether to show a stroke for datasets
-            datasetStroke           : true,
-            //Number - Pixel width of dataset stroke
-            datasetStrokeWidth      : 2,
-            //Boolean - Whether to fill the dataset with a color
-            datasetFill             : true,
-            //String - A legend template
-            legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-            //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-            maintainAspectRatio     : true,
-            //Boolean - whether to make the chart responsive to window resizing
-            responsive              : true
-        }
+    var areaChartOptions2 = {
+        //Boolean - If we should show the scale at all
+        showScale: true,
+        //Boolean - Whether grid lines are shown across the chart
+        scaleShowGridLines: false,
+        //String - Colour of the grid lines
+        scaleGridLineColor: 'rgba(0,0,0,.05)',
+        //Number - Width of the grid lines
+        scaleGridLineWidth: 1,
+        //Boolean - Whether to show horizontal lines (except X axis)
+        scaleShowHorizontalLines: true,
+        //Boolean - Whether to show vertical lines (except Y axis)
+        scaleShowVerticalLines: true,
+        //Boolean - Whether the line is curved between points
+        bezierCurve: true,
+        //Number - Tension of the bezier curve between points
+        bezierCurveTension: 0.3,
+        //Boolean - Whether to show a dot for each point
+        pointDot: false,
+        //Number - Radius of each point dot in pixels
+        pointDotRadius: 4,
+        //Number - Pixel width of point dot stroke
+        pointDotStrokeWidth: 1,
+        //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+        pointHitDetectionRadius: 20,
+        //Boolean - Whether to show a stroke for datasets
+        datasetStroke: true,
+        //Number - Pixel width of dataset stroke
+        datasetStrokeWidth: 2,
+        //Boolean - Whether to fill the dataset with a color
+        datasetFill: true,
+        //String - A legend template
+        legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+        //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+        maintainAspectRatio: true,
+        //Boolean - whether to make the chart responsive to window resizing
+        responsive: true
+    }
 
-        //-------------
-        //- LINE CHART -
-        //--------------
-        var lineChartCanvas          = $('#lineChart').get(0).getContext('2d')
-        var lineChart                = new Chart(lineChartCanvas)
-        var lineChartOptions         = areaChartOptions
-        lineChartOptions.datasetFill = false
-        lineChart.Line(areaChartData, lineChartOptions)
+    //-------------
+    //- LINE CHART -
+    //--------------
+    var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+    var lineChart = new Chart(lineChartCanvas)
+    var lineChartOptions = areaChartOptions
+    lineChartOptions.datasetFill = false
+    lineChart.Line(areaChartData, lineChartOptions)
 
-        var lineChartCanvas2          = $('#lineChart2').get(0).getContext('2d')
-        var lineChart2                = new Chart(lineChartCanvas2)
-        var lineChartOptions2         = areaChartOptions2
-        lineChartOptions2.datasetFill = false
-        lineChart2.Line(areaChartData2, lineChartOptions2)
+    var lineChartCanvas2 = $('#lineChart2').get(0).getContext('2d')
+    var lineChart2 = new Chart(lineChartCanvas2)
+    var lineChartOptions2 = areaChartOptions2
+    lineChartOptions2.datasetFill = false
+    lineChart2.Line(areaChartData2, lineChartOptions2)
 
-    });
-
+});
 </script>

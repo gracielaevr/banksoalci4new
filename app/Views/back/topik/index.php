@@ -1,124 +1,124 @@
 <script type="text/javascript">
-    var save_method; //for save method string
-    var table;
+var save_method; //for save method string
+var table;
 
-    $(document).ready(function() {
-        table = $('#tb').DataTable({
-            ajax: "<?php echo base_url(); ?>/topik/ajaxlist",
-            scrollx: true,
-            responsive: true
-        });
+$(document).ready(function() {
+    table = $('#tb').DataTable({
+        ajax: "<?php echo base_url(); ?>topik/ajaxlist",
+        scrollx: true,
+        responsive: true
     });
+});
 
-    function reload() {
-        table.ajax.reload(null, false); //reload datatable ajax
-    }
+function reload() {
+    table.ajax.reload(null, false); //reload datatable ajax
+}
 
-    function add() {
-        save_method = 'add';
-        $('#form')[0].reset();
-        $('#modal_form').modal('show');
-        $('.modal-title').text('Tambah topik');
-    }
+function add() {
+    save_method = 'add';
+    $('#form')[0].reset();
+    $('#modal_form').modal('show');
+    $('.modal-title').text('Tambah topik');
+}
 
-    function subtopik(kode) {
-        window.location.href = "<?php echo base_url(); ?>/subtopik/detil/" + kode;
-    }
+function subtopik(kode) {
+    window.location.href = "<?php echo base_url(); ?>subtopik/detil/" + kode;
+}
 
-    function save() {
-        var kode = document.getElementById('kode').value;
-        var nama = document.getElementById('nama').value;
-        var best = document.getElementById('best').value;
-        var code = document.getElementById('code').value;
+function save() {
+    var kode = document.getElementById('kode').value;
+    var nama = document.getElementById('nama').value;
+    var best = document.getElementById('best').value;
+    var code = document.getElementById('code').value;
 
-        if (nama === '') {
-            alert("Nama topik tidak boleh kosong");
+    if (nama === '') {
+        alert("Nama topik tidak boleh kosong");
+    } else {
+        $('#btnSave').text('Menyimpan...'); //change button text
+        $('#btnSave').attr('disabled', true); //set button disable 
+
+        var url = "";
+        if (save_method === 'add') {
+            url = "<?php echo base_url(); ?>topik/ajax_add";
         } else {
-            $('#btnSave').text('Menyimpan...'); //change button text
-            $('#btnSave').attr('disabled', true); //set button disable 
-
-            var url = "";
-            if (save_method === 'add') {
-                url = "<?php echo base_url(); ?>/topik/ajax_add";
-            } else {
-                url = "<?php echo base_url(); ?>/topik/ajax_edit";
-            }
-
-            var form_data = new FormData();
-            form_data.append('kode', kode);
-            form_data.append('code', code);
-            form_data.append('best', best);
-            form_data.append('nama', nama);
-
-            // ajax adding data to database
-            $.ajax({
-                url: url,
-                dataType: 'JSON',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'POST',
-                success: function(data) {
-                    alert(data.status);
-                    $('#modal_form').modal('hide');
-                    reload();
-
-                    $('#btnSave').text('Simpan'); //change button text
-                    $('#btnSave').attr('disabled', false); //set button enable 
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    alert("Error json " + errorThrown);
-
-                    $('#btnSave').text('Simpan'); //change button text
-                    $('#btnSave').attr('disabled', false); //set button enable 
-                }
-            });
+            url = "<?php echo base_url(); ?>topik/ajax_edit";
         }
-    }
 
-    function hapus(id, nama) {
-        if (confirm("Apakah anda yakin menghapus topik " + nama +
-                " ini ? \n*Semua data terkait akan terhapus (subtopik / soal)*")) {
-            $.ajax({
-                url: "<?php echo base_url(); ?>/topik/hapus/" + id,
-                type: "POST",
-                dataType: "JSON",
-                success: function(data) {
-                    alert(data.status);
-                    reload();
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    alert('Error hapus data');
-                }
-            });
-        }
-    }
+        var form_data = new FormData();
+        form_data.append('kode', kode);
+        form_data.append('code', code);
+        form_data.append('best', best);
+        form_data.append('nama', nama);
 
-    function ganti(id) {
-        save_method = 'update';
-        $('#form')[0].reset();
-        $('#modal_form').modal('show');
-        $('.modal-title').text('Ganti topik');
+        // ajax adding data to database
         $.ajax({
-            url: "<?php echo base_url(); ?>/topik/ganti/" + id,
+            url: url,
+            dataType: 'JSON',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'POST',
+            success: function(data) {
+                alert(data.status);
+                $('#modal_form').modal('hide');
+                reload();
+
+                $('#btnSave').text('Simpan'); //change button text
+                $('#btnSave').attr('disabled', false); //set button enable 
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("Error json " + errorThrown);
+
+                $('#btnSave').text('Simpan'); //change button text
+                $('#btnSave').attr('disabled', false); //set button enable 
+            }
+        });
+    }
+}
+
+function hapus(id, nama) {
+    if (confirm("Apakah anda yakin menghapus topik " + nama +
+            " ini ? \n*Semua data terkait akan terhapus (subtopik / soal)*")) {
+        $.ajax({
+            url: "<?php echo base_url(); ?>topik/hapus/" + id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
-                $('[name="kode"]').val(data.idtopik);
-                $('[name="code"]').val(data.code);
-                $('[name="best"]').val(data.best);
-                $('[name="nama"]').val(data.nama);
+                alert(data.status);
+                reload();
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                alert('Error get data');
+                alert('Error hapus data');
             }
         });
     }
+}
 
-    function closemodal() {
-        $('#modal_form').modal('hide');
-    }
+function ganti(id) {
+    save_method = 'update';
+    $('#form')[0].reset();
+    $('#modal_form').modal('show');
+    $('.modal-title').text('Ganti topik');
+    $.ajax({
+        url: "<?php echo base_url(); ?>topik/ganti/" + id,
+        type: "POST",
+        dataType: "JSON",
+        success: function(data) {
+            $('[name="kode"]').val(data.idtopik);
+            $('[name="code"]').val(data.code);
+            $('[name="best"]').val(data.best);
+            $('[name="nama"]').val(data.nama);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('Error get data');
+        }
+    });
+}
+
+function closemodal() {
+    $('#modal_form').modal('hide');
+}
 </script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -174,13 +174,15 @@
                     <div class="form-group row">
                         <label for="code" class="col-sm-3 control-label">Kode topik</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="code" name="code" placeholder="Masukkan kode topik disini" autocomplete="off">
+                            <input type="text" class="form-control" id="code" name="code"
+                                placeholder="Masukkan kode topik disini" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="nama" class="col-sm-3 control-label">Nama topik</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan topik disini" autocomplete="off">
+                            <input type="text" class="form-control" id="nama" name="nama"
+                                placeholder="Masukkan topik disini" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">

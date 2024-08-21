@@ -25,7 +25,7 @@ class Homeadmins extends BaseController
             $data['role'] = session()->get("role");
             $data['nm_role'] = session()->get("nama_role");
 
-            $data['menu'] = $this->request->uri->getSegment(1);
+            $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
             $def_foto = base_url() . '/images/noimg.jpg';

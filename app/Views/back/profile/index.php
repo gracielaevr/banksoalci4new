@@ -1,48 +1,47 @@
 <script type="text/javascript">
+$(document).ready(function() {
 
-    $(document).ready(function () {
+});
 
-    });
+function proses() {
+    var nama = document.getElementById('nama').value;
+    var wa = document.getElementById('wa').value;
+    var foto = $('#foto').prop('files')[0];
 
-    function proses() {
-        var nama = document.getElementById('nama').value;
-        var wa = document.getElementById('wa').value;
-        var foto = $('#foto').prop('files')[0];
-        
-        if(nama === ""){
-            alert("Nama personil tidak boleh kosong");
-        }else{
-            $('#btnSave').text('Saving...');
-            $('#btnSave').attr('disabled',true);
+    if (nama === "") {
+        alert("Nama personil tidak boleh kosong");
+    } else {
+        $('#btnSave').text('Saving...');
+        $('#btnSave').attr('disabled', true);
 
-            var form_data = new FormData();
-            form_data.append('nama', nama);
-            form_data.append('wa', wa);
-            form_data.append('file', foto);
+        var form_data = new FormData();
+        form_data.append('nama', nama);
+        form_data.append('wa', wa);
+        form_data.append('file', foto);
 
-            $.ajax({
-                url: "<?php echo base_url(); ?>/profile/proses",
-                dataType: 'JSON',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'POST',
-                success: function (response) {
-                    alert(response.status);
+        $.ajax({
+            url: "<?php echo base_url(); ?>profile/proses",
+            dataType: 'JSON',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'POST',
+            success: function(response) {
+                alert(response.status);
 
-                    location.reload();
-                    $('#btnSave').text('Save');
-                    $('#btnSave').attr('disabled', false);
-                },error: function (response) {
-                    alert(response.status);
-                    $('#btnSave').text('Save');
-                    $('#btnSave').attr('disabled', false);
-                }
-            });
-        }
+                location.reload();
+                $('#btnSave').text('Save');
+                $('#btnSave').attr('disabled', false);
+            },
+            error: function(response) {
+                alert(response.status);
+                $('#btnSave').text('Save');
+                $('#btnSave').attr('disabled', false);
+            }
+        });
     }
-
+}
 </script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -67,20 +66,23 @@
                             <div class="form-group row">
                                 <label for="email" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" id="email" name="email" type="text" value="<?php echo $pro->email; ?>" readonly>
+                                    <input class="form-control" id="email" name="email" type="text"
+                                        value="<?php echo $pro->email; ?>" readonly>
                                     <small>* Jika ingin mengganti email hubungi admin</small>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="nama" class="col-sm-2 control-label">Nama</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" id="nama" name="nama" type="text" value="<?php echo $pro->nama; ?>">
+                                    <input class="form-control" id="nama" name="nama" type="text"
+                                        value="<?php echo $pro->nama; ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="wa" class="col-sm-2 control-label">No WA</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" id="wa" name="wa" type="text" value="<?php echo $pro->wa; ?>">
+                                    <input class="form-control" id="wa" name="wa" type="text"
+                                        value="<?php echo $pro->wa; ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -91,7 +93,8 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button id="btnSave" type="button" class="btn btn-primary" onclick="proses();">Simpan</button>
+                            <button id="btnSave" type="button" class="btn btn-primary"
+                                onclick="proses();">Simpan</button>
                             <button type="button" class="btn btn-default">Batal</button>
                         </div>
                     </div>

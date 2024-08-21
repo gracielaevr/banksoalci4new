@@ -26,7 +26,7 @@ tinymce.init({
 
 $(document).ready(function() {
     table = $('#tb').DataTable({
-        ajax: "<?php echo base_url(); ?>/soal/ajaxdetil/<?php echo $head->idsubtopik; ?>",
+        ajax: "<?php echo base_url(); ?>soal/ajaxdetil/<?php echo $head->idsubtopik; ?>",
         scrollx: true,
         responsive: true
     });
@@ -53,7 +53,7 @@ function pindah() {
 function pindah_instansi(id, nama) {
     if (confirm("Apakah anda yakin ingin memindahkan soal ini ke Leap ?")) {
         $.ajax({
-            url: "<?php echo base_url(); ?>/soal/pindah_instansi/" + id,
+            url: "<?php echo base_url(); ?>soal/pindah_instansi/" + id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
@@ -107,9 +107,9 @@ function simpan() {
 
         var url = "";
         if (kode === '') {
-            url = "<?php echo base_url(); ?>/soal/ajax_add";
+            url = "<?php echo base_url(); ?>soal/ajax_add";
         } else {
-            url = "<?php echo base_url(); ?>/soal/ajax_edit";
+            url = "<?php echo base_url(); ?>soal/ajax_edit";
         }
 
         var form_data = new FormData();
@@ -176,7 +176,7 @@ function savepindah() {
         });
 
         var url = "";
-        url = "<?php echo base_url(); ?>/soal/pindah";
+        url = "<?php echo base_url(); ?>soal/pindah";
 
         var form_data = new FormData();
         form_data.append('idsubtopik', idsub);
@@ -212,7 +212,7 @@ function savepindah() {
 function hapus(id, nama) {
     if (confirm("Apakah anda yakin menghapus soal ini ?")) {
         $.ajax({
-            url: "<?php echo base_url(); ?>/soal/hapus/" + id,
+            url: "<?php echo base_url(); ?>soal/hapus/" + id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
@@ -237,7 +237,7 @@ function deleteall() {
                 kodesoal.push($(this).val());
             });
             var url = "";
-            url = "<?php echo base_url(); ?>/soal/hapussemua";
+            url = "<?php echo base_url(); ?>soal/hapussemua";
 
             var form_data = new FormData();
             form_data.append('hasil', kodesoal);
@@ -281,13 +281,13 @@ function deselectall() {
 }
 
 function kembali() {
-    window.location.href = "<?php echo base_url(); ?>/soal/";
+    window.location.href = "<?php echo base_url(); ?>soal/";
 }
 
 function ganti(id) {
     save_method = 'update';
     $.ajax({
-        url: "<?php echo base_url(); ?>/soal/ganti/" + id,
+        url: "<?php echo base_url(); ?>soal/ganti/" + id,
         type: "POST",
         dataType: "JSON",
         success: function(data) {
@@ -300,7 +300,7 @@ function ganti(id) {
 
             // akses soalyang banyak
             $.ajax({
-                url: "<?php echo base_url(); ?>/soal/aksespilihan/" + idsoal,
+                url: "<?php echo base_url(); ?>soal/aksespilihan/" + idsoal,
                 type: "POST",
                 dataType: "JSON",
                 success: function(data1) {
@@ -316,7 +316,7 @@ function ganti(id) {
 
             // akses soalyang banyak
             $.ajax({
-                url: "<?php echo base_url(); ?>/soal/aksesjawaban/" + idsoal,
+                url: "<?php echo base_url(); ?>soal/aksesjawaban/" + idsoal,
                 type: "POST",
                 dataType: "JSON",
                 success: function(data1) {
@@ -391,7 +391,7 @@ function showimg(kode) {
     $('#modal_show_img').modal('show');
     document.getElementById('kode').value = kode;
     $.ajax({
-        url: "<?php echo base_url(); ?>/soal/load_gambar/" + kode,
+        url: "<?php echo base_url(); ?>soal/load_gambar/" + kode,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -408,7 +408,7 @@ function showimg(kode) {
     <section class="content-header">
         <h1>Detail Soal <small>Maintenance data soal</small></h1>
         <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>/soal"> Soal</a></li>
+            <li><a href="<?php echo base_url(); ?>soal"> Soal</a></li>
             <li class="active">Detil Soal</li>
         </ol>
     </section>

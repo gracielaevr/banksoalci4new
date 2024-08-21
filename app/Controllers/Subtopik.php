@@ -25,7 +25,7 @@ class Subtopik extends BaseController
             $data['role'] = session()->get("role");
             $data['nm_role'] = session()->get("nama_role");
             $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
-            $data['menu'] = $this->request->uri->getSegment(1);
+            $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
             $def_foto = base_url() . '/images/noimg.jpg';
@@ -60,7 +60,7 @@ class Subtopik extends BaseController
                 $data['logo'] = base_url() . '/images/noimg.jpg';
             }
 
-            $kode = $this->request->uri->getSegment(3);
+            $kode = $this->request->getUri()->getSegment(3);
             $data['head'] = $this->model->getAllQR("select * from topik where idtopik = '" . $kode . "';");
 
             echo view('back/head', $data);
@@ -75,7 +75,7 @@ class Subtopik extends BaseController
     public function ajaxdetil()
     {
         if (session()->get("logged_admin")) {
-            $kode = $this->request->uri->getSegment(3);
+            $kode = $this->request->getUri()->getSegment(3);
             $data = array();
             $no = 1;
             $list = $this->model->getAllQ("select * from subtopik where idtopik = '" . $kode . "';");
@@ -126,7 +126,7 @@ class Subtopik extends BaseController
     public function ganti()
     {
         if (session()->get("logged_admin")) {
-            $kondisi['idsubtopik'] = $this->request->uri->getSegment(3);
+            $kondisi['idsubtopik'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("subtopik", $kondisi);
             echo json_encode($data);
         } else {
@@ -159,7 +159,7 @@ class Subtopik extends BaseController
     public function hapus()
     {
         if (session()->get("logged_admin")) {
-            $kond['idsubtopik'] = $this->request->uri->getSegment(3);
+            $kond['idsubtopik'] = $this->request->getUri()->getSegment(3);
             $hapus = $this->model->delete("subtopik", $kond);
             if ($hapus == 1) {
                 $status = "Data terhapus";
