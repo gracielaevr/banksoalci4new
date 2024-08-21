@@ -82,17 +82,20 @@ class coba extends BaseController
         $file = $this->request->getFile('file');
         $status = 0;
         if ($file) {
+
             $excelReader  = new PHPExcel();
             //mengambil lokasi temp file
             $fileLocation = $file->getTempName();
             //baca file
             $objPHPExcel = PHPExcel_IOFactory::load($fileLocation);
+
             //ambil sheet active
             $sheet    = $objPHPExcel->getActiveSheet()->toArray(null, true, true, true);
             //looping untuk mengambil data
             foreach ($sheet as $idx => $data) {
                 //skip index 1 karena title excel
                 if ($idx == 1) {
+
                     continue;
                 }
                 $data = array(
@@ -106,6 +109,7 @@ class coba extends BaseController
             if ($simpan == 1) {
                 $status = "Data tersimpan";
             } else {
+
                 $status = "Data gagal tersimpan";
             }
         }

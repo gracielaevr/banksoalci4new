@@ -38,6 +38,7 @@ class Diagnostictest extends BaseController
 
     public function exam()
     {
+
         $kode = $this->request->getUri()->getSegment(3);
         $data['kode'] = $kode;
 
@@ -51,6 +52,7 @@ class Diagnostictest extends BaseController
         // jenis = '".$r."'
         echo view('front/head');
         // if($r == 'mc'){
+
 
         // }
         echo view('front/exam/mc', $data);
@@ -103,6 +105,7 @@ class Diagnostictest extends BaseController
 
     public function ajaxlist()
     {
+
         $kode = $this->request->getUri()->getSegment(3);
 
         $id = $this->request->getPost('query');
@@ -140,6 +143,7 @@ class Diagnostictest extends BaseController
     public function begin()
     {
         $kode = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
+
         $data['kode'] = $kode;
 
         $data['model'] = $this->model;
@@ -157,6 +161,7 @@ class Diagnostictest extends BaseController
         if ($bidang == 'English') {
             echo view('front/diagnostik/mc', $data);
         } else {
+
             echo view('front/diagnostik/mcexcel', $data);
         }
         echo view('front/foot');
@@ -181,6 +186,7 @@ class Diagnostictest extends BaseController
         if ($simpan == 1) {
             $status = "ok";
         } else {
+
             $status = "Error";
         }
 
@@ -189,6 +195,7 @@ class Diagnostictest extends BaseController
 
     public function finish()
     {
+
         $getid = $this->request->getPost('idpeserta');
         $data_soal = explode(",", $this->request->getPost('idsoal'));
         $data_ja = explode(",", $this->request->getPost('jawaban'));
@@ -232,11 +239,13 @@ class Diagnostictest extends BaseController
                 if ($benar == 1) {
                     $hasil = 1;
                 } else {
+
                     $hasil = 0;
                 }
 
                 $datap = array(
                     'idsp' => $this->model->autokode("A", "idsp", "jawaban_peserta_test", 2, 7),
+
                     'idpeserta' => $getid,
                     'idsoal' => $data_soal[$i],
                     'jawab' => $j,
@@ -254,6 +263,7 @@ class Diagnostictest extends BaseController
             $skor = $this->model->getAllQ("select * from scoring where tipe = 'Listening';");
             foreach ($skor->getResult() as $rows) {
                 if ($rows->benar == $listening) {
+
                     $nlist = $rows->skor;
                 }
             }
@@ -262,6 +272,7 @@ class Diagnostictest extends BaseController
             $skor2 = $this->model->getAllQ("select * from scoring where tipe = 'Reading';");
             foreach ($skor2->getResult() as $rowss) {
                 if ($rowss->benar == $reading) {
+
                     $nread = $rowss->skor;
                 }
             }
@@ -273,6 +284,7 @@ class Diagnostictest extends BaseController
             $nilai = $b * 5;
         }
         $s = $this->model->getAllQR("select count(*) as jml from jawaban_peserta_test where hasil = 0 and idpeserta = '" . $getid . "'")->jml;
+
 
         $kond['idpeserta'] = $this->request->getPost('idpeserta');
         $datanilai = array(
@@ -288,7 +300,7 @@ class Diagnostictest extends BaseController
 
         if ($update == 1) {
             $status = "ok";
-        } else {
+
             $status = "Error!";
         }
 
