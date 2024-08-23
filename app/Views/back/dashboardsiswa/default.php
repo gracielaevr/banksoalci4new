@@ -30,6 +30,40 @@
     <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/assets/css/custom.css">
     <link rel="stylesheet" href="<?= base_url() ?>front/dashboard/assets/css/components.css">
     <link rel="stylesheet" href="<?= base_url() ?>front/dashboard_new/assets/css/style.css">
+
+
+    <style>
+        #flashMessage {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            text-align: center;
+            color: red;
+            font-weight: bold;
+            font-size: 1rem;
+            padding: 30px;
+            width: 40%;
+            border-radius: 12px;
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+        }
+
+        #flashMessage.show {
+            top: 20px;
+            /* Slide down into view */
+            opacity: 1;
+        }
+
+        @media (max-width: 450px) {
+            #flashMessage {
+                width: 75%;
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -136,20 +170,21 @@ height:27%"></div>
                             </a>
                             <ul class="dropdown-menu  dropdown-menu-end  px-2 py-2 me-sm-n2"
                                 aria-labelledby="dropdownMenuButton">
-                                <li>
-                                    <a class="dropdown-item border-radius-md" href="<?= base_url() ?>logout">
-                                        <div class="d-flex py-1">
-                                            <div class="my-auto">
-                                                <i class="ni ni-bold-right text-danger me-3 text-center"></i>Logout
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
+
                                 <li>
                                     <a class="dropdown-item border-radius-md" href="<?= base_url() ?>profilestudent">
                                         <div class="d-flex py-1">
                                             <div class="my-auto">
                                                 <i class="ni ni-single-02 text-success me-3"></i>Profile
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item border-radius-md" href="<?= base_url() ?>logout">
+                                        <div class="d-flex py-1">
+                                            <div class="my-auto">
+                                                <i class="ni ni-bold-right text-danger me-3 text-center"></i>Logout
                                             </div>
                                         </div>
                                     </a>
@@ -167,7 +202,8 @@ height:27%"></div>
 
         </div>
 
-        <footer class="footer pt-3">
+
+        <footer class="footer pt-3 pb-3">
             <hr class="horizontal dark mt-0">
             <div class="container-fluid">
                 <div class="row">
@@ -184,8 +220,8 @@ height:27%"></div>
                 </div>
             </div>
         </footer>
-    </main>
 
+    </main>
     <!--   Core JS Files   -->
     <script src="<?= base_url() ?>front/dashboard_new/assets/js/core/popper.min.js"></script>
     <script src="<?= base_url() ?>front/dashboard_new/assets/js/core/bootstrap.min.js"></script>
@@ -215,20 +251,20 @@ height:27%"></div>
 
     <!-- Search Subtopic -->
     <script>
-    var search = document.getElementById("searchInput-sub");
-    var els = document.querySelectorAll(".search-sub");
+        var search = document.getElementById("searchInput-sub");
+        var els = document.querySelectorAll(".search-sub");
 
-    search.addEventListener("keyup", function() {
-        var searchValue = search.value.toLowerCase();
+        search.addEventListener("keyup", function() {
+            var searchValue = search.value.toLowerCase();
 
-        Array.prototype.forEach.call(els, function(el) {
-            if (el.textContent.trim().toLowerCase().indexOf(searchValue) > -1) {
-                el.style.display = 'block';
-            } else {
-                el.style.display = 'none';
-            }
+            Array.prototype.forEach.call(els, function(el) {
+                if (el.textContent.trim().toLowerCase().indexOf(searchValue) > -1) {
+                    el.style.display = 'block';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
         });
-    });
     </script>
 
     <!-- Template JS File -->
@@ -238,108 +274,122 @@ height:27%"></div>
     <!-- Page Specific JS File -->
     <!-- Code injected by live-server -->
     <script>
-    // <![CDATA[  <-- For SVG support
-    if ('WebSocket' in window) {
-        (function() {
-            function refreshCSS() {
-                var sheets = [].slice.call(document.getElementsByTagName("link"));
-                var head = document.getElementsByTagName("head")[0];
-                for (var i = 0; i < sheets.length; ++i) {
-                    var elem = sheets[i];
-                    var parent = elem.parentElement || head;
-                    parent.removeChild(elem);
-                    var rel = elem.rel;
-                    if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() ==
-                        "stylesheet") {
-                        var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-                        elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date()
-                            .valueOf());
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function() {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() ==
+                            "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date()
+                                .valueOf());
+                        }
+                        parent.appendChild(elem);
                     }
-                    parent.appendChild(elem);
                 }
-            }
-            var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-            var address = protocol + window.location.host + window.location.pathname + '/ws';
-            var socket = new WebSocket(address);
-            socket.onmessage = function(msg) {
-                if (msg.data == 'reload') window.location.reload();
-                else if (msg.data == 'refreshcss') refreshCSS();
-            };
-            if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-                console.log('Live reload enabled.');
-                sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-            }
-        })();
-    } else {
-        console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-    }
-    // ]]>
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function(msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        } else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+        // ]]>
 
-    // Fungsi untuk mendapatkan tanggal dalam format "dd MMMM yyyy"
-    function getCurrentDate() {
-        const date = new Date();
-        const day = date.getDate().toString().padStart(2, '0'); // Format hari dengan dua digit
-        const month = new Intl.DateTimeFormat('en', {
-            month: 'long'
-        }).format(date); // Nama bulan dalam bahasa Inggris
-        const year = date.getFullYear();
-        return `${day} ${month} ${year}`;
-    }
+        // Fungsi untuk mendapatkan tanggal dalam format "dd MMMM yyyy"
+        function getCurrentDate() {
+            const date = new Date();
+            const day = date.getDate().toString().padStart(2, '0'); // Format hari dengan dua digit
+            const month = new Intl.DateTimeFormat('en', {
+                month: 'long'
+            }).format(date); // Nama bulan dalam bahasa Inggris
+            const year = date.getFullYear();
+            return `${day} ${month} ${year}`;
+        }
 
-    // Fungsi untuk mendapatkan hari saat ini
-    function getCurrentDay() {
-        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        return days[new Date().getDay()];
-    }
+        // Fungsi untuk mendapatkan hari saat ini
+        function getCurrentDay() {
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            return days[new Date().getDay()];
+        }
 
 
-    // Mengisi elemen HTML dengan tanggal dan hari saat ini
-    document.getElementById("current-date").textContent = getCurrentDate();
-    document.getElementById("current-day").textContent = getCurrentDay();
+        // Mengisi elemen HTML dengan tanggal dan hari saat ini
+        document.getElementById("current-date").textContent = getCurrentDate();
+        document.getElementById("current-day").textContent = getCurrentDay();
     </script>
 
     <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-        var options = {
-            damping: '0.5'
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
-        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
 
-    //Dashboard Click
+        //Dashboard Click
 
-    const dashboardPaths = [
-        '/public/homesiswa',
-        '/public/subtopic1',
-        '/public/index.php/subtopic1/',
-        'https://kemitraan.leapsurabaya.sch.id/homesiswa',
-        'https://kemitraan.leapsurabaya.sch.id/subtopic1',
-        'https://kemitraan.leapsurabaya.sch.id/index.php/subtopic1'
-    ];
-    const historyPaths = [
-        '/public/history',
-        'https://kemitraan.leapsurabaya.sch.id/history'
-    ];
-    const sessionPaths = [
-        '/public/session',
-        'https://kemitraan.leapsurabaya.sch.id/session'
-    ];
-    const subscribePaths = [
-        '/public/Subscribe',
-        'https://kemitraan.leapsurabaya.sch.id/Subscribe'
-    ];
+        const dashboardPaths = [
+            '/public/homesiswa',
+            '/public/subtopic1',
+            '/public/index.php/subtopic1/',
+            'https://kemitraan.leapsurabaya.sch.id/homesiswa',
+            'https://kemitraan.leapsurabaya.sch.id/subtopic1',
+            'https://kemitraan.leapsurabaya.sch.id/index.php/subtopic1'
+        ];
+        const historyPaths = [
+            '/public/history',
+            'https://kemitraan.leapsurabaya.sch.id/history'
+        ];
+        const sessionPaths = [
+            '/public/session',
+            'https://kemitraan.leapsurabaya.sch.id/session'
+        ];
+        const subscribePaths = [
+            '/public/Subscribe',
+            'https://kemitraan.leapsurabaya.sch.id/Subscribe',
+            '/public/subscribe/index',
+            'https://kemitraan.leapsurabaya.sch.id/Subscribe/index'
+        ];
 
-    const activePage = window.location.pathname;
-    if (dashboardPaths.some(path => activePage.includes(path))) {
-        document.querySelector('.side-dashboard').classList.add('active');
-    } else if ((historyPaths.some(path => activePage.includes(path)))) {
-        document.querySelector('.side-history').classList.add('active');
-    } else if ((sessionPaths.some(path => activePage.includes(path)))) {
-        document.querySelector('.side-session').classList.add('active');
-    } else if ((subscribePaths.some(path => activePage.includes(path)))) {
-        document.querySelector('.side-subscribe').classList.add('active');
-    }
+        const activePage = window.location.pathname;
+        if (dashboardPaths.some(path => activePage.includes(path))) {
+            document.querySelector('.side-dashboard').classList.add('active');
+        } else if ((historyPaths.some(path => activePage.includes(path)))) {
+            document.querySelector('.side-history').classList.add('active');
+        } else if ((sessionPaths.some(path => activePage.includes(path)))) {
+            document.querySelector('.side-session').classList.add('active');
+        } else if ((subscribePaths.some(path => activePage.includes(path)))) {
+            document.querySelector('.side-subscribe').classList.add('active');
+        }
+
+        //Message
+
+        $(document).ready(function() {
+            // Show the flash message
+            $('#flashMessage').addClass('show');
+
+            // Hide the flash message after 5 seconds
+            setTimeout(function() {
+                $('#flashMessage').removeClass('show');
+            }, 5000);
+        });
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

@@ -48,20 +48,21 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
                     </a>
                     <ul class="dropdown-menu  dropdown-menu-end  px-2 py-2 me-sm-n2"
                         aria-labelledby="dropdownMenuButton">
-                        <li>
-                            <a class="dropdown-item border-radius-md" href="<?= base_url() ?>logout">
-                                <div class="d-flex py-1">
-                                    <div class="my-auto">
-                                        <i class="ni ni-bold-right text-danger me-3 text-center"></i>Logout
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+
                         <li>
                             <a class="dropdown-item border-radius-md" href="<?= base_url() ?>profilestudent">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
                                         <i class="ni ni-single-02 text-success me-3"></i>Profile
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item border-radius-md" href="<?= base_url() ?>logout">
+                                <div class="d-flex py-1">
+                                    <div class="my-auto">
+                                        <i class="ni ni-bold-right text-danger me-3 text-center"></i>Logout
                                     </div>
                                 </div>
                             </a>
@@ -101,11 +102,11 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
                     <div class="d-flex justify-content-between mt-4">
                         <h5 class="col-8"><?= $subtopik->nama ?></h5>
                         <div class="col-4 text-end">
-                            <a href="<?php echo base_url() . '/subtopic1/' . $idtopik; ?>"
+                            <a href="<?php echo base_url() . 'subtopic1/' . $idtopik; ?>"
                                 class="btn btn-primary-leap btn-1 d-none"><i class="fa fa-rotate-left me-2"></i>
                                 Back</a>
 
-                            <a href="<?php echo base_url() . '/subtopic1/' . $idtopik; ?>"
+                            <a href="<?php echo base_url() . 'subtopic1/' . $idtopik; ?>"
                                 class="btn btn-primary-leap btn-2"><i class="fa fa-rotate-left me-2"></i>
                                 Back to subtopik</a>
                         </div>

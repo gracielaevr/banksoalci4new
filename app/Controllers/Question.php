@@ -15,10 +15,10 @@ class Question extends BaseController
         $this->model = new Mcustom();
         $this->modul = new Modul();
     }
-    public function index()
-    {
-        echo "Index method is called";
-    }
+    // public function index()
+    // {
+    //     echo "Index method is called";
+    // }
 
 
     public function start($idsubtopik)
@@ -26,10 +26,10 @@ class Question extends BaseController
         if (session()->get("logged_siswa")) {
 
 
-            // $kode = $this->modul->dekrip_url($this->request->uri->getSegment(3));
+            // $kode = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
             // $data['kode'] = $kode;
 
-            $data['idusers'] = session()->get("idusers");
+            // $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
             $data['nm_role'] = session()->get("nama_role");
@@ -78,25 +78,47 @@ class Question extends BaseController
             $jenis = $this->model->getAllQR("select * from soal where idsubtopik = '" . $idsubtopik . "' order by rand() limit 1")->jenis;
             $data['jenis'] = $jenis;
 
-            echo view('back/dashboardsiswa/question/head');
-            if ($subs->narasi == 1) {
-                $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' order by rand() limit 10");
-                echo view('back/dashboardsiswa/question/narasi', $data);
-            } else if ($jenis == 'mg') {
-                $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' and jenis = '" . $jenis . "'order by rand() limit 10");
-                echo view('back/dashboardsiswa/question/mg', $data);
-            } else if ($jenis == 'd') {
-                $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' and jenis = '" . $jenis . "' order by rand() limit 10");
-                echo view('back/dashboardsiswa/question/drop', $data);
-            } else if ($jenis == 'mc') {
-                $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' and jenis = '" . $jenis . "' order by rand() limit 10");
-                echo view('back/dashboardsiswa/question/mc', $data);
-            } else if ($jenis == 'tf') {
-                $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' and jenis = '" . $jenis . "' order by rand() limit 10");
-                echo view('back/dashboardsiswa/question/tf', $data);
-            }
+            $idusers = session()->get('idusers');
+            $jml_pengerjaan = $this->model->getAllQR("SELECT history_pengerjaan FROM users WHERE idusers = '" . $idusers . "';")->history_pengerjaan;
+            $history_subs = $this->model->getAllQR("SELECT idsubs FROM users WHERE idusers = '" . $idusers . "';")->idsubs;
 
-            echo view('back/dashboardsiswa/question/foot');
+            if ($jml_pengerjaan >= 3 && $history_subs === NULL) {
+
+                //Kirim pesan jika melampaui batas
+                session()->setFlashdata('error', 'Berlangganan untuk mendapatkan akses tanpa batas.');
+                return redirect()->to(base_url('subscribe/index'));
+            } else {
+                // Tambah 1 kali pengerjaan pada history_pengerjaan
+                $newHistoryPengerjaan = $jml_pengerjaan + 1;
+
+                $updateData = array(
+                    'history_pengerjaan' => $newHistoryPengerjaan,
+                );
+                $update = $this->model->update("users", $updateData, ['idusers' => $idusers]);
+
+                // Pastikan update berhasil
+                if ($update) {
+                    echo view('back/dashboardsiswa/question/head');
+                    if ($subs->narasi == 1) {
+                        $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' order by rand() limit 10");
+                        echo view('back/dashboardsiswa/question/narasi', $data);
+                    } else if ($jenis == 'mg') {
+                        $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' and jenis = '" . $jenis . "'order by rand() limit 10");
+                        echo view('back/dashboardsiswa/question/mg', $data);
+                    } else if ($jenis == 'd') {
+                        $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' and jenis = '" . $jenis . "' order by rand() limit 10");
+                        echo view('back/dashboardsiswa/question/drop', $data);
+                    } else if ($jenis == 'mc') {
+                        $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' and jenis = '" . $jenis . "' order by rand() limit 10");
+                        echo view('back/dashboardsiswa/question/mc', $data);
+                    } else if ($jenis == 'tf') {
+                        $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' and jenis = '" . $jenis . "' order by rand() limit 10");
+                        echo view('back/dashboardsiswa/question/tf', $data);
+                    }
+
+                    echo view('back/dashboardsiswa/question/foot');
+                }
+            }
         } else {
             $this->modul->halaman('loginsiswa');
         }
@@ -104,7 +126,7 @@ class Question extends BaseController
 
     public function narasi()
     {
-        $kode = $this->modul->dekrip_url($this->request->uri->getSegment(3));
+        $kode = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
         $data['kode'] = $kode;
 
         $idn = $this->model->getAllQR("select idnarasi from subtopik s, narasi n where s.idsubtopik = n.idsubtopik and n.idsubtopik = '" . $kode . "' order by rand() limit 1")->idnarasi;
@@ -131,6 +153,7 @@ class Question extends BaseController
         $data = array(
             'idpeserta' => $this->model->autokode("C", "idpeserta", "peserta", 2, 7),
             'nama' => $this->request->getPost('nama'),
+            'idusers' => $this->request->getPost('idusers'),
             'idtopik' => $this->request->getPost('idtopik'),
             'idsubtopik' => $this->request->getPost('idsubtopik'),
             'status' => 1,
@@ -386,7 +409,7 @@ class Question extends BaseController
 
     // public function done()
     // {
-    //     $kode = $this->modul->dekrip_url($this->request->uri->getSegment(3));
+    //     $kode = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
     //     $data['kode'] = $this->modul->enkrip_url($kode);
 
     //     echo view('front/head');
@@ -396,7 +419,7 @@ class Question extends BaseController
 
     // public function process()
     // {
-    //     $id = $this->modul->dekrip_url($this->request->uri->getSegment(3));
+    //     $id = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
 
     //     $kond['idpeserta'] = $id;
 
@@ -456,7 +479,7 @@ class Question extends BaseController
         }
 
 
-        $kode = $this->modul->dekrip_url($this->request->uri->getSegment(3));
+        $kode = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
         $data['kode'] = $kode;
 
         $data['penutup'] = $this->model->getAllQR("select * from penutup limit 1")->deskripsi;

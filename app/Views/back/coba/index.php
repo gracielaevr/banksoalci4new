@@ -1,6 +1,5 @@
 <script type="text/javascript">
-
-    $(document).ready(function () {
+    $(document).ready(function() {
 
     });
 
@@ -15,7 +14,7 @@
         // form_data.append('file', excel);
 
         // $.ajax({
-        //     url: "<?php echo base_url(); ?>/coba/proses",
+        //     url: "<?php echo base_url(); ?>coba/proses",
         //     dataType: 'JSON',
         //     cache: false,
         //     contentType: false,
@@ -34,7 +33,6 @@
         //     }
         // });
     }
-
 </script>
 <div class="content-wrapper">
     <section class="content-header">
@@ -55,7 +53,8 @@
                             <div class="form-group">
                                 <label for="logo" class="col-sm-2 control-label">Excel</label>
                                 <div class="col-sm-10">
-                                    <input type="file" name="excel" class="form-control" id="excel" required accept=".xls, .xlsx" />
+                                    <input type="file" name="excel" class="form-control" id="excel" required
+                                        accept=".xls, .xlsx" />
                                 </div>
                             </div>
                         </div>

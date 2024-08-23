@@ -64,7 +64,7 @@ class profilestudent extends BaseController
 
             echo view('back/dashboardsiswa/profile/index', $data);
         } else {
-            $this->modul->halaman('login');
+            $this->modul->halaman('loginsiswa');
         }
     }
 

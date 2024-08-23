@@ -19,9 +19,6 @@ class Homesiswa extends BaseController
 
     public function index()
     {
-        $currentPage = 'Dashboard';
-        $data['current_page'] = $currentPage;
-
         if (session()->get("logged_siswa")) {
             // Query untuk mendapatkan topik dan jumlah subtopik
             $db      = \Config\Database::connect();

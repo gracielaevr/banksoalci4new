@@ -36,49 +36,31 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped text-center align-items-center">
-                    <tr class="text-start">
-                        <th>SubTopic</th>
-                        <th>Topic</th>
-                        <th>Date</th>
-                        <th>Grade</th>
-                        <th>Action</th>
-                    </tr>
-                    <tr class="fst-normal">
-                        <td>Create a mobile app</td>
-                        <td>Create a mobile app</td>
-                        <td>2018-01-20</td>
-                        <td>
-                            <div class="badge badge-success">80</div>
-                        </td>
-                        <td><a href="#" class="btn btn-secondary m-0 disabled">Detail</a></td>
-                    </tr>
-                    <tr>
-                        <td>Create a mobile app</td>
-                        <td>Create a mobile app</td>
-                        <td>2018-01-20</td>
-                        <td>
-                            <div class="badge badge-success">80</div>
-                        </td>
-                        <td><a href="#" class="btn btn-secondary m-0 disabled">Detail</a></td>
-                    </tr>
-                    <tr>
-                        <td>Create a mobile app</td>
-                        <td>Create a mobile app</td>
-                        <td>2018-01-20</td>
-                        <td>
-                            <div class="badge badge-success">80</div>
-                        </td>
-                        <td><a href="#" class="btn btn-secondary m-0 disabled">Detail</a></td>
-                    </tr>
-                    <tr>
-                        <td>Create a mobile app</td>
-                        <td>Create a mobile app</td>
-                        <td>2018-01-20</td>
-                        <td>
-                            <div class="badge badge-success">80</div>
-                        </td>
-                        <td><a href="#" class="btn btn-secondary m-0 disabled">Detail</a></td>
-                    </tr>
+                    <thead>
+                        <tr class="text-start">
+                            <th>Date</th>
+                            <th>SubTopic</th>
+                            <th>Correct</th>
+                            <th>Wrong</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($history_peserta as $item): ?>
+                            <tr class="fst-normal">
+                                <td><?= $item->created_at ?></td>
+                                <?php foreach ($subtopik_nama as $sub): ?>
+                                    <td><?= $sub->nama ?></td>
+                                <?php endforeach; ?>
+                                <td><?= $item->benar ?></td>
+                                <td><?= $item->salah ?></td>
+                                <td>
+                                    <div class="badge badge-success"><?= $item->poin ?></div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+
                 </table>
             </div>
         </div>

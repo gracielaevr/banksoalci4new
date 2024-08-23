@@ -132,20 +132,21 @@ height:27%"></div>
                             </a>
                             <ul class="dropdown-menu  dropdown-menu-end  px-2 py-2 me-sm-n2"
                                 aria-labelledby="dropdownMenuButton">
-                                <li>
-                                    <a class="dropdown-item border-radius-md" href="<?= base_url() ?>logout">
-                                        <div class="d-flex py-1">
-                                            <div class="my-auto">
-                                                <i class="ni ni-bold-right text-danger me-3 text-center"></i>Logout
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
+
                                 <li>
                                     <a class="dropdown-item border-radius-md" href="<?= base_url() ?>profilestudent">
                                         <div class="d-flex py-1">
                                             <div class="my-auto">
                                                 <i class="ni ni-single-02 text-success me-3"></i>Profile
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item border-radius-md" href="<?= base_url() ?>logout">
+                                        <div class="d-flex py-1">
+                                            <div class="my-auto">
+                                                <i class="ni ni-bold-right text-danger me-3 text-center"></i>Logout
                                             </div>
                                         </div>
                                     </a>
@@ -248,49 +249,49 @@ height:27%"></div>
     </main>
 
     <script type="text/javascript">
-    $(document).ready(function() {
+        $(document).ready(function() {
 
-    });
+        });
 
-    function proses() {
-        var nama = document.getElementById('nama').value;
-        var wa = document.getElementById('wa').value;
-        var foto = $('#foto').prop('files')[0];
+        function proses() {
+            var nama = document.getElementById('nama').value;
+            var wa = document.getElementById('wa').value;
+            var foto = $('#foto').prop('files')[0];
 
-        if (nama === "") {
-            alert("Nama personil tidak boleh kosong");
-        } else {
-            $('#btnSave').text('Saving...');
-            $('#btnSave').attr('disabled', true);
+            if (nama === "") {
+                alert("Nama personil tidak boleh kosong");
+            } else {
+                $('#btnSave').text('Saving...');
+                $('#btnSave').attr('disabled', true);
 
-            var form_data = new FormData();
-            form_data.append('nama', nama);
-            form_data.append('wa', wa);
-            form_data.append('file', foto);
+                var form_data = new FormData();
+                form_data.append('nama', nama);
+                form_data.append('wa', wa);
+                form_data.append('file', foto);
 
-            $.ajax({
-                url: "<?php echo base_url(); ?>profilestudent/proses",
-                dataType: 'JSON',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'POST',
-                success: function(response) {
-                    alert(response.status);
+                $.ajax({
+                    url: "<?php echo base_url(); ?>profilestudent/proses",
+                    dataType: 'JSON',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'POST',
+                    success: function(response) {
+                        alert(response.status);
 
-                    location.reload();
-                    $('#btnSave').text('Save');
-                    $('#btnSave').attr('disabled', false);
-                },
-                error: function(response) {
-                    alert(response.status);
-                    $('#btnSave').text('Save');
-                    $('#btnSave').attr('disabled', false);
-                }
-            });
+                        location.reload();
+                        $('#btnSave').text('Save');
+                        $('#btnSave').attr('disabled', false);
+                    },
+                    error: function(response) {
+                        alert(response.status);
+                        $('#btnSave').text('Save');
+                        $('#btnSave').attr('disabled', false);
+                    }
+                });
+            }
         }
-    }
     </script>
 
     <!--   Core JS Files   -->
@@ -322,20 +323,20 @@ height:27%"></div>
 
     <!-- Search Subtopic -->
     <script>
-    var search = document.getElementById("searchInput-sub");
-    var els = document.querySelectorAll(".search-sub");
+        var search = document.getElementById("searchInput-sub");
+        var els = document.querySelectorAll(".search-sub");
 
-    search.addEventListener("keyup", function() {
-        var searchValue = search.value.toLowerCase();
+        search.addEventListener("keyup", function() {
+            var searchValue = search.value.toLowerCase();
 
-        Array.prototype.forEach.call(els, function(el) {
-            if (el.textContent.trim().toLowerCase().indexOf(searchValue) > -1) {
-                el.style.display = 'block';
-            } else {
-                el.style.display = 'none';
-            }
+            Array.prototype.forEach.call(els, function(el) {
+                if (el.textContent.trim().toLowerCase().indexOf(searchValue) > -1) {
+                    el.style.display = 'block';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
         });
-    });
     </script>
 
     <!-- Template JS File -->
@@ -345,108 +346,108 @@ height:27%"></div>
     <!-- Page Specific JS File -->
     <!-- Code injected by live-server -->
     <script>
-    // <![CDATA[  <-- For SVG support
-    if ('WebSocket' in window) {
-        (function() {
-            function refreshCSS() {
-                var sheets = [].slice.call(document.getElementsByTagName("link"));
-                var head = document.getElementsByTagName("head")[0];
-                for (var i = 0; i < sheets.length; ++i) {
-                    var elem = sheets[i];
-                    var parent = elem.parentElement || head;
-                    parent.removeChild(elem);
-                    var rel = elem.rel;
-                    if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() ==
-                        "stylesheet") {
-                        var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-                        elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date()
-                            .valueOf());
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function() {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() ==
+                            "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date()
+                                .valueOf());
+                        }
+                        parent.appendChild(elem);
                     }
-                    parent.appendChild(elem);
                 }
-            }
-            var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-            var address = protocol + window.location.host + window.location.pathname + '/ws';
-            var socket = new WebSocket(address);
-            socket.onmessage = function(msg) {
-                if (msg.data == 'reload') window.location.reload();
-                else if (msg.data == 'refreshcss') refreshCSS();
-            };
-            if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-                console.log('Live reload enabled.');
-                sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-            }
-        })();
-    } else {
-        console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-    }
-    // ]]>
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function(msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        } else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+        // ]]>
 
-    // Fungsi untuk mendapatkan tanggal dalam format "dd MMMM yyyy"
-    function getCurrentDate() {
-        const date = new Date();
-        const day = date.getDate().toString().padStart(2, '0'); // Format hari dengan dua digit
-        const month = new Intl.DateTimeFormat('en', {
-            month: 'long'
-        }).format(date); // Nama bulan dalam bahasa Inggris
-        const year = date.getFullYear();
-        return `${day} ${month} ${year}`;
-    }
+        // Fungsi untuk mendapatkan tanggal dalam format "dd MMMM yyyy"
+        function getCurrentDate() {
+            const date = new Date();
+            const day = date.getDate().toString().padStart(2, '0'); // Format hari dengan dua digit
+            const month = new Intl.DateTimeFormat('en', {
+                month: 'long'
+            }).format(date); // Nama bulan dalam bahasa Inggris
+            const year = date.getFullYear();
+            return `${day} ${month} ${year}`;
+        }
 
-    // Fungsi untuk mendapatkan hari saat ini
-    function getCurrentDay() {
-        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        return days[new Date().getDay()];
-    }
+        // Fungsi untuk mendapatkan hari saat ini
+        function getCurrentDay() {
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            return days[new Date().getDay()];
+        }
 
 
-    // Mengisi elemen HTML dengan tanggal dan hari saat ini
-    document.getElementById("current-date").textContent = getCurrentDate();
-    document.getElementById("current-day").textContent = getCurrentDay();
+        // Mengisi elemen HTML dengan tanggal dan hari saat ini
+        document.getElementById("current-date").textContent = getCurrentDate();
+        document.getElementById("current-day").textContent = getCurrentDay();
     </script>
 
     <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-        var options = {
-            damping: '0.5'
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
-        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
 
-    //Dashboard Click
+        //Dashboard Click
 
-    const dashboardPaths = [
-        '/public/homesiswa',
-        '/public/subtopic1',
-        '/public/index.php/subtopic1/',
-        'https://kemitraan.leapsurabaya.sch.id/homesiswa',
-        'https://kemitraan.leapsurabaya.sch.id/subtopic1',
-        'https://kemitraan.leapsurabaya.sch.id/index.php/subtopic1'
-    ];
-    const historyPaths = [
-        '/public/history',
-        'https://kemitraan.leapsurabaya.sch.id/history'
-    ];
-    const sessionPaths = [
-        '/public/session',
-        'https://kemitraan.leapsurabaya.sch.id/session'
-    ];
-    const subscribePaths = [
-        '/public/Subscribe',
-        'https://kemitraan.leapsurabaya.sch.id/Subscribe'
-    ];
+        const dashboardPaths = [
+            '/public/homesiswa',
+            '/public/subtopic1',
+            '/public/index.php/subtopic1/',
+            'https://kemitraan.leapsurabaya.sch.id/homesiswa',
+            'https://kemitraan.leapsurabaya.sch.id/subtopic1',
+            'https://kemitraan.leapsurabaya.sch.id/index.php/subtopic1'
+        ];
+        const historyPaths = [
+            '/public/history',
+            'https://kemitraan.leapsurabaya.sch.id/history'
+        ];
+        const sessionPaths = [
+            '/public/session',
+            'https://kemitraan.leapsurabaya.sch.id/session'
+        ];
+        const subscribePaths = [
+            '/public/Subscribe',
+            'https://kemitraan.leapsurabaya.sch.id/Subscribe'
+        ];
 
-    const activePage = window.location.pathname;
-    if (dashboardPaths.some(path => activePage.includes(path))) {
-        document.querySelector('.side-dashboard').classList.add('active');
-    } else if ((historyPaths.some(path => activePage.includes(path)))) {
-        document.querySelector('.side-history').classList.add('active');
-    } else if ((sessionPaths.some(path => activePage.includes(path)))) {
-        document.querySelector('.side-session').classList.add('active');
-    } else if ((subscribePaths.some(path => activePage.includes(path)))) {
-        document.querySelector('.side-subscribe').classList.add('active');
-    }
+        const activePage = window.location.pathname;
+        if (dashboardPaths.some(path => activePage.includes(path))) {
+            document.querySelector('.side-dashboard').classList.add('active');
+        } else if ((historyPaths.some(path => activePage.includes(path)))) {
+            document.querySelector('.side-history').classList.add('active');
+        } else if ((sessionPaths.some(path => activePage.includes(path)))) {
+            document.querySelector('.side-session').classList.add('active');
+        } else if ((subscribePaths.some(path => activePage.includes(path)))) {
+            document.querySelector('.side-subscribe').classList.add('active');
+        }
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

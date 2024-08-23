@@ -1,32 +1,32 @@
 <script type="text/javascript">
-var save_method; //for save method string
-var table;
+    var save_method; //for save method string
+    var table;
 
-$(document).ready(function() {
-    table = $('#tb').DataTable({
-        ajax: "<?php echo base_url(); ?>siswa/ajaxlist",
-        scrollx: true,
-        responsive: true
+    $(document).ready(function() {
+        table = $('#tb').DataTable({
+            ajax: "<?php echo base_url(); ?>siswa/ajaxlist",
+            scrollx: true,
+            responsive: true
+        });
+
+        $('#tanggalrange').daterangepicker();
     });
 
-    $('#tanggalrange').daterangepicker();
-});
-
-function nilai(id, jenis) {
-    if (jenis === "mg") {
-        window.location.href = "<?php echo base_url(); ?>siswa/detilmg/" + id;
-    } else {
-        window.location.href = "<?php echo base_url(); ?>siswa/detil/" + id;
+    function nilai(id, jenis) {
+        if (jenis === "mg") {
+            window.location.href = "<?php echo base_url(); ?>siswa/detilmg/" + id;
+        } else {
+            window.location.href = "<?php echo base_url(); ?>siswa/detil/" + id;
+        }
     }
-}
 
-function excellap() {
-    var tgl = document.getElementById('tanggalrange').value;
-    var tanggal = tgl.replace("-", ":");
-    var tg = tanggal.replaceAll("/", "-");
-    var t = tg.replaceAll(" ", "")
-    window.open("<?php echo base_url(); ?>siswa/exportexcel/" + t, "_blank");
-}
+    function excellap() {
+        var tgl = document.getElementById('tanggalrange').value;
+        var tanggal = tgl.replace("-", ":");
+        var tg = tanggal.replaceAll("/", "-");
+        var t = tg.replaceAll(" ", "")
+        window.open("<?php echo base_url(); ?>siswa/exportexcel/" + t, "_blank");
+    }
 </script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->

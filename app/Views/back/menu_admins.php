@@ -24,6 +24,11 @@
                         } ?>"><a href="<?php echo base_url(); ?>soalinstansi/index"><i class="fa fa-book"></i>
                     <span>Soal</span></a>
             </li>
+            <li class="<?php if ($menu == "siswaguru") {
+                            echo 'active';
+                        } ?>"><a href="<?php echo base_url(); ?>siswaguru/index"><i class="fa fa-book"></i>
+                    <span>Siswa</span></a>
+            </li>
             <li class="header">Hasil</li>
             <li class="<?php if ($menu == "soal" | $menu == "soalnarasi") {
                             echo 'active';

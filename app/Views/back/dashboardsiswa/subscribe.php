@@ -19,6 +19,14 @@
         </div>
     </div>
 
+    <!-- Message -->
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="shadow-leap fade show" id="flashMessage">
+            <?= session()->getFlashdata('error'); ?>
+        </div>
+
+    <?php endif; ?>
+
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-4 col-lg-4">

@@ -786,8 +786,4 @@ select.form-control:not([size]):not([multiple]) {
   .form-profile {
     flex-direction: column !important;
   }
-
-  /* .form-profile label{
-    justify-content: start !important;
-  } */
 }

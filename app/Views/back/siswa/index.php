@@ -1,22 +1,22 @@
 <script type="text/javascript">
-var save_method; //for save method string
-var table;
+    var save_method; //for save method string
+    var table;
 
-$(document).ready(function() {
-    table = $('#tb').DataTable({
-        ajax: "<?php echo base_url(); ?>siswaguru/ajaxlist",
-        scrollx: true,
-        responsive: true
+    $(document).ready(function() {
+        table = $('#tb').DataTable({
+            ajax: "<?php echo base_url(); ?>siswaguru/ajaxlist",
+            scrollx: true,
+            responsive: true
+        });
     });
-});
 
-function nilai(id, jenis) {
-    if (jenis === "mg") {
-        window.location.href = "<?php echo base_url(); ?>siswaguru/detilmg/" + id;
-    } else {
-        window.location.href = "<?php echo base_url(); ?>siswaguru/detil/" + id;
+    function nilai(id, jenis) {
+        if (jenis === "mg") {
+            window.location.href = "<?php echo base_url(); ?>siswaguru/detilmg/" + id;
+        } else {
+            window.location.href = "<?php echo base_url(); ?>siswaguru/detil/" + id;
+        }
     }
-}
 </script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->

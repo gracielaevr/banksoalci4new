@@ -10,25 +10,27 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
                     <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="ms-3" id="nama"><?= $nama; ?></span>
+                        <input type="hidden" name="idusers" id="idusers" value="<?= $idusers ?>">
                         <img src="<?= $foto_profile ?>" class="avatar avatar-sm  ms-3" aria-hidden="true">
 
                     </a>
                     <ul class="dropdown-menu  dropdown-menu-end  px-2 py-2 me-sm-n2"
                         aria-labelledby="dropdownMenuButton">
-                        <li>
-                            <a class="dropdown-item border-radius-md" href="<?= base_url() ?>logout">
-                                <div class="d-flex py-1">
-                                    <div class="my-auto">
-                                        <i class="ni ni-bold-right text-danger me-3 text-center"></i>Logout
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+
                         <li>
                             <a class="dropdown-item border-radius-md" href="<?= base_url() ?>profilestudent">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
                                         <i class="ni ni-single-02 text-success me-3"></i>Profile
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item border-radius-md" href="<?= base_url() ?>logout">
+                                <div class="d-flex py-1">
+                                    <div class="my-auto">
+                                        <i class="ni ni-bold-right text-danger me-3 text-center"></i>Logout
                                     </div>
                                 </div>
                             </a>
@@ -79,8 +81,8 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
                                 <?php $i = 1;
                                 foreach ($soal->getResult() as $row) {
                                 ?>
-                                <input type="hidden" id="kodesoal<?php echo $i; ?>" name="kodesoal[]"
-                                    value="<?php echo $row->idsoal; ?>">
+                                    <input type="hidden" id="kodesoal<?php echo $i; ?>" name="kodesoal[]"
+                                        value="<?php echo $row->idsoal; ?>">
                                 <?php
                                     $text = str_replace('p>', 'h6>', $row->soal);
                                     $pil = $model->getAllQ("select * from pilihan where idsoal = '" . $row->idsoal . "'");
@@ -142,159 +144,161 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
     </footer>
 
     <script type="text/javascript">
-    function simpan2() {
+        function simpan2() {
 
-        var idsubtopik = document.getElementById('idsubtopik').value;
-        var idtopik = document.getElementById('idtopik').value;
-        var jml = document.getElementById('jml').value;
-        var jenis = document.getElementById('jenis').value;
-        var idsoal = $("input[name='kodesoal[]']").map(function() {
-            return $(this).val();
-        }).get();
-
-        const pil = [];
-
-        var tot = 0;
-        for (let i = 1; i < jml; i++) {
-            pil[i] = document.getElementById('pilihan' + i).value;
-            if (pil[i] === '') {
-                document.getElementById("errorsoal" + i).removeAttribute("hidden");
-            } else {
-                document.getElementById("errorsoal" + i).setAttribute("hidden", "hidden");
-                tot += 1;
-            }
-        }
-
-        var temp = '';
-        for (let i = 1; i < jml; i++) {
-            temp += $("#pilihan" + i + " option:selected").val() + ',';
-        }
-
-        if (tot < jml - 1) {
-            alert("Fill all the question first!");
-        } else {
-            var url = "<?php echo base_url(); ?>question/finish";
-
-            var form_data = new FormData();
-            form_data.append('idsubtopik', idsubtopik);
-            form_data.append('idtopik', idtopik);
-            form_data.append('idsoal', idsoal);
-            form_data.append('jenis', jenis);
-            form_data.append('jml', jml);
-            form_data.append('jawaban', temp);
-
-            // ajax adding data to database
-            $.ajax({
-                url: url,
-                dataType: 'JSON',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'POST',
-                success: function(data) {
-                    if (data.status === "ok") {
-                        window.location.href = "<?php echo base_url(); ?>question/score/" + data.id;
-                    }
-
-                    $('#btnSimpan').text('Save'); //change button text
-                    $('#btnSimpan').attr('disabled', false); //set button enable 
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    alert("Error json " + errorThrown);
-
-                    $('#btnSimpan').text('Save'); //change button text
-                    $('#btnSimpan').attr('disabled', false); //set button enable 
-                }
-            });
-        }
-    }
-
-    function simpan() {
-
-        var nama = document.getElementById('nama').textContent;
-        var idsubtopik = document.getElementById('idsubtopik').value;
-        var idtopik = document.getElementById('idtopik').value;
-        var jml = document.getElementById('jml').value;
-        var jenis = document.getElementById('jenis').value;
-        var idsoal = $("input[name='kodesoal[]']").map(function() {
-            return $(this).val();
-        }).get();
-
-        const pil = [];
-
-        var tot = 0;
-        for (let i = 1; i < jml; i++) {
-            pil[i] = $("select[name='pilihan" + i + "[]']").map(function() {
+            var idsubtopik = document.getElementById('idsubtopik').value;
+            var idtopik = document.getElementById('idtopik').value;
+            var jml = document.getElementById('jml').value;
+            var jenis = document.getElementById('jenis').value;
+            var idsoal = $("input[name='kodesoal[]']").map(function() {
                 return $(this).val();
-            }).toArray();
-            if (!pil[i].some(element => element === '') === false) {
-                document.getElementById("errorsoal" + i).removeAttribute("hidden");
-            } else {
-                document.getElementById("errorsoal" + i).setAttribute("hidden", "hidden");
-                tot += 1;
-            }
-        }
+            }).get();
 
-        var val1 = '';
-        for (let i = 1; i < jml; i++) {
-            val1 += $("select[name='pilihan" + i + "[]']").map(function() {
-                return $(this).val() + ',';
-            }).toArray();
-        }
+            const pil = [];
 
-
-        var c = val1.substring(0, val1.length - 1);
-        var d = c.split(",");
-
-        var arr = [];
-        for (let i = 0; i < d.length; i++) {
-            if (d[i].length > 0) {
-                arr.push(d[i]);
-            }
-        }
-
-
-        if (tot < jml - 1) {
-            alert("Fill all the question first!");
-        } else {
-            var url = "<?php echo base_url(); ?>question/finish";
-
-            var form_data = new FormData();
-            form_data.append('nama', nama);
-            form_data.append('idsubtopik', idsubtopik);
-            form_data.append('idtopik', idtopik);
-            form_data.append('idsoal', idsoal);
-            form_data.append('jml', jml);
-            form_data.append('jenis', jenis);
-            form_data.append('jawaban', arr);
-
-            // ajax adding data to database
-            $.ajax({
-                url: url,
-                dataType: 'JSON',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'POST',
-                success: function(data) {
-                    if (data.status === "ok") {
-                        window.location.href = "<?php echo base_url(); ?>question/score/" + data.id;
-                    }
-
-                    $('#btnSimpan').text('Save'); //change button text
-                    $('#btnSimpan').attr('disabled', false); //set button enable 
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    alert("Error json " + errorThrown);
-
-                    $('#btnSimpan').text('Save'); //change button text
-                    $('#btnSimpan').attr('disabled', false); //set button enable 
+            var tot = 0;
+            for (let i = 1; i < jml; i++) {
+                pil[i] = document.getElementById('pilihan' + i).value;
+                if (pil[i] === '') {
+                    document.getElementById("errorsoal" + i).removeAttribute("hidden");
+                } else {
+                    document.getElementById("errorsoal" + i).setAttribute("hidden", "hidden");
+                    tot += 1;
                 }
-            });
+            }
+
+            var temp = '';
+            for (let i = 1; i < jml; i++) {
+                temp += $("#pilihan" + i + " option:selected").val() + ',';
+            }
+
+            if (tot < jml - 1) {
+                alert("Fill all the question first!");
+            } else {
+                var url = "<?php echo base_url(); ?>question/finish";
+
+                var form_data = new FormData();
+                form_data.append('idsubtopik', idsubtopik);
+                form_data.append('idtopik', idtopik);
+                form_data.append('idsoal', idsoal);
+                form_data.append('jenis', jenis);
+                form_data.append('jml', jml);
+                form_data.append('jawaban', temp);
+
+                // ajax adding data to database
+                $.ajax({
+                    url: url,
+                    dataType: 'JSON',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'POST',
+                    success: function(data) {
+                        if (data.status === "ok") {
+                            window.location.href = "<?php echo base_url(); ?>question/score/" + data.id;
+                        }
+
+                        $('#btnSimpan').text('Save'); //change button text
+                        $('#btnSimpan').attr('disabled', false); //set button enable 
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert("Error json " + errorThrown);
+
+                        $('#btnSimpan').text('Save'); //change button text
+                        $('#btnSimpan').attr('disabled', false); //set button enable 
+                    }
+                });
+            }
         }
 
+        function simpan() {
 
-    }
+            var nama = document.getElementById('nama').textContent;
+            var idusers = document.getElementById('idusers').value;
+            var idsubtopik = document.getElementById('idsubtopik').value;
+            var idtopik = document.getElementById('idtopik').value;
+            var jml = document.getElementById('jml').value;
+            var jenis = document.getElementById('jenis').value;
+            var idsoal = $("input[name='kodesoal[]']").map(function() {
+                return $(this).val();
+            }).get();
+
+            const pil = [];
+
+            var tot = 0;
+            for (let i = 1; i < jml; i++) {
+                pil[i] = $("select[name='pilihan" + i + "[]']").map(function() {
+                    return $(this).val();
+                }).toArray();
+                if (!pil[i].some(element => element === '') === false) {
+                    document.getElementById("errorsoal" + i).removeAttribute("hidden");
+                } else {
+                    document.getElementById("errorsoal" + i).setAttribute("hidden", "hidden");
+                    tot += 1;
+                }
+            }
+
+            var val1 = '';
+            for (let i = 1; i < jml; i++) {
+                val1 += $("select[name='pilihan" + i + "[]']").map(function() {
+                    return $(this).val() + ',';
+                }).toArray();
+            }
+
+
+            var c = val1.substring(0, val1.length - 1);
+            var d = c.split(",");
+
+            var arr = [];
+            for (let i = 0; i < d.length; i++) {
+                if (d[i].length > 0) {
+                    arr.push(d[i]);
+                }
+            }
+
+
+            if (tot < jml - 1) {
+                alert("Fill all the question first!");
+            } else {
+                var url = "<?php echo base_url(); ?>question/finish";
+
+                var form_data = new FormData();
+                form_data.append('nama', nama);
+                form_data.append('idusers', idusers);
+                form_data.append('idsubtopik', idsubtopik);
+                form_data.append('idtopik', idtopik);
+                form_data.append('idsoal', idsoal);
+                form_data.append('jml', jml);
+                form_data.append('jenis', jenis);
+                form_data.append('jawaban', arr);
+
+                // ajax adding data to database
+                $.ajax({
+                    url: url,
+                    dataType: 'JSON',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'POST',
+                    success: function(data) {
+                        if (data.status === "ok") {
+                            window.location.href = "<?php echo base_url(); ?>question/score/" + data.id;
+                        }
+
+                        $('#btnSimpan').text('Save'); //change button text
+                        $('#btnSimpan').attr('disabled', false); //set button enable 
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert("Error json " + errorThrown);
+
+                        $('#btnSimpan').text('Save'); //change button text
+                        $('#btnSimpan').attr('disabled', false); //set button enable 
+                    }
+                });
+            }
+
+
+        }
     </script>

@@ -19,17 +19,22 @@ class History extends BaseController
 
     public function index(): void
     {
-        $currentPage = 'Dashboard';
-        $data['current_page'] = $currentPage;
-
         if (session()->get("logged_siswa")) {
 
-            $data['idusers'] = session()->get("idusers");
+            $idusers = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
             $data['nm_role'] = session()->get("nama_role");
 
             $data['menu'] = $this->request->getUri()->getSegment(1);
+
+            //ambil history peserta
+            $history_peserta = $this->model->getAllW('peserta', ['idusers' => $idusers])->getResult();
+            $idsubtopik = $history_peserta[0]->idsubtopik;
+            $subtopik_nama = $this->model->getAllW('subtopik', ['idsubtopik' => $idsubtopik])->getResult();
+
+            $data['history_peserta'] = $history_peserta;
+            $data['subtopik_nama'] = $subtopik_nama;
 
             $jml_user = $this->model->getAllQR("SELECT count(*) as jml FROM users WHERE idusers = '" . session()->get("idusers") . "';")->jml;
 
@@ -58,6 +63,8 @@ class History extends BaseController
                 $data['idrole'] = "";
                 $data['foto_profile'] = base_url() . '/images/noimg.jpg';
             }
+
+
 
             echo view('back/dashboardsiswa/history', $data);
         } else {

@@ -19,10 +19,6 @@ class Subtopic1 extends BaseController
 
     public function index($idtopik): void
     {
-        $idtopik = $this->request->getUri()->getSegment(3);
-        $currentPage = 'Dashboard';
-        $data['current_page'] = $currentPage;
-
         if (session()->get("logged_siswa")) {
             // Ambil subtopik berdasarkan $idtopik dari database
             $subtopics = $this->model->getAllW('subtopik', ['idtopik' => $idtopik])->getResult();

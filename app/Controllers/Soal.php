@@ -29,7 +29,7 @@ class Soal extends BaseController
             // membaca profile orang tersebut
             $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
 
-            $data['menu'] = $this->request->uri->getSegment(1);
+            $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
             $def_foto = base_url() . '/images/noimg.jpg';
@@ -131,10 +131,10 @@ class Soal extends BaseController
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
-            $idrole = session()->get("role");  
+            $idrole = session()->get("role");
             $data['nm_role'] = session()->get("nama_role");
             $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
-            $data['menu'] = $this->request->uri->getSegment(1);
+            $data['menu'] = $this->request->getUri()->getSegment(1);
 
             $data['subtopik'] = $this->model->getAllQ("SELECT idsubtopik, s.nama as sub, t.nama as top FROM subtopik s, topik t where s.idtopik = t.idtopik;");
 
@@ -171,7 +171,7 @@ class Soal extends BaseController
                 $data['logo'] = base_url() . '/images/noimg.jpg';
             }
 
-            $kode = $this->request->uri->getSegment(3);
+            $kode = $this->request->getUri()->getSegment(3);
             $data['head'] = $this->model->getAllQR("select t.nama as namatopik,s.nama as namasub, idsubtopik from subtopik s, topik t where s.idtopik = t.idtopik AND s.idsubtopik = '" . $kode . "';");
 
             echo view('back/head', $data);
@@ -303,7 +303,7 @@ class Soal extends BaseController
     public function ganti()
     {
         if (session()->get("logged_in")) {
-            $kondisi['idsoal'] = $this->request->uri->getSegment(3);
+            $kondisi['idsoal'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("soal", $kondisi);
             echo json_encode($data);
         } else {
@@ -314,7 +314,7 @@ class Soal extends BaseController
     public function aksespilihan()
     {
         if (session()->get("logged_in")) {
-            $idsoal = $this->request->uri->getSegment(3);
+            $idsoal = $this->request->getUri()->getSegment(3);
             $str = '';
             $counter = 1;
             $list = $this->model->getAllQ("select * from pilihan where idsoal = '" . $idsoal . "';");
@@ -336,7 +336,7 @@ class Soal extends BaseController
     public function aksesjawaban()
     {
         if (session()->get("logged_in")) {
-            $idsoal = $this->request->uri->getSegment(3);
+            $idsoal = $this->request->getUri()->getSegment(3);
             $str = '';
             $counter = 1;
             $list = $this->model->getAllQ("select * from jawaban where idsoal = '" . $idsoal . "';");
@@ -541,14 +541,14 @@ class Soal extends BaseController
     public function hapus()
     {
         if (session()->get("logged_in")) {
-            $id = $this->request->uri->getSegment(3);
+            $id = $this->request->getUri()->getSegment(3);
             $lawas = $this->model->getAllQR("SELECT gambar FROM soal where idsoal = '" . $id . "';")->gambar;
             if (strlen($lawas) > 0) {
                 if (file_exists($this->modul->getPathApp() . $lawas)) {
                     unlink($this->modul->getPathApp() . $lawas);
                 }
             }
-            $kond['idsoal'] = $this->request->uri->getSegment(3);
+            $kond['idsoal'] = $this->request->getUri()->getSegment(3);
             $hapus = $this->model->delete("soal", $kond);
             if ($hapus == 1) {
                 $status = "Data terhapus";
@@ -562,28 +562,28 @@ class Soal extends BaseController
     }
 
     public function pindah_instansi()
-        {
-            if (session()->get("logged_in")) {
-                
-                $data = array(
-                    'pindahsoal' => 'ya',
-                );
-                $kond['idsoal'] = $this->request->uri->getSegment(3);
-                $simpan = $this->model->update("soal", $data, $kond);
-                if ($simpan == 1) {
-                    $status = "Data dipindahkan";
-                } else {
-                    $status = "Data gagal dipindahkan";
-                }
-                echo json_encode(array("status" => $status));
+    {
+        if (session()->get("logged_in")) {
+
+            $data = array(
+                'pindahsoal' => 'ya',
+            );
+            $kond['idsoal'] = $this->request->getUri()->getSegment(3);
+            $simpan = $this->model->update("soal", $data, $kond);
+            if ($simpan == 1) {
+                $status = "Data dipindahkan";
             } else {
-                $this->modul->halaman('login');
+                $status = "Data gagal dipindahkan";
             }
+            echo json_encode(array("status" => $status));
+        } else {
+            $this->modul->halaman('login');
         }
+    }
     public function ajaxdetil()
     {
         if (session()->get("logged_in")) {
-            $kode = $this->request->uri->getSegment(3);
+            $kode = $this->request->getUri()->getSegment(3);
             $data = array();
             $no = 1;
             $list = $this->model->getAllQ("select * from soal where idsubtopik = '" . $kode . "';");
@@ -637,24 +637,24 @@ class Soal extends BaseController
                 //     . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus(' . "'" . $row->idsoal . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>'
                 //     . '</div>';
                 // $data[] = $val;
-                if($row->idinstansi == NULL){
+                if ($row->idinstansi == NULL) {
                     $val[] = '<div style="text-align: center;">'
-                    . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="ganti(' . "'" . $row->idsoal . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
-                    . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus(' . "'" . $row->idsoal . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>'
-                    . '</div>';
-                }else if($row->pindahsoal == !NULL){
+                        . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="ganti(' . "'" . $row->idsoal . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
+                        . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus(' . "'" . $row->idsoal . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>'
+                        . '</div>';
+                } else if ($row->pindahsoal == !NULL) {
                     $val[] = '<div style="text-align: center;">'
-                    .$instansi = $this->model->getAllQR("select * from instansi where idinstansi = '" . $row->idinstansi . "';")->nama_instansi;
-                $val[] = $instansi .
-                    '</div>';
-                }else{
+                        . $instansi = $this->model->getAllQR("select * from instansi where idinstansi = '" . $row->idinstansi . "';")->nama_instansi;
+                    $val[] = $instansi .
+                        '</div>';
+                } else {
                     $val[] = '<div style="text-align: center;">'
-                    . '<button type="button" class="btn btn-info btn-sm" onclick="pindah_instansi(' . "'" . $row->idsoal . "'" . ');" "><i class="fa fa-fw fa-sign-out"></i>Pindah
-                Soal</button>'.$instansi = $this->model->getAllQR("select * from instansi where idinstansi = '" . $row->idinstansi . "';")->nama_instansi;
-                $val[] = $instansi .
-                    '</div>';
+                        . '<button type="button" class="btn btn-info btn-sm" onclick="pindah_instansi(' . "'" . $row->idsoal . "'" . ');" "><i class="fa fa-fw fa-sign-out"></i>Pindah
+                Soal</button>' . $instansi = $this->model->getAllQR("select * from instansi where idinstansi = '" . $row->idinstansi . "';")->nama_instansi;
+                    $val[] = $instansi .
+                        '</div>';
                 }
-        
+
                 $data[] = $val;
 
                 $no++;
@@ -670,7 +670,7 @@ class Soal extends BaseController
     public function load_gambar()
     {
         if (session()->get("logged_in")) {
-            $kode = $this->request->uri->getSegment(3);
+            $kode = $this->request->getUri()->getSegment(3);
 
             $def_foto = base_url() . '/images/noimg.jpg';
             $foto = $this->model->getAllQR("select gambar from soal where idsoal = '" . $kode . "';")->gambar;

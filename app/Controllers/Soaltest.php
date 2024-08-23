@@ -5,17 +5,20 @@ namespace App\Controllers;
 use App\Models\Mcustom;
 use App\Libraries\Modul;
 
-class Soaltest extends BaseController {
+class Soaltest extends BaseController
+{
 
     private $model;
     private $modul;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->model = new Mcustom();
         $this->modul = new Modul();
     }
 
-    public function index() {
+    public function index()
+    {
         if (session()->get("logged_in")) {
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
@@ -26,7 +29,7 @@ class Soaltest extends BaseController {
             // membaca profile orang tersebut
             $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
 
-            $data['menu'] = $this->request->uri->getSegment(1);
+            $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
             $def_foto = base_url() . '/images/noimg.jpg';
@@ -64,7 +67,8 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function ajaxlist() {
+    public function ajaxlist()
+    {
         if (session()->get("logged_in")) {
             $data = array();
             $no = 1;
@@ -72,20 +76,20 @@ class Soaltest extends BaseController {
             foreach ($list->getResult() as $row) {
                 $val = array();
                 $val[] = $no;
-                $val[] = '<a href="'.base_url().'/diagnostictest/start/'.$this->modul->enkrip_url($row->idbidang).'" target="_blank">'.$row->namabidang.'</a>';
+                $val[] = '<a href="' . base_url() . '/diagnostictest/start/' . $this->modul->enkrip_url($row->idbidang) . '" target="_blank">' . $row->namabidang . '</a>';
                 $val[] = $row->status;
                 $val[] = '<div style="text-align: center;">'
-                .'<button type="button" class="btn btn-sm btn-success btn-fw" onclick="instruksi(' . "'" . $row->idbidang . "'" . ')">Tambah</button>&nbsp;'
-                                    . '</div>';
+                    . '<button type="button" class="btn btn-sm btn-success btn-fw" onclick="instruksi(' . "'" . $row->idbidang . "'" . ')">Tambah</button>&nbsp;'
+                    . '</div>';
                 $val[] = '<div style="text-align: center;">'
-                . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="scoring('."'".$row->idbidang."'".')">Scoring</button>&nbsp;'
-                .'<button type="button" class="btn btn-sm btn-primary btn-fw" onclick="nilai(' . "'" . $row->idbidang . "'" . ')">Komentar Nilai</button>&nbsp;'
-                                    . '</div>';
+                    . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="scoring(' . "'" . $row->idbidang . "'" . ')">Scoring</button>&nbsp;'
+                    . '<button type="button" class="btn btn-sm btn-primary btn-fw" onclick="nilai(' . "'" . $row->idbidang . "'" . ')">Komentar Nilai</button>&nbsp;'
+                    . '</div>';
                 $val[] = '<div style="text-align: center;">'
-                . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="ganti('."'".$row->idbidang."'".')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
-                . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus('."'".$row->idbidang."'".','."'".$row->namabidang."'".')"><i class="fa fa-fw fa-trash"></i></button>&nbsp;'
-                .'<button type="button" class="btn btn-sm btn-success btn-fw" onclick="soal(' . "'" . $row->idbidang . "'" . ')"><i class="fa fa-fw fa-plus-square"></i> Buat Soal</button>&nbsp;'
-                                    . '</div>';
+                    . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="ganti(' . "'" . $row->idbidang . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
+                    . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus(' . "'" . $row->idbidang . "'" . ',' . "'" . $row->namabidang . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>&nbsp;'
+                    . '<button type="button" class="btn btn-sm btn-success btn-fw" onclick="soal(' . "'" . $row->idbidang . "'" . ')"><i class="fa fa-fw fa-plus-square"></i> Buat Soal</button>&nbsp;'
+                    . '</div>';
                 $data[] = $val;
 
                 $no++;
@@ -97,7 +101,8 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function detil() {
+    public function detil()
+    {
         if (session()->get("logged_in")) {
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
@@ -105,7 +110,7 @@ class Soaltest extends BaseController {
             $idrole = session()->get("role");
             $data['nm_role'] = session()->get("nama_role");
             $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
-            $data['menu'] = $this->request->uri->getSegment(1);
+            $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
             $def_foto = base_url() . '/images/noimg.jpg';
@@ -140,7 +145,7 @@ class Soaltest extends BaseController {
                 $data['logo'] = base_url() . '/images/noimg.jpg';
             }
 
-            $kode = $this->request->uri->getSegment(3);
+            $kode = $this->request->getUri()->getSegment(3);
             $data['head'] = $this->model->getAllQR("SELECT * FROM bidang where idbidang = '" . $kode . "';");
             $data['bidang'] = $this->model->getAllQ("SELECT * FROM bidang where status = 'Aktif'");
 
@@ -155,7 +160,8 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function ajax_add() {
+    public function ajax_add()
+    {
         if (session()->get("logged_in")) {
             $getidsoal = $this->model->autokode("E", "idsoal", "soaltest", 2, 7);
 
@@ -200,9 +206,10 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function ganti() {
+    public function ganti()
+    {
         if (session()->get("logged_in")) {
-            $kondisi['idsoal'] = $this->request->uri->getSegment(3);
+            $kondisi['idsoal'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("soaltest", $kondisi);
             echo json_encode($data);
         } else {
@@ -210,9 +217,10 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function aksespilihan() {
+    public function aksespilihan()
+    {
         if (session()->get("logged_in")) {
-            $idsoal = $this->request->uri->getSegment(3);
+            $idsoal = $this->request->getUri()->getSegment(3);
             $str = '';
             $counter = 1;
             $list = $this->model->getAllQ("select * from pilihantest where idsoal = '" . $idsoal . "';");
@@ -231,9 +239,10 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function aksesjawaban() {
+    public function aksesjawaban()
+    {
         if (session()->get("logged_in")) {
-            $idsoal = $this->request->uri->getSegment(3);
+            $idsoal = $this->request->getUri()->getSegment(3);
             $str = '';
             $counter = 1;
             $list = $this->model->getAllQ("select * from jawabantest where idsoal = '" . $idsoal . "';");
@@ -252,7 +261,8 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function ajax_edit() {
+    public function ajax_edit()
+    {
         if (session()->get("logged_in")) {
             $kode = $this->request->getPost('kode');
             $kond['idsoal'] = $this->request->getPost('kode');
@@ -327,16 +337,17 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function hapus() {
+    public function hapus()
+    {
         if (session()->get("logged_in")) {
-            $id = $this->request->uri->getSegment(3);
+            $id = $this->request->getUri()->getSegment(3);
             $lawas = $this->model->getAllQR("SELECT gambar FROM soaltest where idsoal = '" . $id . "';")->gambar;
             if (strlen($lawas) > 0) {
                 if (file_exists($this->modul->getPathApp() . $lawas)) {
                     unlink($this->modul->getPathApp() . $lawas);
                 }
             }
-            $kond['idsoal'] = $this->request->uri->getSegment(3);
+            $kond['idsoal'] = $this->request->getUri()->getSegment(3);
             $hapus = $this->model->delete("soaltest", $kond);
             if ($hapus == 1) {
                 $status = "Data terhapus";
@@ -349,15 +360,16 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function ajaxdetil() {
+    public function ajaxdetil()
+    {
         if (session()->get("logged_in")) {
-            $kode = $this->request->uri->getSegment(3);
+            $kode = $this->request->getUri()->getSegment(3);
             $data = array();
             $no = 1;
             $list = $this->model->getAllQ("select * from soaltest where idbidang = '" . $kode . "';");
             foreach ($list->getResult() as $row) {
                 $val = array();
-                $val[] = '<input type="checkbox" name="kodesoal" value="'.$row->idsoal.'"></input>';
+                $val[] = '<input type="checkbox" name="kodesoal" value="' . $row->idsoal . '"></input>';
                 $def_foto = base_url() . '/images/noimg.jpg';
                 if (strlen($row->gambar) > 0) {
                     if (file_exists($this->modul->getPathApp() . $row->gambar)) {
@@ -382,7 +394,7 @@ class Soaltest extends BaseController {
                     $val[] = '(Poin ' . $row->poin . ')<br>' . $row->soal;
                 } else {
                     $val[] = 'Audio : <audio controls>
-                    <source src="'.$def_audio.'" type="audio/ogg">
+                    <source src="' . $def_audio . '" type="audio/ogg">
                   Your browser does not support the audio element.
                   </audio>(Poin ' . $row->poin . ')<br>' . $row->soal;
                 }
@@ -393,8 +405,8 @@ class Soaltest extends BaseController {
                 //list pilihan 
                 $list_pil = $this->model->getAllQ("select * from pilihantest where idsoal = '" . $row->idsoal . "';");
                 $str = '';
-                if($row->tipe != null){
-                    $str .= 'Tipe Soal : '.$row->tipe;
+                if ($row->tipe != null) {
+                    $str .= 'Tipe Soal : ' . $row->tipe;
                 }
                 $str .= '<ol>';
                 foreach ($list_pil->getResult() as $row1) {
@@ -412,9 +424,9 @@ class Soaltest extends BaseController {
                 $str .= '</ul>';
                 $val[] = $str;
                 $val[] = '<div style="text-align: center;">'
-                        . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="ganti(' . "'" . $row->idsoal . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
-                        . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus(' . "'" . $row->idsoal . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>'
-                        . '</div>';
+                    . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="ganti(' . "'" . $row->idsoal . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
+                    . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus(' . "'" . $row->idsoal . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>'
+                    . '</div>';
                 $data[] = $val;
 
                 $no++;
@@ -426,9 +438,10 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function load_gambar() {
+    public function load_gambar()
+    {
         if (session()->get("logged_in")) {
-            $kode = $this->request->uri->getSegment(3);
+            $kode = $this->request->getUri()->getSegment(3);
 
             $def_foto = base_url() . '/images/noimg.jpg';
             $foto = $this->model->getAllQR("select gambar from soaltest where idsoal = '" . $kode . "';")->gambar;
@@ -443,7 +456,8 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function ajax_upload() {
+    public function ajax_upload()
+    {
         if (session()->get("logged_in")) {
             if (isset($_FILES['file']['name'])) {
                 if (0 < $_FILES['file']['error']) {
@@ -461,7 +475,8 @@ class Soaltest extends BaseController {
     }
 
     //belum
-    private function upload_xls_file() {
+    private function upload_xls_file()
+    {
         $file = $this->request->getFile('file');
         $fileName = $file->getRandomName();
         $info_file = $this->modul->info_file($file);
@@ -606,7 +621,8 @@ class Soaltest extends BaseController {
         return $status;
     }
 
-    public function hapussemua() {
+    public function hapussemua()
+    {
         if (session()->get("logged_in")) {
             $hasil = explode(",", $this->request->getPost('hasil'));
 
@@ -642,8 +658,9 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function pindah() {
-        if(session()->get("logged_in")){
+    public function pindah()
+    {
+        if (session()->get("logged_in")) {
             $hasil = explode(",", $this->request->getPost('hasil'));
 
             $hapus = "";
@@ -652,21 +669,22 @@ class Soaltest extends BaseController {
                     'idbidang' => $this->request->getPost('idbidang'),
                 );
                 $kond['idsoal'] = $hasil[$b];
-                $this->model->update("soaltest",$data, $kond);
+                $this->model->update("soaltest", $data, $kond);
                 $update = 1;
             }
-            if($update == 1){
+            if ($update == 1) {
                 $status = "Soal berhasil dipindahkan";
-            }else{
+            } else {
                 $status = "Soal gagal dipindahkan";
             }
             echo json_encode(array("status" => $status));
-        }else{
+        } else {
             $this->modul->halaman('login');
         }
     }
 
-    public function unggah_audio(){
+    public function unggah_audio()
+    {
         if (session()->get("logged_in")) {
             if (isset($_FILES['file']['name'])) {
                 if (0 < $_FILES['file']['error']) {
@@ -689,9 +707,9 @@ class Soaltest extends BaseController {
                             );
                             $simpan = $this->model->add("soaltest", $data);
 
-                            if($simpan == 1){
+                            if ($simpan == 1) {
                                 $pesan = "Audio tersimpan";
-                            }else{
+                            } else {
                                 $pesan = "Audio gagal tersimpan";
                             }
                         } else {
@@ -708,7 +726,8 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function edit_audio(){
+    public function edit_audio()
+    {
         if (session()->get("logged_in")) {
             if (isset($_FILES['file']['name'])) {
                 if (0 < $_FILES['file']['error']) {
@@ -737,9 +756,9 @@ class Soaltest extends BaseController {
                             );
                             $update = $this->model->update("soaltest", $data, $kond);
 
-                            if($update == 1){
+                            if ($update == 1) {
                                 $pesan = "Audio terupdate";
-                            }else{
+                            } else {
                                 $pesan = "Audio gagal terupdate";
                             }
                         } else {
@@ -756,7 +775,8 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function unggah_gambar(){
+    public function unggah_gambar()
+    {
         if (session()->get("logged_in")) {
             if (isset($_FILES['file']['name'])) {
                 if (0 < $_FILES['file']['error']) {
@@ -779,9 +799,9 @@ class Soaltest extends BaseController {
                             );
                             $simpan = $this->model->add("soaltest", $data);
 
-                            if($simpan == 1){
+                            if ($simpan == 1) {
                                 $pesan = "Gambar tersimpan";
-                            }else{
+                            } else {
                                 $pesan = "Gambar gagal tersimpan";
                             }
                         } else {
@@ -798,7 +818,8 @@ class Soaltest extends BaseController {
         }
     }
 
-    public function edit_gambar(){
+    public function edit_gambar()
+    {
         if (session()->get("logged_in")) {
             if (isset($_FILES['file']['name'])) {
                 if (0 < $_FILES['file']['error']) {
@@ -827,9 +848,9 @@ class Soaltest extends BaseController {
                             );
                             $update = $this->model->update("soaltest", $data, $kond);
 
-                            if($update == 1){
+                            if ($update == 1) {
                                 $pesan = "Gambar terupdate";
-                            }else{
+                            } else {
                                 $pesan = "Gambar gagal terupdate";
                             }
                         } else {
@@ -845,5 +866,4 @@ class Soaltest extends BaseController {
             $this->modul->halaman('login');
         }
     }
-
 }

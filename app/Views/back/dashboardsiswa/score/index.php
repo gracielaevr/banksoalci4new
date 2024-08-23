@@ -159,20 +159,21 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
                     </a>
                     <ul class="dropdown-menu  dropdown-menu-end  px-2 py-2 me-sm-n2"
                         aria-labelledby="dropdownMenuButton">
-                        <li>
-                            <a class="dropdown-item border-radius-md" href="<?= base_url() ?>logout">
-                                <div class="d-flex py-1">
-                                    <div class="my-auto">
-                                        <i class="ni ni-bold-right text-danger me-3 text-center"></i>Logout
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+
                         <li>
                             <a class="dropdown-item border-radius-md" href="<?= base_url() ?>profilestudent">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
                                         <i class="ni ni-single-02 text-success me-3"></i>Profile
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item border-radius-md" href="<?= base_url() ?>logout">
+                                <div class="d-flex py-1">
+                                    <div class="my-auto">
+                                        <i class="ni ni-bold-right text-danger me-3 text-center"></i>Logout
                                     </div>
                                 </div>
                             </a>
@@ -231,7 +232,7 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
                                 class="btn-score-wa" style="margin-bottom: 20px;">Call
                                 Us <i class="fa-brands fa-whatsapp"></i> </a>
                             <?php if ($score < 100) { ?>
-                            <a href="<?php echo base_url() . '/start/' . $idsub; ?>" class="btn-score-again"
+                            <a href="<?php echo base_url() . 'start/' . $idsub; ?>" class="btn-score-again"
                                 style="margin-bottom: 20px;">Try
                                 Again <i class="fa-solid fa-rotate-right"></i></a>
                             <?php } ?>
