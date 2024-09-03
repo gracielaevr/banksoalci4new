@@ -1,6 +1,3 @@
-<?= $this->extend('back/dashboardsiswa/default') ?>
-
-<?= $this->section('content') ?>
 <section class="section">
     <div class="row">
         <div class="col-xl-12 col-sm-12 mb-4">
@@ -146,4 +143,3 @@
         </div>
     </div>
 </section>
-<?= $this->endSection() ?>

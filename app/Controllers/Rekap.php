@@ -19,7 +19,7 @@ class Rekap extends BaseController
 
     public function index()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_in")) {
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
@@ -32,7 +32,7 @@ class Rekap extends BaseController
             $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
-            $def_foto = base_url() . '/images/noimg.jpg';
+            $def_foto = base_url() . 'front/images/noimg.png';
             $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
             if (strlen($foto) > 0) {
                 if (file_exists($this->modul->getPathApp() . $foto)) {
@@ -59,6 +59,8 @@ class Rekap extends BaseController
             echo view('back/head', $data);
             if ($idrole == "R00001") {
                 echo view('back/menu');
+            } else if ($idrole == "R00005") {
+                echo view('back/menu_admins');
             } else {
                 echo view('back/menu_guru');
             }
@@ -71,7 +73,7 @@ class Rekap extends BaseController
 
     public function ajaxlist()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_in")) {
             $data = array();
             $no = 1;
             $list = $this->model->getAll("topik");
@@ -130,7 +132,7 @@ class Rekap extends BaseController
 
     public function ajax_add()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_in")) {
             $data = array(
                 'nama' => $this->request->getPost('nama')
             );
@@ -148,7 +150,7 @@ class Rekap extends BaseController
 
     public function ganti()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_in")) {
             $kondisi['idtopik'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("topik", $kondisi);
             echo json_encode($data);
@@ -159,7 +161,7 @@ class Rekap extends BaseController
 
     public function ajax_edit()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_in")) {
             $data = array(
                 'nama' => $this->request->getPost('nama')
             );
@@ -178,7 +180,7 @@ class Rekap extends BaseController
 
     public function hapus()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_in")) {
             $kond['idtopik'] = $this->request->getUri()->getSegment(3);
             $hapus = $this->model->delete("topik", $kond);
             if ($hapus == 1) {
@@ -194,7 +196,7 @@ class Rekap extends BaseController
 
     public function detil()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_in")) {
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
@@ -206,7 +208,7 @@ class Rekap extends BaseController
             $data['model'] = $this->model;
 
             // membaca foto profile
-            $def_foto = base_url() . '/images/noimg.jpg';
+            $def_foto = base_url() . 'front/images/noimg.png';
             $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
             if (strlen($foto) > 0) {
                 if (file_exists($this->modul->getPathApp() . $foto)) {
@@ -238,6 +240,8 @@ class Rekap extends BaseController
             echo view('back/head', $data);
             if ($idrole == "R00001") {
                 echo view('back/menu');
+            } elseif ($idrole = "R00005") {
+                echo view('back/menu_admins');
             } else {
                 echo view('back/menu_guru');
             }
@@ -250,7 +254,7 @@ class Rekap extends BaseController
 
     public function ajaxdetil()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_in")) {
             $kode = $this->request->getUri()->getSegment(3);
 
             $data = array();

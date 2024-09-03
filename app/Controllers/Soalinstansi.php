@@ -33,7 +33,7 @@ class Soalinstansi extends BaseController
             $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
-            $def_foto = base_url() . '/images/noimg.jpg';
+            $def_foto = base_url() . 'front/images/noimg.png';
             $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
             if (strlen($foto) > 0) {
                 if (file_exists($this->modul->getPathApp() . $foto)) {
@@ -137,7 +137,7 @@ class Soalinstansi extends BaseController
             $data['subtopik'] = $this->model->getAllQ("SELECT idsubtopik, s.nama as sub, t.nama as top FROM subtopik s, topik t where s.idtopik = t.idtopik;");
 
             // membaca foto profile
-            $def_foto = base_url() . '/images/noimg.jpg';
+            $def_foto = base_url() . 'front/images/noimg.png';
             $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
             if (strlen($foto) > 0) {
                 if (file_exists($this->modul->getPathApp() . $foto)) {
@@ -569,7 +569,7 @@ class Soalinstansi extends BaseController
             foreach ($list->getResult() as $row) {
                 $val = array();
                 $val[] = '<input type="checkbox" name="kodesoal" value="' . $row->idsoal . '"></input>';
-                $def_foto = base_url() . '/images/noimg.jpg';
+                $def_foto = base_url() . 'front/images/noimg.png';
                 if (!is_null($row->gambar) && strlen($row->gambar)) {
                     if (file_exists($this->modul->getPathApp() . $row->gambar)) {
                         $def_foto = base_url() . '/uploads/' . $row->gambar;
@@ -637,7 +637,7 @@ class Soalinstansi extends BaseController
         if (session()->get("logged_in")) {
             $kode = $this->request->getUri()->getSegment(3);
 
-            $def_foto = base_url() . '/images/noimg.jpg';
+            $def_foto = base_url() . 'front/images/noimg.png';
             $foto = $this->model->getAllQR("select gambar from soal where idsoal = '" . $kode . "';")->gambar;
             if (strlen($foto) > 0) {
                 if (file_exists($this->modul->getPathApp() . $foto)) {

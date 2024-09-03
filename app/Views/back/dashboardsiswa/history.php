@@ -1,6 +1,3 @@
-<?= $this->extend('back/dashboardsiswa/default') ?>
-
-<?= $this->section('content') ?>
 <section class="section">
     <div class="row">
         <div class="col-xl-12 col-sm-12 mb-4">
@@ -46,19 +43,28 @@
                         </tr>
                     </thead>
                     <tbody>
+
+
+                        <?php if (!empty($history_peserta)): ?>
                         <?php foreach ($history_peserta as $item): ?>
-                            <tr class="fst-normal">
-                                <td><?= $item->created_at ?></td>
-                                <?php foreach ($subtopik_nama as $sub): ?>
-                                    <td><?= $sub->nama ?></td>
-                                <?php endforeach; ?>
-                                <td><?= $item->benar ?></td>
-                                <td><?= $item->salah ?></td>
-                                <td>
-                                    <div class="badge badge-success"><?= $item->poin ?></div>
-                                </td>
-                            </tr>
+                        <tr class="fst-normal">
+                            <td><?= $item->created_at ?></td>
+                            <?php foreach ($subtopik_nama as $sub): ?>
+                            <td><?= $sub->nama ?></td>
+                            <?php endforeach; ?>
+                            <td><?= $item->benar ?></td>
+                            <td><?= $item->salah ?></td>
+                            <td>
+                                <div class="badge badge-success text-center"><?= $item->poin ?></div>
+                            </td>
+                        </tr>
                         <?php endforeach; ?>
+                        <?php else: ?>
+                        <tr>
+                            <td colspan="5" class="text-center">History Is Empty.</td>
+                        </tr>
+                        <?php endif; ?>
+
                     </tbody>
 
                 </table>
@@ -67,4 +73,3 @@
     </div>
 
 </section>
-<?= $this->endSection() ?>

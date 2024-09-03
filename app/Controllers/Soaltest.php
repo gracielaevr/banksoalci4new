@@ -32,7 +32,7 @@ class Soaltest extends BaseController
             $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
-            $def_foto = base_url() . '/images/noimg.jpg';
+            $def_foto = base_url() . 'front/images/noimg.png';
             $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
             if (strlen($foto) > 0) {
                 if (file_exists($this->modul->getPathApp() . $foto)) {
@@ -113,7 +113,7 @@ class Soaltest extends BaseController
             $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
-            $def_foto = base_url() . '/images/noimg.jpg';
+            $def_foto = base_url() . 'front/images/noimg.png';
             $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
             if (strlen($foto) > 0) {
                 if (file_exists($this->modul->getPathApp() . $foto)) {
@@ -370,7 +370,7 @@ class Soaltest extends BaseController
             foreach ($list->getResult() as $row) {
                 $val = array();
                 $val[] = '<input type="checkbox" name="kodesoal" value="' . $row->idsoal . '"></input>';
-                $def_foto = base_url() . '/images/noimg.jpg';
+                $def_foto = base_url() . 'front/images/noimg.png';
                 if (strlen($row->gambar) > 0) {
                     if (file_exists($this->modul->getPathApp() . $row->gambar)) {
                         $def_foto = base_url() . '/uploads/' . $row->gambar;
@@ -443,7 +443,7 @@ class Soaltest extends BaseController
         if (session()->get("logged_in")) {
             $kode = $this->request->getUri()->getSegment(3);
 
-            $def_foto = base_url() . '/images/noimg.jpg';
+            $def_foto = base_url() . 'front/images/noimg.png';
             $foto = $this->model->getAllQR("select gambar from soaltest where idsoal = '" . $kode . "';")->gambar;
             if (strlen($foto) > 0) {
                 if (file_exists($this->modul->getPathApp() . $foto)) {

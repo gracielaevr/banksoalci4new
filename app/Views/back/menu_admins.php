@@ -14,9 +14,9 @@
         </div>
         <ul class="sidebar-menu" data-widget="tree">
 
-            <li class="<?php if ($menu == "homesiswa") {
+            <li class="<?php if ($menu == "homeadmins") {
                             echo 'active';
-                        } ?>"><a href="<?php echo base_url(); ?>homesiswa"><i class="fa fa-home"></i>
+                        } ?>"><a href="<?php echo base_url(); ?>homeadmins"><i class="fa fa-home"></i>
                     <span>Beranda</span></a></li>
             <li class="header">Master Data</li>
             <li class="<?php if ($menu == "soalinstansi") {
@@ -24,16 +24,16 @@
                         } ?>"><a href="<?php echo base_url(); ?>soalinstansi/index"><i class="fa fa-book"></i>
                     <span>Soal</span></a>
             </li>
-            <li class="<?php if ($menu == "siswaguru") {
+            <li class="<?php if ($menu == "pengguna") {
                             echo 'active';
-                        } ?>"><a href="<?php echo base_url(); ?>siswaguru/index"><i class="fa fa-book"></i>
+                        } ?>"><a href="<?php echo base_url(); ?>pengguna/index"><i class="fa fa-user"></i>
                     <span>Siswa</span></a>
             </li>
             <li class="header">Hasil</li>
-            <li class="<?php if ($menu == "soal" | $menu == "soalnarasi") {
+            <li class="<?php if ($menu == "rekap") {
                             echo 'active';
-                        } ?>"><a href="<?php echo base_url(); ?>soal"><i class="fa fa-book"></i>
-                    <span>Results</span></a></li>
+                        } ?>"><a href="<?php echo base_url(); ?>rekap"><i class="fa fa-book"></i>
+                    <span>Rekap Soal</span></a></li>
             <li class="header">Pengaturan</li>
             <li class="<?php if ($menu == "profilsiswa" || $menu == "gantipass") {
                             echo 'active';

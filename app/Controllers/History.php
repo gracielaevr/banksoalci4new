@@ -30,8 +30,13 @@ class History extends BaseController
 
             //ambil history peserta
             $history_peserta = $this->model->getAllW('peserta', ['idusers' => $idusers])->getResult();
-            $idsubtopik = $history_peserta[0]->idsubtopik;
-            $subtopik_nama = $this->model->getAllW('subtopik', ['idsubtopik' => $idsubtopik])->getResult();
+            if (!empty($history_peserta)) {
+                $idsubtopik = $history_peserta[0]->idsubtopik;
+                $subtopik_nama = $this->model->getAllW('subtopik', ['idsubtopik' => $idsubtopik])->getResult();
+            } else {
+                $subtopik_nama = [];
+                $data['message'] = "Data Is Empty.";
+            }
 
             $data['history_peserta'] = $history_peserta;
             $data['subtopik_nama'] = $subtopik_nama;
@@ -47,7 +52,7 @@ class History extends BaseController
                 $data['wa'] = $user->wa;
                 $data['idrole'] = $user->idrole;
 
-                $def_foto = base_url() . '/images/noimg.jpg';
+                $def_foto = base_url() . 'front/images/noimg.png';
                 $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
                 if (strlen($foto) > 0) {
                     if (file_exists($this->modul->getPathApp() . $foto)) {
@@ -61,12 +66,12 @@ class History extends BaseController
                 $data['email'] = "";
                 $data['wa'] = "";
                 $data['idrole'] = "";
-                $data['foto_profile'] = base_url() . '/images/noimg.jpg';
+                $data['foto_profile'] = base_url() . 'front/images/noimg.png';
             }
 
-
-
+            echo view('back/dashboardsiswa/head', $data);
             echo view('back/dashboardsiswa/history', $data);
+            echo view('back/dashboardsiswa/foot', $data);
         } else {
             $this->modul->halaman('loginsiswa');
         }

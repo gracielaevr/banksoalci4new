@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Bank Soal</title>
-    <link rel="icon" href="<?php echo $logo; ?>" type="image/x-icon">
+    <link rel="icon" type="image/png" href="<?= base_url() ?>front/images/leapverse.png">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="<?php echo base_url(); ?>back/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>back/bower_components/font-awesome/css/font-awesome.min.css">
@@ -30,40 +30,40 @@
     <script src="<?php echo base_url(); ?>back/bower_components/select2/dist/js/select2.full.min.js"></script>
 
     <script type="text/javascript">
-    function back() {
-        window.history.back();
-    }
+        function back() {
+            window.history.back();
+        }
 
-    function hanyaAngka(e, decimal) {
-        var key;
-        var keychar;
-        if (window.event) {
-            key = window.event.keyCode;
-        } else if (e) {
-            key = e.which;
-        } else {
-            return true;
+        function hanyaAngka(e, decimal) {
+            var key;
+            var keychar;
+            if (window.event) {
+                key = window.event.keyCode;
+            } else if (e) {
+                key = e.which;
+            } else {
+                return true;
+            }
+            keychar = String.fromCharCode(key);
+            if ((key == null) || (key == 0) || (key == 8) || (key == 9) || (key == 13) || (key == 27)) {
+                return true;
+            } else if ((("0123456789").indexOf(keychar) > -1)) {
+                return true;
+            } else if (decimal && (keychar == ".")) {
+                return true;
+            } else {
+                return false;
+            }
         }
-        keychar = String.fromCharCode(key);
-        if ((key == null) || (key == 0) || (key == 8) || (key == 9) || (key == 13) || (key == 27)) {
-            return true;
-        } else if ((("0123456789").indexOf(keychar) > -1)) {
-            return true;
-        } else if (decimal && (keychar == ".")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
-    function batas_angka(input, batas) {
-        if (input.value < 0) {
-            input.value = 0;
+        function batas_angka(input, batas) {
+            if (input.value < 0) {
+                input.value = 0;
+            }
+            if (input.value > batas) {
+                input.value = batas;
+            }
         }
-        if (input.value > batas) {
-            input.value = batas;
-        }
-    }
     </script>
 
 </head>
@@ -100,30 +100,30 @@
                                 <li class="user-footer">
                                     <div class="pull-left">
                                         <?php if ($role == "R00001") { ?>
-                                        <a href="<?php echo base_url(); ?>profile"
-                                            class="btn btn-default btn-flat">Profil</a>
+                                            <a href="<?php echo base_url(); ?>profile"
+                                                class="btn btn-default btn-flat">Profil</a>
                                         <?php } elseif ($role == "R00002") { ?>
-                                        <a href="<?php echo base_url(); ?>profilguru"
-                                            class="btn btn-default btn-flat">Profil</a>
+                                            <a href="<?php echo base_url(); ?>profilguru"
+                                                class="btn btn-default btn-flat">Profil</a>
                                         <?php } elseif ($role == "R00003") { ?>
-                                        <a href="<?php echo base_url(); ?>profilsiswa"
-                                            class="btn btn-default btn-flat">Profil</a>
+                                            <a href="<?php echo base_url(); ?>profilsiswa"
+                                                class="btn btn-default btn-flat">Profil</a>
                                         <?php } elseif ($role == "R00004") { ?>
-                                        <a href="<?php echo base_url(); ?>profilinstansi"
-                                            class="btn btn-default btn-flat">Profil</a>
+                                            <a href="<?php echo base_url(); ?>profilinstansi"
+                                                class="btn btn-default btn-flat">Profil</a>
                                         <?php } else {
                                         } ?>
                                     </div>
                                     <div class="pull-right">
                                         <?php if ($role == "R00003") { ?>
-                                        <a href="<?php echo base_url(); ?>loginsiswa/logout"
-                                            class="btn btn-default btn-flat">Keluar</a>
+                                            <a href="<?php echo base_url(); ?>loginsiswa/logout"
+                                                class="btn btn-default btn-flat">Keluar</a>
                                         <?php } elseif ($role == "R00004") { ?>
-                                        <a href="<?php echo base_url(); ?>logininstansi/logout"
-                                            class="btn btn-default btn-flat">Keluar</a>
+                                            <a href="<?php echo base_url(); ?>logininstansi/logout"
+                                                class="btn btn-default btn-flat">Keluar</a>
                                         <?php } else { ?>
-                                        <a href="<?php echo base_url(); ?>login/logout"
-                                            class="btn btn-default btn-flat">Keluar</a>
+                                            <a href="<?php echo base_url(); ?>login/logout"
+                                                class="btn btn-default btn-flat">Keluar</a>
                                         <?php } ?>
                                     </div>
                                 </li>

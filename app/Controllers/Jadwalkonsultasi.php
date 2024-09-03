@@ -31,7 +31,7 @@ class Jadwalkonsultasi extends BaseController
             $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
-            $def_foto = base_url() . '/images/noimg.jpg';
+            $def_foto = base_url() . 'front/images/noimg.png';
             $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
             if (strlen($foto) > 0) {
                 if (file_exists($this->modul->getPathApp() . $foto)) {
@@ -86,8 +86,8 @@ class Jadwalkonsultasi extends BaseController
                 $val[] = $row->linkzoom;
                 $val[] = $row->durasi;
                 $val[] = $row->catatan;
-                $users = $this->model->getAllQR("select * from users where idusers = 'U00002';")->nama;
-                $val[] = $users;
+                // $users = $this->model->getAllQR("select * from users where idusers = 'U00002';")->nama;
+                $val[] = $row->guru;
                 $val[] = '<div style="text-align: center;">'
                     . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="ganti(' . "'" . $row->idkonsultasi . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
                     . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus(' . "'" . $row->idkonsultasi . "'" . ',' . "'" . $row->tanggal . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>'
@@ -113,9 +113,10 @@ class Jadwalkonsultasi extends BaseController
                 'linkzoom' => $this->request->getPost('linkzoom'),
                 'durasi' => $this->request->getPost('durasi'),
                 'catatan' => $this->request->getPost('catatan'),
-                'idrole' => $this->request->getPost('idrole'),
+                'guru' => $this->request->getPost('guru'),
             );
             $simpan = $this->model->add("konsultasi", $data);
+
             if ($simpan == 1) {
                 $status = "Data tersimpan";
             } else {
@@ -148,7 +149,7 @@ class Jadwalkonsultasi extends BaseController
                 'linkzoom' => $this->request->getPost('linkzoom'),
                 'durasi' => $this->request->getPost('durasi'),
                 'catatan' => $this->request->getPost('catatan'),
-                'idrole' => $this->request->getPost('idrole'),
+                'guru' => $this->request->getPost('guru'),
             );
             $kond['idkonsultasi'] = $this->request->getPost('idkonsultasi');
             $update = $this->model->update("konsultasi", $data, $kond);

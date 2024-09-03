@@ -31,6 +31,7 @@ class Question extends BaseController
 
             // $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
+            $data['wa'] = session()->get("wa");
             $data['role'] = session()->get("role");
             $data['nm_role'] = session()->get("nama_role");
 
@@ -46,7 +47,7 @@ class Question extends BaseController
                 $data['wa'] = $user->wa;
                 $data['idrole'] = $user->idrole;
 
-                $def_foto = base_url() . '/images/noimg.jpg';
+                $def_foto = base_url() . 'front/images/noimg.png';
                 $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
                 if (strlen($foto) > 0) {
                     if (file_exists($this->modul->getPathApp() . $foto)) {
@@ -75,7 +76,7 @@ class Question extends BaseController
             $topik = $this->model->getAllQR("select t.idtopik, t.nama as nm from subtopik s, topik t where t.idtopik = s.idtopik and s.idsubtopik = '" . $idsubtopik . "'");
             $data['topik'] = $topik->nm;
             $data['idtopik'] = $topik->idtopik;
-            $jenis = $this->model->getAllQR("select * from soal where idsubtopik = '" . $idsubtopik . "' order by rand() limit 1")->jenis;
+            $jenis = $this->model->getAllQR("select * from soal where idsubtopik = '" . $idsubtopik . "' order by rand() limit 1")->jenis ?? 'tidak ada soal';
             $data['jenis'] = $jenis;
 
             $idusers = session()->get('idusers');
@@ -154,6 +155,8 @@ class Question extends BaseController
             'idpeserta' => $this->model->autokode("C", "idpeserta", "peserta", 2, 7),
             'nama' => $this->request->getPost('nama'),
             'idusers' => $this->request->getPost('idusers'),
+            'email' => $this->request->getPost('email'),
+            'nohp' => $this->request->getPost('wa'),
             'idtopik' => $this->request->getPost('idtopik'),
             'idsubtopik' => $this->request->getPost('idsubtopik'),
             'status' => 1,
@@ -461,7 +464,7 @@ class Question extends BaseController
             $data['wa'] = $user->wa;
             $data['idrole'] = $user->idrole;
 
-            $def_foto = base_url() . '/images/noimg.jpg';
+            $def_foto = base_url() . 'front/images/noimg.png';
             $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
             if (strlen($foto) > 0) {
                 if (file_exists($this->modul->getPathApp() . $foto)) {

@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Bank Soal</title>
-    <link rel="icon" href="<?php echo $logo; ?>" type="image/x-icon">
+    <link rel="icon" type="image/png" href="<?= base_url() ?>front/images/leapverse.png">
+
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="<?php echo base_url(); ?>back/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>back/bower_components/font-awesome/css/font-awesome.min.css">
@@ -46,47 +47,47 @@
     <script src="<?php echo base_url(); ?>back/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>back/plugins/iCheck/icheck.min.js"></script>
     <script type="text/javascript">
-    $(document).ready(function() {
+        $(document).ready(function() {
 
-    });
+        });
 
-    function proses() {
+        function proses() {
 
-        var email = document.getElementById('email').value;
+            var email = document.getElementById('email').value;
 
-        if (email === "") {
-            alert("Email tidak boleh kosong");
-        } else {
-            $('#btnProses').text('Prosessing...');
-            $('#btnProses').attr('disabled', true);
+            if (email === "") {
+                alert("Email tidak boleh kosong");
+            } else {
+                $('#btnProses').text('Prosessing...');
+                $('#btnProses').attr('disabled', true);
 
-            var form_data = new FormData();
-            form_data.append('email', email);
+                var form_data = new FormData();
+                form_data.append('email', email);
 
-            $.ajax({
-                url: "<?php echo base_url(); ?>lupapass/proses",
-                dataType: 'JSON',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'POST',
-                success: function(response) {
-                    $('#btnProses').text('Sign In');
-                    $('#btnProses').attr('disabled', false);
+                $.ajax({
+                    url: "<?php echo base_url(); ?>lupapass/proses",
+                    dataType: 'JSON',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'POST',
+                    success: function(response) {
+                        $('#btnProses').text('Sign In');
+                        $('#btnProses').attr('disabled', false);
 
-                    alert(response.status);
-                    window.location.href = "<?php echo base_url(); ?>login";
+                        alert(response.status);
+                        window.location.href = "<?php echo base_url(); ?>login";
 
-                },
-                error: function(response) {
-                    alert(response.status);
-                    $('#btnProses').text('Sign In');
-                    $('#btnProses').attr('disabled', false);
-                }
-            });
+                    },
+                    error: function(response) {
+                        alert(response.status);
+                        $('#btnProses').text('Sign In');
+                        $('#btnProses').attr('disabled', false);
+                    }
+                });
+            }
         }
-    }
     </script>
 </body>
 

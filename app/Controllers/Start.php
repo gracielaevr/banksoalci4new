@@ -49,7 +49,7 @@ class Start extends BaseController
                 $data['wa'] = $user->wa;
                 $data['idrole'] = $user->idrole;
 
-                $def_foto = base_url() . '/images/noimg.jpg';
+                $def_foto = base_url() . 'front/images/noimg.png';
                 $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
                 if (strlen($foto) > 0) {
                     if (file_exists($this->modul->getPathApp() . $foto)) {

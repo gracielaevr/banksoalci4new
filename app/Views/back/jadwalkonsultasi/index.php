@@ -29,7 +29,7 @@ function save() {
     var linkzoom = document.getElementById('linkzoom').value;
     var durasi = document.getElementById('durasi').value;
     var catatan = document.getElementById('catatan').value;
-    var idrole = document.getElementById('idrole').value;
+    var guru = document.getElementById('guru').value;
 
     if (tanggal === '') {
         alert("Tanggal tidak boleh kosong");
@@ -59,7 +59,7 @@ function save() {
         form_data.append('linkzoom', linkzoom);
         form_data.append('durasi', durasi);
         form_data.append('catatan', catatan);
-        form_data.append('idrole', idrole);
+        form_data.append('guru', guru);
 
         // ajax adding data to database
         $.ajax({
@@ -122,7 +122,7 @@ function ganti(id) {
             $('[name="linkzoom"]').val(data.linkzoom);
             $('[name="durasi"]').val(data.durasi);
             $('[name="catatan"]').val(data.catatan);
-            $('[name="idrole"]').val(data.idrole);
+            $('[name="guru"]').val(data.guru);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert('Error get data');
@@ -224,12 +224,12 @@ function closemodal() {
                     <div class="form-group row">
                         <label class="col-sm-3 control-label">Guru</label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="idrole" id="idrole">
+                            <select class="form-control" name="guru" id="guru">
                                 <option value="-">- Pilih -</option>
                                 <?php
                                 foreach ($users->getResult() as $row) {
                                 ?>
-                                <option value="<?php echo $row->idrole ?>">
+                                <option value="<?php echo $row->nama ?>">
                                     <?php
 
                                         echo $row->nama . '(' . $row->nama . ')'; ?> </option>

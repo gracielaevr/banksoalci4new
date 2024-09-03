@@ -98,6 +98,17 @@
 .badge.badge-success {
   background-color: #47c363;
 }
+.badge.badge-success2 {
+  background-color: #47c363;
+}
+
+.badge-success2:hover{
+  color: #ffffff;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  background-color: #23833a;
+  transform: scale(1.1);
+
+}
 
 .badge.badge-info {
   background-color: #3abaf4;
@@ -199,17 +210,15 @@ h6 .badge {
   border-color: #95a0f4;
 }
 
-.input-group-text,
-select.form-control:not([size]):not([multiple]),
-.form-control:not(.form-control-sm):not(.form-control-lg) {
+.input-group input[type=text] {
   font-size: 14px;
   padding: 10px 15px;
   height: 42px;
 }
 
-textarea.form-control {
+/* textarea.form-control {
   height: 64px;
-}
+} */
 
 .custom-control {
   line-height: 1.6rem;
@@ -729,9 +738,36 @@ select.form-control:not([size]):not([multiple]) {
   background-color: #e0e0e0 !important;
 }
 
-/* .active{
-  background-color: #e0e0e0;
-} */
+@keyframes moveRight {
+  0%, 100% {
+      transform: translateX(0);
+  }
+  50% {
+      transform: translateX(10px);
+  }
+}
+
+@keyframes moveLeft {
+  0%, 100% {
+      transform: translateX(0);
+  }
+  50% {
+      transform: translateX(-10px);
+  }
+}
+
+.animate-arrow {
+  display: inline-block;
+  animation: moveRight 1s infinite;
+}
+
+.animate-arrow:last-of-type {
+  animation: moveLeft 1s infinite;
+}
+
+.arrow-large {
+  font-size: 1.5em;
+}
 
 @media (max-width: 450px) {
   .nav-das {

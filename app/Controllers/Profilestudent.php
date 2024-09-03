@@ -43,7 +43,7 @@ class profilestudent extends BaseController
                 $data['idrole'] = $user->idrole;
 
                 // membaca foto profile
-                $def_foto = base_url() . '/images/noimg.jpg';
+                $def_foto = base_url() . 'front/images/noimg.png';
                 $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
                 if (strlen($foto) > 0) {
                     if (file_exists($this->modul->getPathApp() . $foto)) {

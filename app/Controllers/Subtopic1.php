@@ -19,7 +19,8 @@ class Subtopic1 extends BaseController
 
     public function index($idtopik): void
     {
-        if (session()->get("logged_siswa")) {
+        if (session()->get("logged_siswa") && session()->get("role") === 'R00003') {
+
             // Ambil subtopik berdasarkan $idtopik dari database
             $subtopics = $this->model->getAllW('subtopik', ['idtopik' => $idtopik])->getResult();
 
@@ -50,7 +51,7 @@ class Subtopic1 extends BaseController
                 $data['wa'] = $user->wa;
                 $data['idrole'] = $user->idrole;
 
-                $def_foto = base_url() . '/images/noimg.jpg';
+                $def_foto = base_url() . 'front/images/noimg.png';
                 $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
                 if (strlen($foto) > 0) {
                     if (file_exists($this->modul->getPathApp() . $foto)) {
@@ -67,8 +68,9 @@ class Subtopic1 extends BaseController
                 $data['foto_profile'] = base_url() . '/images/noimg.jpg';
             }
 
-
+            echo view('back/dashboardsiswa/head', $data);
             echo view('back/dashboardsiswa/subtopic', $data);
+            echo view('back/dashboardsiswa/foot', $data);
         } else {
             $this->modul->halaman('loginsiswa');
         }

@@ -85,7 +85,7 @@ class Soalnarasi extends BaseController
             $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
-            $def_foto = base_url() . '/images/noimg.jpg';
+            $def_foto = base_url() . 'front/images/noimg.png';
             $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
             if (strlen($foto) > 0) {
                 if (file_exists($this->modul->getPathApp() . $foto)) {
@@ -517,7 +517,7 @@ class Soalnarasi extends BaseController
             foreach ($list->getResult() as $row) {
                 $val = array();
                 $val[] = $no;
-                $def_foto = base_url() . '/images/noimg.jpg';
+                $def_foto = base_url() . 'front/images/noimg.png';
                 if (strlen($row->gambar) > 0) {
                     if (file_exists($this->modul->getPathApp() . $row->gambar)) {
                         $def_foto = base_url() . '/uploads/' . $row->gambar;
@@ -573,7 +573,7 @@ class Soalnarasi extends BaseController
         if (session()->get("logged_in")) {
             $kode = $this->request->getUri()->getSegment(3);
 
-            $def_foto = base_url() . '/images/noimg.jpg';
+            $def_foto = base_url() . 'front/images/noimg.png';
             $foto = $this->model->getAllQR("select gambar from soal where idsoal = '" . $kode . "';")->gambar;
             if (strlen($foto) > 0) {
                 if (file_exists($this->modul->getPathApp() . $foto)) {

@@ -11,6 +11,8 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="ms-3" id="nama"><?= $nama; ?></span>
                         <input type="hidden" name="idusers" id="idusers" value="<?= $idusers ?>">
+                        <input type="hidden" name="email" id="email" value="<?= $email ?>">
+                        <input type="hidden" name="wa" id="wa" value="<?= $wa ?>">
                         <img src="<?= $foto_profile ?>" class="avatar avatar-sm  ms-3" aria-hidden="true">
 
                     </a>
@@ -82,29 +84,29 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
                                 echo $narasi . '<br><hr>';
                                 $i = 1;
                                 foreach ($soal->getResult() as $row) { ?>
-                                    <input type="hidden" id="kodesoal<?php echo $i; ?>" name="kodesoal[]"
-                                        value="<?php echo $row->idsoal; ?>">
-                                    <h3><?php echo str_replace('p>', 'h3>', $row->soal); ?></h3>
-                                    <span class="step-count"><?php echo 'Poin : ' . $row->poin; ?></span>
-                                    <div class="step-block">
-                                        <div class="row">
-                                            <?php
+                                <input type="hidden" id="kodesoal<?php echo $i; ?>" name="kodesoal[]"
+                                    value="<?php echo $row->idsoal; ?>">
+                                <h3><?php echo str_replace('p>', 'h3>', $row->soal); ?></h3>
+                                <span class="step-count"><?php echo 'Poin : ' . $row->poin; ?></span>
+                                <div class="step-block">
+                                    <div class="row">
+                                        <?php
                                             $pil = $model->getAllQ("select * from pilihan where idsoal = '" . $row->idsoal . "'");
                                             foreach ($pil->getResult() as $row1) { ?>
-                                                <div class="col-lg-6 col-sm-12">
-                                                    <div class="form-group">
-                                                        <input type="radio" name="pilihan<?php echo $i; ?>" class="form-control"
-                                                            id="<?php echo $row1->pilihan . $i; ?>"
-                                                            value="<?php echo $row1->idpilihan; ?>" required>
-                                                        <label
-                                                            for="<?php echo $row1->pilihan . $i; ?>"><?php echo $row1->pilihan; ?></label>
-                                                    </div>
-                                                </div>
-                                            <?php } ?>
+                                        <div class="col-lg-6 col-sm-12">
+                                            <div class="form-group">
+                                                <input type="radio" name="pilihan<?php echo $i; ?>" class="form-control"
+                                                    id="<?php echo $row1->pilihan . $i; ?>"
+                                                    value="<?php echo $row1->idpilihan; ?>" required>
+                                                <label
+                                                    for="<?php echo $row1->pilihan . $i; ?>"><?php echo $row1->pilihan; ?></label>
+                                            </div>
                                         </div>
+                                        <?php } ?>
                                     </div>
-                                    <span hidden="hidden" style="color: red; margin-top: 0;"
-                                        id="errorsoal<?php echo $i; ?>">* Required</span>
+                                </div>
+                                <span hidden="hidden" style="color: red; margin-top: 0;"
+                                    id="errorsoal<?php echo $i; ?>">* Required</span>
 
                                 <?php
                                     $i++;
@@ -151,101 +153,105 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
     </footer>
 
     <script type="text/javascript">
-        function simpan() {
+    function simpan() {
 
-            var nama = document.getElementById('nama').textContent;
-            var idusers = document.getElementById('idusers').value;
-            var idsubtopik = document.getElementById('idsubtopik').value;
-            var idtopik = document.getElementById('idtopik').value;
-            var jml = document.getElementById('jml').value;
-            var idsoal = $("input[name='kodesoal[]']").map(function() {
-                return $(this).val();
-            }).get();
-            var p1 = $("input[type='radio'][name='pilihan1']:checked").val();
-            var p2 = $("input[type='radio'][name='pilihan2']:checked").val();
-            var p3 = $("input[type='radio'][name='pilihan3']:checked").val();
-            var p4 = $("input[type='radio'][name='pilihan4']:checked").val();
-            var p5 = $("input[type='radio'][name='pilihan5']:checked").val();
+        var nama = document.getElementById('nama').textContent;
+        var idusers = document.getElementById('idusers').value;
+        var email = document.getElementById('email').value;
+        var wa = document.getElementById('wa').value;
+        var idsubtopik = document.getElementById('idsubtopik').value;
+        var idtopik = document.getElementById('idtopik').value;
+        var jml = document.getElementById('jml').value;
+        var idsoal = $("input[name='kodesoal[]']").map(function() {
+            return $(this).val();
+        }).get();
+        var p1 = $("input[type='radio'][name='pilihan1']:checked").val();
+        var p2 = $("input[type='radio'][name='pilihan2']:checked").val();
+        var p3 = $("input[type='radio'][name='pilihan3']:checked").val();
+        var p4 = $("input[type='radio'][name='pilihan4']:checked").val();
+        var p5 = $("input[type='radio'][name='pilihan5']:checked").val();
 
-            var temp = '';
-            for (let i = 1; i < jml; i++) {
-                temp += $("input[type='radio'][name='pilihan" + i + "']:checked").val() + ',';
-            }
-
-            var tot = 0;
-            if (p1 === undefined) {
-                document.getElementById("errorsoal1").removeAttribute("hidden");
-            } else {
-                document.getElementById("errorsoal1").setAttribute("hidden", "hidden");
-                tot += 1;
-            }
-            if (p2 === undefined) {
-                document.getElementById("errorsoal2").removeAttribute("hidden");
-            } else {
-                document.getElementById("errorsoal2").setAttribute("hidden", "hidden");
-                tot += 1;
-            }
-            if (p3 === undefined) {
-                document.getElementById("errorsoal3").removeAttribute("hidden");
-            } else {
-                document.getElementById("errorsoal3").setAttribute("hidden", "hidden");
-                tot += 1;
-            }
-            if (p4 === undefined) {
-                document.getElementById("errorsoal4").removeAttribute("hidden");
-            } else {
-                document.getElementById("errorsoal4").setAttribute("hidden", "hidden");
-                tot += 1;
-            }
-            if (p5 === undefined) {
-                document.getElementById("errorsoal5").removeAttribute("hidden");
-            } else {
-                document.getElementById("errorsoal5").setAttribute("hidden", "hidden");
-                tot += 1;
-            }
-
-
-
-            if (tot < jml - 1) {
-                alert("Fill all the question first!");
-            } else {
-                var url = "<?php echo base_url(); ?>question/finish";
-
-                var form_data = new FormData();
-                form_data.append('nama', nama);
-                form_data.append('idusers', idusers);
-                form_data.append('idsubtopik', idsubtopik);
-                form_data.append('idtopik', idtopik);
-                form_data.append('idsoal', idsoal);
-                form_data.append('jml', jml);
-                form_data.append('jawaban', temp);
-
-                // ajax adding data to database
-                $.ajax({
-                    url: url,
-                    dataType: 'JSON',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    data: form_data,
-                    type: 'POST',
-                    success: function(data) {
-                        if (data.status === "ok") {
-                            window.location.href = "<?php echo base_url(); ?>question/score/" + data.id;
-                        }
-
-                        $('#btnSimpan').text('Save'); //change button text
-                        $('#btnSimpan').attr('disabled', false); //set button enable 
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        alert("Error json " + errorThrown);
-
-                        $('#btnSimpan').text('Save'); //change button text
-                        $('#btnSimpan').attr('disabled', false); //set button enable 
-                    }
-                });
-            }
-
-
+        var temp = '';
+        for (let i = 1; i < jml; i++) {
+            temp += $("input[type='radio'][name='pilihan" + i + "']:checked").val() + ',';
         }
+
+        var tot = 0;
+        if (p1 === undefined) {
+            document.getElementById("errorsoal1").removeAttribute("hidden");
+        } else {
+            document.getElementById("errorsoal1").setAttribute("hidden", "hidden");
+            tot += 1;
+        }
+        if (p2 === undefined) {
+            document.getElementById("errorsoal2").removeAttribute("hidden");
+        } else {
+            document.getElementById("errorsoal2").setAttribute("hidden", "hidden");
+            tot += 1;
+        }
+        if (p3 === undefined) {
+            document.getElementById("errorsoal3").removeAttribute("hidden");
+        } else {
+            document.getElementById("errorsoal3").setAttribute("hidden", "hidden");
+            tot += 1;
+        }
+        if (p4 === undefined) {
+            document.getElementById("errorsoal4").removeAttribute("hidden");
+        } else {
+            document.getElementById("errorsoal4").setAttribute("hidden", "hidden");
+            tot += 1;
+        }
+        if (p5 === undefined) {
+            document.getElementById("errorsoal5").removeAttribute("hidden");
+        } else {
+            document.getElementById("errorsoal5").setAttribute("hidden", "hidden");
+            tot += 1;
+        }
+
+
+
+        if (tot < jml - 1) {
+            alert("Fill all the question first!");
+        } else {
+            var url = "<?php echo base_url(); ?>question/finish";
+
+            var form_data = new FormData();
+            form_data.append('nama', nama);
+            form_data.append('idusers', idusers);
+            form_data.append('email', email);
+            form_data.append('wa', wa);
+            form_data.append('idsubtopik', idsubtopik);
+            form_data.append('idtopik', idtopik);
+            form_data.append('idsoal', idsoal);
+            form_data.append('jml', jml);
+            form_data.append('jawaban', temp);
+
+            // ajax adding data to database
+            $.ajax({
+                url: url,
+                dataType: 'JSON',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'POST',
+                success: function(data) {
+                    if (data.status === "ok") {
+                        window.location.href = "<?php echo base_url(); ?>question/score/" + data.id;
+                    }
+
+                    $('#btnSimpan').text('Save'); //change button text
+                    $('#btnSimpan').attr('disabled', false); //set button enable 
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("Error json " + errorThrown);
+
+                    $('#btnSimpan').text('Save'); //change button text
+                    $('#btnSimpan').attr('disabled', false); //set button enable 
+                }
+            });
+        }
+
+
+    }
     </script>

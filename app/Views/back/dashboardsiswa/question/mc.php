@@ -11,6 +11,8 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="ms-3" id="nama"><?= $nama; ?></span>
                         <input type="hidden" name="idusers" id="idusers" value="<?= $idusers ?>">
+                        <input type="hidden" name="email" id="email" value="<?= $email ?>">
+                        <input type="hidden" name="wa" id="wa" value="<?= $wa ?>">
                         <img src="<?= $foto_profile ?>" class="avatar avatar-sm  ms-3" aria-hidden="true">
 
                     </a>
@@ -88,62 +90,62 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
                                                 $def_foto = base_url() . '/uploads/' . $foto;
                                             }
                                         } ?>
-                                        <img src="<?php echo $def_foto; ?>" height="150px">
-                                    <?php }
+                                <img src="<?php echo $def_foto; ?>" height="150px">
+                                <?php }
                                     if ($row->link != '') { ?>
-                                        <br>
-                                        <iframe class="embed-responsive-item"
-                                            src="<?php echo str_replace('watch?v=', 'embed/', $row->link); ?>?rel=0&mute=0&autoplay=1"
-                                            srcdoc="<style>*{padding:0;margin:0px;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style>
+                                <br>
+                                <iframe class="embed-responsive-item"
+                                    src="<?php echo str_replace('watch?v=', 'embed/', $row->link); ?>?rel=0&mute=0&autoplay=1"
+                                    srcdoc="<style>*{padding:0;margin:0px;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style>
                                                     <a href=<?php echo str_replace('watch?v=', 'embed/', $row->link); ?>?rel=0&autoplay=1><img src=<?php $im = str_replace('www', 'img', $row->link);
                                                                                                                                                     echo str_replace('watch?v=', 'vi/', $im); ?>maxresdefault.jpg><span>▶</span></a>"
-                                            frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen>
-                                        </iframe>
-                                    <?php }
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen>
+                                </iframe>
+                                <?php }
                                     ?>
-                                    <input type="hidden" id="kodesoal<?php echo $i; ?>" name="kodesoal[]"
-                                        value="<?php echo $row->idsoal; ?>">
-                                    <div class="step-block">
-                                        <div class="row mt-3">
-                                            <?php echo str_replace('p>', 'h6>', $row->soal); ?>
-                                            <span class="step-count"><?php echo 'Poin : ' . $row->poin; ?></span>
-                                            <?php
+                                <input type="hidden" id="kodesoal<?php echo $i; ?>" name="kodesoal[]"
+                                    value="<?php echo $row->idsoal; ?>">
+                                <div class="step-block">
+                                    <div class="row mt-3">
+                                        <?php echo str_replace('p>', 'h6>', $row->soal); ?>
+                                        <span class="step-count"><?php echo 'Poin : ' . $row->poin; ?></span>
+                                        <?php
                                             $pil = $model->getAllQ("select * from pilihan where idsoal = '" . $row->idsoal . "'");
                                             foreach ($pil->getResult() as $row1) { ?>
 
-                                                <div class="col-lg-6 col-sm-12">
+                                        <div class="col-lg-6 col-sm-12">
 
-                                                    <label class="radio-container" for="<?php echo $row1->pilihan . $i; ?>">
-                                                        <input type="radio" i="click" name="pilihan<?php echo $i; ?>"
-                                                            id="<?php echo $row1->pilihan . $i; ?>"
-                                                            value="<?php echo $row1->idpilihan; ?>" required>
-                                                        <span class="checkmark"><span
-                                                                class="circle"></span><?= $row1->pilihan ?>
-                                                        </span>
-                                                    </label>
-                                                </div>
-
-                                            <?php } ?>
-                                            <!-- <div style="border-top:1px  solid  #d9d9d9" class="mb-3 mt-3"></div> -->
-                                            <span hidden="hidden" style="color: red; margin-top: 0;"
-                                                id="errorsoal<?php echo $i; ?>">* Required</span>
+                                            <label class="radio-container" for="<?php echo $row1->pilihan . $i; ?>">
+                                                <input type="radio" i="click" name="pilihan<?php echo $i; ?>"
+                                                    id="<?php echo $row1->pilihan . $i; ?>"
+                                                    value="<?php echo $row1->idpilihan; ?>" required>
+                                                <span class="checkmark"><span
+                                                        class="circle"></span><?= $row1->pilihan ?>
+                                                </span>
+                                            </label>
                                         </div>
+
+                                        <?php } ?>
+                                        <!-- <div style="border-top:1px  solid  #d9d9d9" class="mb-3 mt-3"></div> -->
+                                        <span hidden="hidden" style="color: red; margin-top: 0;"
+                                            id="errorsoal<?php echo $i; ?>">* Required</span>
+                                    </div>
                                     <?php
                                     $i++;
                                 }
                                     ?>
 
 
-                                    </div>
+                                </div>
 
-                                    <!-- <div class="card-footer"> -->
-                                    <input type="hidden" id="jml" value="<?php echo $i; ?>">
-                                    <input type="hidden" id="jenis" value="<?php echo $jenis; ?>">
-                                    <button id="btnSimpan" class="btn btn-primary-leap w-100 mt-5"
-                                        onclick="simpan();">Submit</button>
-                                    <!-- </div> -->
+                                <!-- <div class="card-footer"> -->
+                                <input type="hidden" id="jml" value="<?php echo $i; ?>">
+                                <input type="hidden" id="jenis" value="<?php echo $jenis; ?>">
+                                <button id="btnSimpan" class="btn btn-primary-leap w-100 mt-5"
+                                    onclick="simpan();">Submit</button>
+                                <!-- </div> -->
 
 
                             </div>
@@ -177,77 +179,81 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(47,104,170,1) 10
     </footer>
 
     <script type="text/javascript">
-        function simpan() {
+    function simpan() {
 
-            var nama = document.getElementById('nama').textContent;
-            var idusers = document.getElementById('idusers').value;
-            var idsubtopik = document.getElementById('idsubtopik').value;
-            var idtopik = document.getElementById('idtopik').value;
-            var jml = document.getElementById('jml').value;
-            var jenis = document.getElementById('jenis').value;
-            var idsoal = $("input[name='kodesoal[]']").map(function() {
-                return $(this).val();
-            }).get();
+        var nama = document.getElementById('nama').textContent;
+        var idusers = document.getElementById('idusers').value;
+        var email = document.getElementById('email').value;
+        var wa = document.getElementById('wa').value;
+        var idsubtopik = document.getElementById('idsubtopik').value;
+        var idtopik = document.getElementById('idtopik').value;
+        var jml = document.getElementById('jml').value;
+        var jenis = document.getElementById('jenis').value;
+        var idsoal = $("input[name='kodesoal[]']").map(function() {
+            return $(this).val();
+        }).get();
 
-            const pil = [];
+        const pil = [];
 
-            var tot = 0;
-            for (let i = 1; i < jml; i++) {
-                pil[i] = $("input[type='radio'][name='pilihan" + i + "']:checked").val();
-                if (pil[i] === undefined) {
-                    document.getElementById("errorsoal" + i).removeAttribute("hidden");
-                } else {
-                    document.getElementById("errorsoal" + i).setAttribute("hidden", "hidden");
-                    tot += 1;
-                }
-            }
-
-            var temp = '';
-            for (let i = 1; i < jml; i++) {
-                temp += $("input[type='radio'][name='pilihan" + i + "']:checked").val() + ',';
-            }
-
-            if (tot < jml - 1) {
-                alert("Fill all the question first!");
+        var tot = 0;
+        for (let i = 1; i < jml; i++) {
+            pil[i] = $("input[type='radio'][name='pilihan" + i + "']:checked").val();
+            if (pil[i] === undefined) {
+                document.getElementById("errorsoal" + i).removeAttribute("hidden");
             } else {
-                var url = "<?php echo base_url(); ?>question/finish";
-
-                var form_data = new FormData();
-                form_data.append('nama', nama);
-                form_data.append('idusers', idusers);
-                form_data.append('idsubtopik', idsubtopik);
-                form_data.append('idtopik', idtopik);
-                form_data.append('idsoal', idsoal);
-                form_data.append('jml', jml);
-                form_data.append('jenis', jenis);
-                form_data.append('jawaban', temp);
-
-                // ajax adding data to database
-                $.ajax({
-                    url: url,
-                    dataType: 'JSON',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    data: form_data,
-                    type: 'POST',
-                    success: function(data) {
-                        if (data.status === "ok") {
-                            window.location.href = "<?php echo base_url(); ?>question/score/" + data.id;
-                        }
-
-                        $('#btnSimpan').text('Save'); //change button text
-                        $('#btnSimpan').attr('disabled', false); //set button enable 
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        alert("Error json " + errorThrown);
-
-                        $('#btnSimpan').text('Save'); //change button text
-                        $('#btnSimpan').attr('disabled', false); //set button enable 
-                    }
-                });
+                document.getElementById("errorsoal" + i).setAttribute("hidden", "hidden");
+                tot += 1;
             }
-
-
         }
+
+        var temp = '';
+        for (let i = 1; i < jml; i++) {
+            temp += $("input[type='radio'][name='pilihan" + i + "']:checked").val() + ',';
+        }
+
+        if (tot < jml - 1) {
+            alert("Fill all the question first!");
+        } else {
+            var url = "<?php echo base_url(); ?>question/finish";
+
+            var form_data = new FormData();
+            form_data.append('nama', nama);
+            form_data.append('idusers', idusers);
+            form_data.append('email', email);
+            form_data.append('wa', wa);
+            form_data.append('idsubtopik', idsubtopik);
+            form_data.append('idtopik', idtopik);
+            form_data.append('idsoal', idsoal);
+            form_data.append('jml', jml);
+            form_data.append('jenis', jenis);
+            form_data.append('jawaban', temp);
+
+            // ajax adding data to database
+            $.ajax({
+                url: url,
+                dataType: 'JSON',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'POST',
+                success: function(data) {
+                    if (data.status === "ok") {
+                        window.location.href = "<?php echo base_url(); ?>question/score/" + data.id;
+                    }
+
+                    $('#btnSimpan').text('Save'); //change button text
+                    $('#btnSimpan').attr('disabled', false); //set button enable 
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("Error json " + errorThrown);
+
+                    $('#btnSimpan').text('Save'); //change button text
+                    $('#btnSimpan').attr('disabled', false); //set button enable 
+                }
+            });
+        }
+
+
+    }
     </script>

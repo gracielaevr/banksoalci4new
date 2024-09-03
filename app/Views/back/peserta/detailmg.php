@@ -1,22 +1,22 @@
 <script type="text/javascript">
-var save_method; //for save method string
-var table;
+    var save_method; //for save method string
+    var table;
 
-$(document).ready(function() {
-    table = $('#tb').DataTable({
-        ajax: "<?php echo base_url(); ?>siswa/ajaxdetil2/<?php echo $head->idpeserta; ?>",
-        scrollx: true,
-        responsive: true
+    $(document).ready(function() {
+        table = $('#tb').DataTable({
+            ajax: "<?php echo base_url(); ?>siswa/ajaxdetil2/<?php echo $head->idpeserta; ?>",
+            scrollx: true,
+            responsive: true
+        });
     });
-});
 
-function reload() {
-    table.ajax.reload(null, false); //reload datatable ajax
-}
+    function reload() {
+        table.ajax.reload(null, false); //reload datatable ajax
+    }
 
-function print() {
-    window.open('<?php echo base_url() . '/laporan/cetak/' . $head->idpeserta; ?>', '_blank');
-}
+    function print() {
+        window.open('<?php echo base_url() . '/laporan/cetak/' . $head->idpeserta; ?>', '_blank');
+    }
 </script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->

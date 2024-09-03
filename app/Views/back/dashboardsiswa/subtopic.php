@@ -1,6 +1,3 @@
-<?= $this->extend('back/dashboardsiswa/default') ?>
-
-<?= $this->section('content') ?>
 <section class="section">
     <div class="row">
         <div class="col-xl-12 col-sm-12 mb-4">
@@ -46,18 +43,17 @@
             <?php
 
             foreach ($subtopics as $subtopic): ?>
-            <div class="col-12 col-md-4 col-lg-4 ">
-                <a href="<?= base_url("start/{$subtopic->idsubtopik}") ?>">
-                    <div class="card shadow-leap2 mb-2">
-                        <div class="card-header-centered search-sub">
-                            <h5><?= $subtopic->nama ?></h5>
+                <div class="col-12 col-md-4 col-lg-4 ">
+                    <a href="<?= base_url("start/{$subtopic->idsubtopik}") ?>">
+                        <div class="card shadow-leap2 mb-2">
+                            <div class="card-header-centered search-sub">
+                                <h5><?= $subtopic->nama ?></h5>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>
             <?php endforeach; ?>
         </div>
 
     </div>
 </section>
-<?= $this->endSection() ?>

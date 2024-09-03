@@ -19,7 +19,7 @@ class Homesiswa extends BaseController
 
     public function index()
     {
-        if (session()->get("logged_siswa")) {
+        if (session()->get("logged_siswa") && session()->get("role") === 'R00003') {
             // Query untuk mendapatkan topik dan jumlah subtopik
             $db      = \Config\Database::connect();
             $builder = $db->table('topik');
@@ -50,39 +50,6 @@ class Homesiswa extends BaseController
             $data['menu'] = $this->request->getUri()->getSegment(1);
 
 
-            // membaca foto profile
-            // $def_foto = base_url().'/images/noimg.jpg';
-            // $foto = $this->model->getAllQR("select foto from users where idusers = '".session()->get("idusers")."';")->foto;
-            // if(strlen($foto) > 0){
-            //     if(file_exists($this->modul->getPathApp().$foto)){
-            //         $def_foto = base_url().'/uploads/'.$foto;
-            //     }
-            // }
-            // $data['foto_profile'] = $def_foto;
-
-            // membaca identitas
-            // $jml_identitas = $this->model->getAllQR("SELECT count(*) as jml FROM identitas;")->jml;
-            // if ($jml_identitas > 0) {
-            //     $tersimpan = $this->model->getAllQR("SELECT * FROM identitas;");
-            //     $data['alamat'] = $tersimpan->alamat;
-            //     $data['tlp'] = $tersimpan->tlp;
-            //     $data['fax'] = $tersimpan->fax;
-            //     $data['website'] = $tersimpan->website;
-            //     $deflogo = base_url() . '/images/noimg.jpg';
-            //     if (strlen($tersimpan->logo) > 0) {
-            //         if (file_exists($this->modul->getPathApp() . $tersimpan->logo)) {
-            //             $deflogo = base_url() . '/uploads/' . $tersimpan->logo;
-            //         }
-            //     }
-            //     $data['logo'] = $deflogo;
-            // } else {
-            //     $data['alamat'] = "";
-            //     $data['tlp'] = "";
-            //     $data['fax'] = "";
-            //     $data['website'] = "";
-            //     $data['logo'] = base_url() . '/images/noimg.jpg';
-            // }
-
             // Ambil jumlah pengguna dengan idusers tertentu dari database
             $jml_user = $this->model->getAllQR("SELECT count(*) as jml FROM users WHERE idusers = '" . session()->get("idusers") . "';")->jml;
 
@@ -99,7 +66,7 @@ class Homesiswa extends BaseController
                 $data['idrole'] = $user->idrole;
 
                 // membaca foto profile
-                $def_foto = base_url() . '/images/noimg.jpg';
+                $def_foto = base_url() . 'front/images/noimg.png';
                 $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
                 if (strlen($foto) > 0) {
                     if (file_exists($this->modul->getPathApp() . $foto)) {
@@ -117,11 +84,9 @@ class Homesiswa extends BaseController
                 $data['foto_profile'] = base_url() . '/images/noimg.jpg';
             }
 
-            // echo view('back/head', $data);
+            echo view('back/dashboardsiswa/head', $data);
             echo view('back/dashboardsiswa/home', $data);
-            // echo view('back/content');
-            // echo view('back/foot');
-
+            echo view('back/dashboardsiswa/foot', $data);
         } else {
             $this->modul->halaman('loginsiswa');
         }

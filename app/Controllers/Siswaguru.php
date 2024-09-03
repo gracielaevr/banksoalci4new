@@ -78,7 +78,7 @@ class Siswaguru extends BaseController
         if (session()->get("logged_in")) {
             $data = array();
             $no = 1;
-            $list = $this->model->getAllQ("select * from peserta where status = 1 and poin is not null order by created_at;");
+            $list = $this->model->getAllQ("select * from peserta where status = 1 and poin is not null order by created_at DESC;");
             foreach ($list->getResult() as $row) {
                 $val = array();
                 $val[] = $no;

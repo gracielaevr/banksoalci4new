@@ -3,11 +3,25 @@
     var table;
 
     $(document).ready(function() {
-        table = $('#tb').DataTable({
-            ajax: "<?php echo base_url(); ?>siswa/ajaxlist",
-            scrollx: true,
-            responsive: true
-        });
+
+        var id = <?php echo json_encode($id ?? ''); ?>;
+
+        // Periksa jika ID ada dan valid
+        if (id) {
+            // Inisialisasi DataTable dengan ID di URL
+            table = $('#tb').DataTable({
+                ajax: "<?php echo base_url(); ?>siswa/ajaxlist/" + id,
+                scrollX: true,
+                responsive: true
+            });
+        } else {
+            table = $('#tb').DataTable({
+                ajax: "<?php echo base_url(); ?>siswa/ajaxlist",
+                scrollx: true,
+                responsive: true
+            });
+        }
+
 
         $('#tanggalrange').daterangepicker();
     });
