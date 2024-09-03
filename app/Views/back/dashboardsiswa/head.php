@@ -98,6 +98,8 @@ height:27%"></div>
                         <span class="nav-link-text ms-1">History</span>
                     </a>
                 </li>
+                <?php if ($showSessionMenu): // Menampilkan menu jika $showSessionMenu bernilai true 
+                ?>
                 <li class="nav-item">
                     <a class="nav-link side-leap side-session" href="<?= base_url() ?>session">
                         <div
@@ -107,6 +109,7 @@ height:27%"></div>
                         <span class="nav-link-text ms-1">Session</span>
                     </a>
                 </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link side-leap side-subscribe" href="<?= base_url() ?>Subscribe">
                         <div

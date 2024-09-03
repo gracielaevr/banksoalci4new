@@ -69,6 +69,10 @@ class History extends BaseController
                 $data['foto_profile'] = base_url() . 'front/images/noimg.png';
             }
 
+            $history_subs = $this->model->getAllQR("SELECT idsubs FROM users WHERE idusers = '" . session()->get("idusers") . "';")->idsubs;
+            $data['showSessionMenu'] = $history_subs !== null;
+
+
             echo view('back/dashboardsiswa/head', $data);
             echo view('back/dashboardsiswa/history', $data);
             echo view('back/dashboardsiswa/foot', $data);

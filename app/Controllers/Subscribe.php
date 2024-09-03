@@ -57,6 +57,10 @@ class Subscribe extends BaseController
                 $data['idrole'] = "";
                 $data['foto_profile'] = base_url() . '/images/noimg.jpg';
             }
+
+            $history_subs = $this->model->getAllQR("SELECT idsubs FROM users WHERE idusers = '" . session()->get("idusers") . "';")->idsubs;
+            $data['showSessionMenu'] = $history_subs !== null;
+
             echo view('back/dashboardsiswa/head', $data);
             echo view('back/dashboardsiswa/subscribe', $data);
             echo view('back/dashboardsiswa/foot', $data);
