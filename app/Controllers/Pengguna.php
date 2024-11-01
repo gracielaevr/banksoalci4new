@@ -19,11 +19,13 @@ class Pengguna extends BaseController
 
     public function index()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
             $data['nm_role'] = session()->get("nama_role");
+            $data['idinstansi'] = session()->get("idinstansi");
+            $data['school_name'] = session()->get("school_name");
 
             // membaca profile orang tersebut
             $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
@@ -63,12 +65,16 @@ class Pengguna extends BaseController
                 $data['logo'] = base_url() . 'front/images/noimg.png';
             }
 
+            $jml_siswa = $this->model->getAllQR("SELECT count(*) as jml FROM users where idrole = 'R00003' AND school_name = '" . addslashes(session()->get("school_name"))  . "';")->jml;
+            $data['jml_siswa'] = $jml_siswa;
+
+
             $role = session()->get("role");
-            if ($role === 'R00005') {
+            if ($role === 'R00004') {
                 echo view('back/head', $data);
-                echo view('back/menu_admins');
+                echo view('back/menu_instansi');
                 // echo view('back/content');
-                echo view('back/users/index');
+                echo view('back/users/index', $data);
                 echo view('back/foot');
             } else {
 
@@ -84,7 +90,7 @@ class Pengguna extends BaseController
 
     public function proses()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
             if (0 < $_FILES['file']['error']) {
                 $status = "Error during file upload " . $_FILES['file']['error'];
             } else {
@@ -98,9 +104,12 @@ class Pengguna extends BaseController
 
     public function ajax_add()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
             $idrole = session()->get("role");
-            if ($idrole == 'R00005') {
+            $idinstansi = session()->get("idinstansi");
+            $school_name = session()->get("school_name");
+
+            if ($idrole === 'R00004' && $idinstansi === NULL) {
                 $data = array(
                     'idusers' => $this->model->autokode("U", "idusers", "users", 2, 7),
                     'nama' => $this->request->getPost('nama'),
@@ -108,15 +117,22 @@ class Pengguna extends BaseController
                     'idrole' => 'R00003',
                     'wa' => $this->request->getPost('wa'),
                     'pass' => $this->modul->enkrip_pass('123'),
+                    'school_name' => $this->request->getPost('school_name')
                 );
                 $simpan = $this->model->add("users", $data);
-                if ($simpan == 1) {
-                    $status = "Data tersimpan";
-                } else {
-                    $status = "Data gagal tersimpan";
-                }
-                echo json_encode(array("status" => $status));
+            } else  if ($idrole === 'R00004' && $school_name === NULL) {
+                $data = array(
+                    'idusers' => $this->model->autokode("U", "idusers", "users", 2, 7),
+                    'nama' => $this->request->getPost('nama'),
+                    'email' => $this->request->getPost('email'),
+                    'idrole' => 'R00003',
+                    'wa' => $this->request->getPost('wa'),
+                    'pass' => $this->modul->enkrip_pass('123'),
+                    'idinstansi' => $this->request->getPost('idinstansi')
+                );
+                $simpan = $this->model->add("users", $data);
             } else {
+
                 $data = array(
                     'idusers' => $this->model->autokode("U", "idusers", "users", 2, 7),
                     'email' => $this->request->getPost('email'),
@@ -124,13 +140,14 @@ class Pengguna extends BaseController
                     'pass' => $this->modul->enkrip_pass('123'),
                 );
                 $simpan = $this->model->add("users", $data);
-                if ($simpan == 1) {
-                    $status = "Data tersimpan";
-                } else {
-                    $status = "Data gagal tersimpan";
-                }
-                echo json_encode(array("status" => $status));
             }
+
+            if ($simpan == 1) {
+                $status = "Data tersimpan";
+            } else {
+                $status = "Data gagal tersimpan";
+            }
+            echo json_encode(array("status" => $status));
         } else {
             $this->modul->halaman('login');
         }
@@ -138,7 +155,7 @@ class Pengguna extends BaseController
 
     public function ajax_edit()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
             $idrole = session()->get("role");
             if ($idrole == 'R00005') {
                 $data = array(
@@ -176,14 +193,14 @@ class Pengguna extends BaseController
 
     public function ajaxlist()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
             $data = array();
             $no = 1;
 
             $role = session()->get("role");
 
-            if ($role === 'R00005') {
-                $list = $this->model->getAllQ("SELECT * FROM users WHERE idrole = 'R00003';");
+            if ($role === 'R00004' && session()->get("idinstansi") !== NULL) {
+                $list = $this->model->getAllQ("SELECT * FROM users WHERE idrole = 'R00003' AND idinstansi = '" . session()->get("idinstansi") . "'");
                 foreach ($list->getResult() as $row) {
                     $def_foto = base_url() . 'front/images/noimg.png';
                     if (!is_null($row->foto) && strlen($row->foto)) {
@@ -201,10 +218,31 @@ class Pengguna extends BaseController
                         $val[] = '-';
                     } else {
                         $val[] = '<div style="text-align: center;">'
-                            . '<button type="button" class="btn btn-sm btn-info btn-fw" onclick="lock(' . "'" . $row->idusers . "'" . ')"><i class="fa fa-fw fa-lock"></i></button>&nbsp;'
-                            . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="ganti(' . "'" . $row->idusers . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
-                            . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus(' . "'" . $row->idusers . "'" . ',' . "'" . $row->nama . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>' .
-                            '</div>';
+                            . '<button type="button" class="btn btn-sm btn-success btn-fw" onclick="detail_siswa(' . "'" . $row->idusers . "'" . ')">Detail</button>&nbsp;'
+                            . '</div>';
+                    }
+
+                    $data[] = $val;
+                    $no++;
+                }
+            } else if ($role === 'R00004' && session()->get("school_name") !== NULL) {
+                $list = $this->model->getAllQ("SELECT * FROM users WHERE idrole = 'R00003' AND school_name = '" . addslashes(session()->get("school_name")) . "'");
+                foreach ($list->getResult() as $row) {
+                    $def_foto = base_url() . 'front/images/noimg.png';
+                    if (!is_null($row->foto) && strlen($row->foto)) {
+                        if (file_exists($this->modul->getPathApp() . $row->foto)) {
+                            $def_foto = base_url() . '/uploads/' . $row->foto;
+                        }
+                    }
+                    $val = array();
+                    $val[] = $no;
+                    $val[] = '<img src="' . $def_foto . '" class="img-thumbnail" style="width: 120px; height: auto;">';
+                    $val[] = $row->nama;
+                    $val[] = $row->email;
+                    $val[] = $row->wa;
+                    if ($row->idusers === session()->get("idusers")) {
+                        $val[] = '-';
+                    } else {
                         $val[] = '<div style="text-align: center;">'
                             . '<button type="button" class="btn btn-sm btn-success btn-fw" onclick="detail_siswa(' . "'" . $row->idusers . "'" . ')">Detail</button>&nbsp;'
                             . '</div>';
@@ -254,7 +292,7 @@ class Pengguna extends BaseController
 
     public function hapus()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
             $id = $this->request->getUri()->getSegment(3);
             $lawas = $this->model->getAllQR("SELECT foto FROM users where idusers = '" . $id . "';")->foto;
             if (strlen($lawas) > 0) {
@@ -278,7 +316,7 @@ class Pengguna extends BaseController
 
     public function reset()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
             $id = $this->request->getUri()->getSegment(3);
             $data = array(
                 'pass' => $this->modul->enkrip_pass('123'),
@@ -298,7 +336,7 @@ class Pengguna extends BaseController
 
     public function ganti()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
             $kondisi['idusers'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("users", $kondisi);
             echo json_encode($data);

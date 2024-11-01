@@ -19,7 +19,7 @@ class Rekap extends BaseController
 
     public function index()
     {
-        if (session()->get("logged_admin") || session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_guru") || session()->get("logged_instansi")) {
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
@@ -56,16 +56,22 @@ class Rekap extends BaseController
                 $data['logo'] = base_url() . '/images/noimg.jpg';
             }
 
-            echo view('back/head', $data);
             if ($idrole == "R00001") {
-                echo view('back/menu');
-            } else if ($idrole == "R00005") {
-                echo view('back/menu_admins');
+                echo view('page/menu/layout/head', $data);
+                echo view('page/menu/menu_admin');
+                echo view('page/menu/rekap/index');
+                echo view('page/menu/layout/foot');
+            } else if ($idrole == "R00004") {
+                echo view('back/head', $data);
+                echo view('back/menu_instansi');
+                echo view('back/rekap/index');
+                echo view('back/foot');
             } else {
-                echo view('back/menu_guru');
+                echo view('back/head2', $data);
+                echo view('back/menu_guru2');
+                echo view('back/rekap/index2');
+                echo view('back/foot2');
             }
-            echo view('back/rekap/index');
-            echo view('back/foot');
         } else {
             $this->modul->halaman('login');
         }
@@ -73,7 +79,7 @@ class Rekap extends BaseController
 
     public function ajaxlist()
     {
-        if (session()->get("logged_admin") || session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_guru") || session()->get("logged_instansi")) {
             $data = array();
             $no = 1;
             $list = $this->model->getAll("topik");
@@ -82,7 +88,7 @@ class Rekap extends BaseController
                 $val[] = $no;
                 $val[] = $row->nama;
                 $topik = $this->model->getAllQR("SELECT count(*) as jml, sum(benar) as bnr, sum(salah) as slh FROM peserta where idtopik = '" . $row->idtopik . "';");
-                $val[] = '<h3><small class="label bg-gray">' . $topik->jml . '</small></h3>';
+                $val[] = '<h5><small class="label bg-gray">' . $topik->jml . '</small></h5>';
                 $jml = $topik->bnr + $topik->slh;
                 if ($jml > 0) {
                     $benar = ($topik->bnr / $jml) * 100;
@@ -91,19 +97,20 @@ class Rekap extends BaseController
                     $benar = '-';
                     $salah = '-';
                 }
-                $val[] = '<h3><small class="label bg-green">' . $benar . '</small></h3>';
-                $val[] = '<h3><small class="label bg-red">' . $salah . '</small></h3>';
+                $val[] = '<h5><small class="label bg-green">' . $benar . '</small></h5>';
+                $val[] = '<h5><small class="label bg-red">' . $salah . '</small></h5>';
 
                 $jml_subtopik = $this->model->getAllQR("SELECT count(*) as jml FROM subtopik where idtopik = '" . $row->idtopik . "';")->jml;
                 if ($jml_subtopik > 0) {
-                    $str = '<table class="table table-striped" style="width: 100%;">
+                    $str = '<table class="table-striped">
                         <thead>
                             <tr>
-                                <th>Subtopik</th>
-                                <th>Total Diujikan</th>
+                                <th style="text-align: center;">Subtopik</th>
+                                <th style="text-align: center;">Total Diujikan</th>
                                 <th style="text-align: center;">Aksi</th>
                             </tr>
-                        </thead>            
+                        </thead>     
+                        
                     <tbody>';
                     $list_subs = $this->model->getAllQ("select * from subtopik where idtopik = '" . $row->idtopik . "';");
                     foreach ($list_subs->getResult() as $row1) {
@@ -111,7 +118,7 @@ class Rekap extends BaseController
                         $str .= '<td>' . $row1->nama . '</td>';
                         $st = $this->model->getAllQR("SELECT count(*) as jml FROM peserta where idsubtopik = '" . $row1->idsubtopik . "';");
                         $str .= '<td>' . $st->jml . '</td>';
-                        $str .= '<td style="text-align: center;"><button type="button" class="btn btn-warning btn-sm" onclick="soal(' . "'" . $row1->idsubtopik . "'" . ');"><i class="fa fa-fw fa-eye"></i></button></td>';
+                        $str .= '<td style="text-align: center;"><button type="button" class="btn btn-warning btn-sm mt-2 mb-2" onclick="soal(' . "'" . $row1->idsubtopik . "'" . ');"><i class="fa fa-fw fa-eye"></i></button></td>';
                         $str .= '</tr>';
                     }
                     $str .= '</tbody></table>';
@@ -132,7 +139,7 @@ class Rekap extends BaseController
 
     public function ajax_add()
     {
-        if (session()->get("logged_admin") || session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_guru") || session()->get("logged_instansi")) {
             $data = array(
                 'nama' => $this->request->getPost('nama')
             );
@@ -150,7 +157,7 @@ class Rekap extends BaseController
 
     public function ganti()
     {
-        if (session()->get("logged_admin") || session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_guru") || session()->get("logged_instansi")) {
             $kondisi['idtopik'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("topik", $kondisi);
             echo json_encode($data);
@@ -161,7 +168,7 @@ class Rekap extends BaseController
 
     public function ajax_edit()
     {
-        if (session()->get("logged_admin") || session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_guru") || session()->get("logged_instansi")) {
             $data = array(
                 'nama' => $this->request->getPost('nama')
             );
@@ -180,7 +187,7 @@ class Rekap extends BaseController
 
     public function hapus()
     {
-        if (session()->get("logged_admin") || session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_guru") || session()->get("logged_instansi")) {
             $kond['idtopik'] = $this->request->getUri()->getSegment(3);
             $hapus = $this->model->delete("topik", $kond);
             if ($hapus == 1) {
@@ -196,7 +203,7 @@ class Rekap extends BaseController
 
     public function detil()
     {
-        if (session()->get("logged_admin") || session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_guru") || session()->get("logged_instansi")) {
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
@@ -237,16 +244,22 @@ class Rekap extends BaseController
             $data['soal'] = $this->model->getAllQR("SELECT count(*) as jml, sum(benar) as bnr, sum(salah) as slh FROM peserta where idsubtopik = '" . $kode . "' group by idsubtopik;");
             $data['quest'] = $this->model->getAllQ("SELECT soal, idsoal, FLOOR(RAND()*(255-100)+0) as random,FLOOR(RAND()*(255-100)+0) as random2,FLOOR(RAND()*(255-100)+0) as random3 FROM soal where idsubtopik = '" . $kode . "';");
 
-            echo view('back/head', $data);
             if ($idrole == "R00001") {
-                echo view('back/menu');
-            } elseif ($idrole = "R00005") {
-                echo view('back/menu_admins');
+                echo view('page/menu/layout/head', $data);
+                echo view('page/menu/menu_admin');
+                echo view('page/menu/rekap/detail');
+                echo view('page/menu/layout/foot');
+            } elseif ($idrole = "R00004") {
+                echo view('back/head', $data);
+                echo view('back/menu_instansi');
+                echo view('back/rekap/detail');
+                echo view('back/foot');
             } else {
-                echo view('back/menu_guru');
+                echo view('back/head2', $data);
+                echo view('back/menu_guru2');
+                echo view('back/rekap/detail2');
+                echo view('back/foot2');
             }
-            echo view('back/rekap/detail');
-            echo view('back/foot');
         } else {
             $this->modul->halaman('login');
         }
@@ -254,12 +267,12 @@ class Rekap extends BaseController
 
     public function ajaxdetil()
     {
-        if (session()->get("logged_admin") || session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_guru") || session()->get("logged_instansi")) {
             $kode = $this->request->getUri()->getSegment(3);
 
             $data = array();
             $no = 1;
-            $list = $this->model->getAllQ("select * from soal where idsubtopik = '" . $kode . "';");
+            $list = $this->model->getAllQ("select * from soal where idsubtopik = '" . $kode . "' ;");
             foreach ($list->getResult() as $row) {
                 $val = array();
                 $val[] = $no;

@@ -63,10 +63,30 @@ class Instansi extends BaseController
                 $data['logo'] = base_url() . '/images/noimg.jpg';
             }
 
-            echo view('back/head', $data);
-            echo view('back/menu');
-            echo view('back/instansi/index');
-            echo view('back/foot');
+            // echo view('back/head', $data);
+            // echo view('back/menu');
+            // echo view('back/instansi/index');
+            // echo view('back/foot');
+
+            $idrole = session()->get("role");
+            if ($idrole === "R00001") {
+                echo view('page/menu/layout/head', $data);
+                echo view('page/menu/menu_admin');
+                echo view('page/menu/instansi/index', $data);
+                echo view('page/menu/layout/foot');
+            }
+
+            // else if ($idrole === "R00004") {
+            //     echo view('back/head', $data);
+            //     echo view('back/menu_instansi');
+            //     echo view('back/instansi/index', $data);
+            //     echo view('back/foot');
+            // } else {
+            //     echo view('back/head', $data);
+            //     echo view('back/menu_guru');
+            //     echo view('back/instansi/index', $data);
+            //     echo view('back/foot');
+            // }
         } else {
             $this->modul->halaman('login');
         }
@@ -82,7 +102,7 @@ class Instansi extends BaseController
                 $val = array();
                 $val[] = $no;
                 $val[] = $row->nama_instansi;
-                $val[] = $row->jml_krywan;
+                $val[] = $row->jml_siswa;
                 $val[] = $row->alamat;
                 $val[] = $row->kontak;
 
@@ -107,7 +127,7 @@ class Instansi extends BaseController
             $data = array(
                 'idinstansi' => $this->model->autokode("I", "idinstansi", "instansi", 2, 7),
                 'nama_instansi' => $this->request->getPost('nama_instansi'),
-                'jml_krywan' => $this->request->getPost('jml_krywan'),
+                'jml_siswa' => $this->request->getPost('jml_siswa'),
                 'alamat' => $this->request->getPost('alamat'),
                 'kontak' => $this->request->getPost('kontak'),
             );
@@ -140,7 +160,7 @@ class Instansi extends BaseController
             $data = array(
                 'idinstansi' => $this->request->getPost('idinstansi'),
                 'nama_instansi' => $this->request->getPost('nama_instansi'),
-                'jml_krywan' => $this->request->getPost('jml_krywan'),
+                'jml_siswa' => $this->request->getPost('jml_siswa'),
                 'alamat' => $this->request->getPost('alamat'),
                 'kontak' => $this->request->getPost('kontak'),
             );

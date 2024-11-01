@@ -19,7 +19,7 @@ class Diagnostictest extends BaseController
 
     public function start()
     {
-        $kode =  $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
+        $kode = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
         $data['kode'] = $this->modul->enkrip_url($kode);
 
         $nama = $this->model->getAllQR("select namabidang from bidang where idbidang = '" . $kode . "'")->namabidang;
@@ -27,13 +27,13 @@ class Diagnostictest extends BaseController
         $data['instruksi'] = $this->model->getAllQR("select instruksi from instruksi where idbidang = '" . $kode . "'")->instruksi;
         $data['jml'] = 10;
 
-        echo view('front/head');
+        echo view('page/beranda/layout/head');
         if ($nama == 'English') {
-            echo view('front/diagnostik/index', $data);
+            echo view('page/beranda/diagnostik/index', $data);
         } else {
-            echo view('front/diagnostik/indexexcel', $data);
+            echo view('page/beranda/diagnostik/indexexcel', $data);
         }
-        echo view('front/foot');
+        echo view('page/beranda/layout/foot');
     }
 
     public function exam()
@@ -50,18 +50,18 @@ class Diagnostictest extends BaseController
         $data['topik'] = $this->model->getAllQR("select t.nama as nm from subtopik s, topik t where t.idtopik = s.idtopik and s.idsubtopik = '" . $kode . "'")->nm;
         $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $kode . "' order by rand() limit 10");
         // jenis = '".$r."'
-        echo view('front/head');
+        echo view('page/beranda/layout/head');
         // if($r == 'mc'){
 
 
         // }
-        echo view('front/exam/mc', $data);
-        echo view('front/foot');
+        echo view('page/beranda/exam/mc', $data);
+        echo view('page/beranda/layout/foot');
     }
 
     public function narasi()
     {
-        $kode =  $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
+        $kode = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
         $data['kode'] = $this->modul->enkrip_url($kode);
 
         $idn = $this->model->getAllQR("select idnarasi from subtopik s, narasi n where s.idsubtopik = n.idsubtopik and n.idsubtopik = '" . $kode . "' order by rand() limit 1")->idnarasi;
@@ -76,9 +76,9 @@ class Diagnostictest extends BaseController
         $data['narasi'] = $n->deskripsi;
         $data['soal'] = $this->model->getAllQ("select * from soal where idnarasi = '" . $idn . "' limit 5");
 
-        echo view('front/head');
-        echo view('front/exam/narasi', $data);
-        echo view('front/foot');
+        echo view('page/beranda/layout/head');
+        echo view('page/beranda/exam/narasi', $data);
+        echo view('page/beranda/layout/foot');
     }
 
     public function done()
@@ -94,13 +94,13 @@ class Diagnostictest extends BaseController
         $data['komentar'] = $this->model->getAllQ("select * from komentar where idbidang = '" . $idsub . "'");
         $bidang = $this->model->getAllQR("select namabidang from bidang where idbidang = '" . $idsub . "'")->namabidang;
 
-        echo view('front/head');
+        echo view('page/beranda/layout/head');
         if ($bidang == "English") {
-            echo view('front/diagnostik/score', $data);
+            echo view('page/beranda/diagnostik/score', $data);
         } else {
-            echo view('front/diagnostik/scoreexcel', $data);
+            echo view('page/beranda/diagnostik/scoreexcel', $data);
         }
-        echo view('front/foot');
+        echo view('page/beranda/layout/foot');
     }
 
     public function ajaxlist()
@@ -157,14 +157,14 @@ class Diagnostictest extends BaseController
 
         $bidang = $this->model->getAllQR("select namabidang from bidang where idbidang = '" . $idbidang . "';")->namabidang;
 
-        echo view('front/head');
+        echo view('page/beranda/layout/head');
         if ($bidang == 'English') {
-            echo view('front/diagnostik/mc', $data);
+            echo view('page/beranda/diagnostik/mc', $data);
         } else {
 
-            echo view('front/diagnostik/mcexcel', $data);
+            echo view('page/beranda/diagnostik/mcexcel', $data);
         }
-        echo view('front/foot');
+        echo view('page/beranda/layout/foot');
     }
 
     public function process()

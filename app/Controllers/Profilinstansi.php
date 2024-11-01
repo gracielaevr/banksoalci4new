@@ -40,32 +40,11 @@ class Profilinstansi extends BaseController
             }
             $data['foto_profile'] = $def_foto;
 
-            // membaca identitas
-            $jml_identitas = $this->model->getAllQR("SELECT count(*) as jml FROM identitas;")->jml;
-            if ($jml_identitas > 0) {
-                $tersimpan = $this->model->getAllQR("SELECT * FROM identitas;");
-                $data['alamat'] = $tersimpan->alamat;
-                $data['tlp'] = $tersimpan->tlp;
-                $data['fax'] = $tersimpan->fax;
-                $data['website'] = $tersimpan->website;
-                $deflogo = base_url() . '/images/noimg.jpg';
-                if (strlen($tersimpan->logo) > 0) {
-                    if (file_exists($this->modul->getPathApp() . $tersimpan->logo)) {
-                        $deflogo = base_url() . '/uploads/' . $tersimpan->logo;
-                    }
-                }
-                $data['logo'] = $deflogo;
-            } else {
-                $data['alamat'] = "";
-                $data['tlp'] = "";
-                $data['fax'] = "";
-                $data['website'] = "";
-                $data['logo'] = base_url() . '/images/noimg.jpg';
-            }
+
 
             echo view('back/head', $data);
             echo view('back/menu_instansi');
-            echo view('back/profilinstansi/index');
+            echo view('back/profilinstansi/index', $data);
             echo view('back/foot');
         } else {
             $this->modul->halaman('logininstansi');
@@ -112,7 +91,7 @@ class Profilinstansi extends BaseController
                 $data = array(
                     'nama' => $this->request->getPost('nama'),
                     'wa' => $this->request->getPost('wa'),
-                    'Sekolah' => $this->request->getPost('Sekolah'),
+                    'school_name' => $this->request->getPost('school_name'),
                     'foto' => $fileName
                 );
                 $kond['idusers'] = $idusers;
@@ -135,7 +114,7 @@ class Profilinstansi extends BaseController
         $data = array(
             'nama' => $this->request->getPost('nama'),
             'wa' => $this->request->getPost('wa'),
-            'Sekolah' => $this->request->getPost('Sekolah'),
+            'school' => $this->request->getPost('school'),
         );
         $kond['idusers'] = $idusers;
         $update = $this->model->update("users", $data, $kond);

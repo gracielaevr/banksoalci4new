@@ -19,7 +19,7 @@ class Soalinstansi extends BaseController
 
     public function index()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_instansi")) {
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
@@ -58,7 +58,7 @@ class Soalinstansi extends BaseController
             }
 
             echo view('back/head', $data);
-            echo view('back/menu_admins');
+            echo view('back/menu_instansi');
             echo view('back/soal_instansi/index');
             echo view('back/foot');
         } else {
@@ -68,7 +68,7 @@ class Soalinstansi extends BaseController
 
     public function ajaxlist()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_instansi")) {
             $data = array();
             $no = 1;
             $list = $this->model->getAll("topik");
@@ -79,7 +79,7 @@ class Soalinstansi extends BaseController
                 // membaca jml subtopik
                 $jml_subtopik = $this->model->getAllQR("SELECT count(*) as jml FROM subtopik where idtopik = '" . $row->idtopik . "';")->jml;
                 if ($jml_subtopik > 0) {
-                    $str = '<table class="table table-striped" style="width: 100%;">
+                    $str = '<table class="table-striped">
                             <thead>                                 
                                 <tr>
                                     <th style="text-align: center;">Subtopik</th>
@@ -95,12 +95,12 @@ class Soalinstansi extends BaseController
                         $jml = $this->model->getAllQR("SELECT count(*) as jml FROM soal where idsubtopik = '" . $row1->idsubtopik . "';")->jml;
                         $str .= '<td style="text-align: center;" width="20%">' . $jml . '</td>';
                         if ($row1->narasi == 0) {
-                            $str .= '<td><div style="text-align: center;">'
-                                . '<button type="button" class="btn btn-sm btn-success btn-fw" onclick="subtopik(' . "'" . $row1->idsubtopik . "'" . ')"><i class="fa fa-fw fa-plus-square"></i> Buat Soal</button>&nbsp;'
+                            $str .= '<td><div style="text-align: center;>'
+                                . '<button type="button" class="btn btn-sm btn-success mt-3" onclick="subtopik(' . "'" . $row1->idsubtopik . "'" . ')"> Buat Soal</button>&nbsp;'
                                 . '</div></td>';
                         } else {
                             $str .= '<td><div style="text-align: center;">'
-                                . '<button type="button" class="btn btn-sm btn-primary btn-fw" onclick="soal(' . "'" . $row1->idsubtopik . "'" . ')"><i class="fa fa-fw fa-plus-square"></i> Buat Soal Narasi</button>&nbsp;'
+                                . '<button type="button" class="btn btn-sm btn-primary mt-3" onclick="soal(' . "'" . $row1->idsubtopik . "'" . ')"><i class="fa fa-fw fa-plus-square"></i> Buat Soal Narasi</button>&nbsp;'
                                 . '</div></td>';
                         }
 
@@ -124,12 +124,13 @@ class Soalinstansi extends BaseController
 
     public function detil()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_instansi")) {
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
             $data['idinstansi'] = session()->get("idinstansi");
-            $idrole = session()->get("role");
+            $data['school_name'] = session()->get("school_name");
+            // $idrole = session()->get("role");
             $data['nm_role'] = session()->get("nama_role");
             $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
             $data['menu'] = $this->request->getUri()->getSegment(1);
@@ -172,10 +173,13 @@ class Soalinstansi extends BaseController
             $kode = $this->request->getUri()->getSegment(3);
             $data['head'] = $this->model->getAllQR("select t.nama as namatopik,s.nama as namasub, idsubtopik from subtopik s, topik t where s.idtopik = t.idtopik AND s.idsubtopik = '" . $kode . "';");
 
+            $jml_soal = $this->model->getAllQR("SELECT count(*) as jml FROM soal WHERE school_name = '" . addslashes(session()->get("school_name")) . "';")->jml;
+            $data['jml_soal'] = $jml_soal;
+
 
             echo view('back/head', $data);
-            echo view('back/menu_admins');
-            echo view('back/soal_instansi/detail');
+            echo view('back/menu_instansi');
+            echo view('back/soal_instansi/detail', $data);
             echo view('back/foot');
         } else {
             $this->modul->halaman('login');
@@ -184,7 +188,7 @@ class Soalinstansi extends BaseController
 
     public function ajax_add()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_instansi")) {
             if (isset($_FILES['file']['name'])) {
                 if (0 < $_FILES['file']['error']) {
                     $pesan = "Error during file upload " . $_FILES['file']['error'];
@@ -211,17 +215,50 @@ class Soalinstansi extends BaseController
         } else {
             $status_upload = $file->move($this->modul->getPathApp(), $fileName);
             if ($status_upload) {
-                $data = array(
-                    'idsoal' => $this->model->autokode("E", "idsoal", "soal", 2, 7),
-                    'idsubtopik' => $this->request->getPost('idsubtopik'),
-                    'soal' => $this->request->getPost('soal'),
-                    'jenis' => $this->request->getPost('jenis'),
-                    'poin' => $this->request->getPost('poin'),
-                    'link' => $this->request->getPost('link'),
-                    'idinstansi' => $this->request->getPost('idinstansi'),
-                    'gambar' => $fileName
-                );
-                $this->model->add("soal", $data);
+
+                $idrole = session()->get("role");
+                $idinstansi = session()->get("idinstansi");
+                $school_name = session()->get("school_name");
+
+                if ($idrole === 'R00004' && $idinstansi === NULL) {
+                    $data = array(
+                        'idsoal' => $this->model->autokode("E", "idsoal", "soal", 2, 7),
+                        'idsubtopik' => $this->request->getPost('idsubtopik'),
+                        'soal' => $this->request->getPost('soal'),
+                        'jenis' => $this->request->getPost('jenis'),
+                        'poin' => $this->request->getPost('poin'),
+                        'link' => $this->request->getPost('link'),
+                        'school_name' => $this->request->getPost('school_name'),
+                        'gambar' => $fileName
+                    );
+                    $this->model->add("soal", $data);
+                } else  if ($idrole === 'R00004' && $school_name === NULL) {
+                    $data = array(
+                        'idsoal' => $this->model->autokode("E", "idsoal", "soal", 2, 7),
+                        'idsubtopik' => $this->request->getPost('idsubtopik'),
+                        'soal' => $this->request->getPost('soal'),
+                        'jenis' => $this->request->getPost('jenis'),
+                        'poin' => $this->request->getPost('poin'),
+                        'link' => $this->request->getPost('link'),
+                        'idinstansi' => $this->request->getPost('idinstansi'),
+                        'gambar' => $fileName
+                    );
+                    $this->model->add("soal", $data);
+                } else {
+
+                    $data = array(
+                        'idsoal' => $this->model->autokode("E", "idsoal", "soal", 2, 7),
+                        'idsubtopik' => $this->request->getPost('idsubtopik'),
+                        'soal' => $this->request->getPost('soal'),
+                        'jenis' => $this->request->getPost('jenis'),
+                        'poin' => $this->request->getPost('poin'),
+                        'link' => $this->request->getPost('link'),
+                        'gambar' => $fileName
+                    );
+                    $this->model->add("soal", $data);
+                }
+
+
 
                 $getidsoal = $this->model->getAllQR("select idsoal from soal order by idsoal desc limit 1;")->idsoal;
                 $data_pil = explode(",", $this->request->getPost('pilihan'));
@@ -257,16 +294,46 @@ class Soalinstansi extends BaseController
 
     private function simpan()
     {
-        $data = array(
-            'idsoal' => $this->model->autokode("E", "idsoal", "soal", 2, 7),
-            'idsubtopik' => $this->request->getPost('idsubtopik'),
-            'soal' => $this->request->getPost('soal'),
-            'jenis' => $this->request->getPost('jenis'),
-            'poin' => $this->request->getPost('poin'),
-            'link' => $this->request->getPost('link'),
-            'idinstansi' => $this->request->getPost('idinstansi')
-        );
-        $this->model->add("soal", $data);
+
+
+        $idrole = session()->get("role");
+        $idinstansi = session()->get("idinstansi");
+        $school_name = session()->get("school_name");
+
+        if ($idrole === 'R00004' && $idinstansi === NULL) {
+            $data = array(
+                'idsoal' => $this->model->autokode("E", "idsoal", "soal", 2, 7),
+                'idsubtopik' => $this->request->getPost('idsubtopik'),
+                'soal' => $this->request->getPost('soal'),
+                'jenis' => $this->request->getPost('jenis'),
+                'poin' => $this->request->getPost('poin'),
+                'link' => $this->request->getPost('link'),
+                'school_name' => $this->request->getPost('school_name'),
+            );
+            $this->model->add("soal", $data);
+        } else  if ($idrole === 'R00004' && $school_name === NULL) {
+            $data = array(
+                'idsoal' => $this->model->autokode("E", "idsoal", "soal", 2, 7),
+                'idsubtopik' => $this->request->getPost('idsubtopik'),
+                'soal' => $this->request->getPost('soal'),
+                'jenis' => $this->request->getPost('jenis'),
+                'poin' => $this->request->getPost('poin'),
+                'link' => $this->request->getPost('link'),
+                'idinstansi' => $this->request->getPost('idinstansi'),
+            );
+            $this->model->add("soal", $data);
+        } else {
+
+            $data = array(
+                'idsoal' => $this->model->autokode("E", "idsoal", "soal", 2, 7),
+                'idsubtopik' => $this->request->getPost('idsubtopik'),
+                'soal' => $this->request->getPost('soal'),
+                'jenis' => $this->request->getPost('jenis'),
+                'poin' => $this->request->getPost('poin'),
+                'link' => $this->request->getPost('link'),
+            );
+            $this->model->add("soal", $data);
+        }
 
         $getidsoal = $this->model->getAllQR("select idsoal from soal order by idsoal desc limit 1;")->idsoal;
         $data_pil = explode(",", $this->request->getPost('pilihan'));
@@ -299,7 +366,7 @@ class Soalinstansi extends BaseController
 
     public function ganti()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_instansi")) {
             $kondisi['idsoal'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("soal", $kondisi);
             echo json_encode($data);
@@ -310,7 +377,7 @@ class Soalinstansi extends BaseController
 
     public function aksespilihan()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_instansi")) {
             $idsoal = $this->request->getUri()->getSegment(3);
             $str = '';
             $counter = 1;
@@ -332,7 +399,7 @@ class Soalinstansi extends BaseController
 
     public function aksesjawaban()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_instansi")) {
             $idsoal = $this->request->getUri()->getSegment(3);
             $str = '';
             $counter = 1;
@@ -354,7 +421,7 @@ class Soalinstansi extends BaseController
 
     public function ajax_edit()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_instansi")) {
             if (isset($_FILES['file']['name'])) {
                 if (0 < $_FILES['file']['error']) {
                     $pesan = "Error during file upload " . $_FILES['file']['error'];
@@ -380,7 +447,7 @@ class Soalinstansi extends BaseController
             'jenis' => $this->request->getPost('jenis'),
             'poin' => $this->request->getPost('poin'),
             'link' => $this->request->getPost('link'),
-            'idinstansi' => $this->request->getPost('idinstansi')
+            // 'idinstansi' => $this->request->getPost('idinstansi')
         );
         $this->model->update("soal", $data, $kond);
 
@@ -538,7 +605,7 @@ class Soalinstansi extends BaseController
 
     public function hapus()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_instansi")) {
             $id = $this->request->getUri()->getSegment(3);
             $lawas = $this->model->getAllQR("SELECT gambar FROM soal where idsoal = '" . $id . "';")->gambar;
             if (!is_null($lawas) && strlen($lawas)) {
@@ -561,7 +628,7 @@ class Soalinstansi extends BaseController
 
     public function ajaxdetil()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_instansi")) {
             $kode = $this->request->getUri()->getSegment(3);
             $data = array();
             $no = 1;
@@ -612,9 +679,9 @@ class Soalinstansi extends BaseController
                 $str .= '</ul>';
                 $val[] = $str;
 
-                if ($row->idinstansi == session()->get("idinstansi")) {
+                if ($row->idinstansi == session()->get("idinstansi") && $row->school_name == session()->get("school_name")) {
                     $val[] = '<div style="text-align: center;">'
-                        . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="ganti(' . "'" . $row->idsoal . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
+                        . '<a href="#"  class="btn btn-sm btn-warning btn-fw" onclick="ganti(' . "'" . $row->idsoal . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></a>&nbsp;'
                         . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus(' . "'" . $row->idsoal . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>'
                         . '</div>';
                 } else {
@@ -634,7 +701,7 @@ class Soalinstansi extends BaseController
 
     public function load_gambar()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_instansi")) {
             $kode = $this->request->getUri()->getSegment(3);
 
             $def_foto = base_url() . 'front/images/noimg.png';
@@ -652,7 +719,7 @@ class Soalinstansi extends BaseController
 
     public function ajax_upload()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_instansi")) {
             if (isset($_FILES['file']['name'])) {
                 if (0 < $_FILES['file']['error']) {
                     $pesan = "Error during file upload " . $_FILES['file']['error'];
@@ -842,7 +909,7 @@ class Soalinstansi extends BaseController
 
     public function hapussemua()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_instansi")) {
             $hasil = explode(",", $this->request->getPost('hasil'));
 
             $hapus = "";
@@ -872,7 +939,7 @@ class Soalinstansi extends BaseController
 
     public function pindah()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_instansi")) {
             $hasil = explode(",", $this->request->getPost('hasil'));
 
             $hapus = "";

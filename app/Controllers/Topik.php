@@ -7,7 +7,6 @@ use App\Libraries\Modul;
 
 class Topik extends BaseController
 {
-
     private $model;
     private $modul;
 
@@ -19,12 +18,14 @@ class Topik extends BaseController
 
     public function index()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
             $data['nm_role'] = session()->get("nama_role");
-
+            $data['idinstansi'] = session()->get("idinstansi");
+            $data['school_name'] = session()->get("school_name");
             // membaca profile orang tersebut
             $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
 
@@ -63,10 +64,28 @@ class Topik extends BaseController
                 $data['logo'] = base_url() . '/images/noimg.jpg';
             }
 
-            echo view('back/head', $data);
-            echo view('back/menu');
-            echo view('back/topik/index');
-            echo view('back/foot');
+            $jml_topik = $this->model->getAllQR("SELECT count(*) as jml FROM topik WHERE school_name = '" . addslashes(session()->get("school_name"))  . "';")->jml;
+            $data['jml_topik'] = $jml_topik;
+
+
+            $idrole = session()->get("role");
+
+            if ($idrole === "R00001") {
+                echo view('page/menu/layout/head', $data);
+                echo view('page/menu/menu_admin');
+                echo view('page/menu/topik/index', $data);
+                echo view('page/menu/layout/foot');
+            } else if ($idrole === "R00004") {
+                echo view('back/head', $data);
+                echo view('back/menu_instansi');
+                echo view('back/topik/index', $data);
+                echo view('back/foot');
+            } else {
+                echo view('back/head', $data);
+                echo view('back/menu_guru');
+                echo view('back/topik/index', $data);
+                echo view('back/foot');
+            }
         } else {
             $this->modul->halaman('login');
         }
@@ -74,7 +93,8 @@ class Topik extends BaseController
 
     public function ajaxlist()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $data = array();
             $no = 1;
             $list = $this->model->getAllQ("select * from topik order by best desc;");
@@ -89,12 +109,12 @@ class Topik extends BaseController
                 // membaca jml subtopik
                 $jml_subtopik = $this->model->getAllQR("SELECT count(*) as jml FROM subtopik where idtopik = '" . $row->idtopik . "';")->jml;
                 if ($jml_subtopik > 0) {
-                    $str = '<table class="table table-striped" style="width: 100%;">
+                    $str = '<table  class="table-striped" >
                             <tbody>';
                     $list_subs = $this->model->getAllQ("select code, nama from subtopik where idtopik = '" . $row->idtopik . "';");
                     foreach ($list_subs->getResult() as $row1) {
                         $str .= '<tr>';
-                        $str .= '<td>' . $row1->code . ' - ' . $row1->nama . '</td>';
+                        $str .= '<td >' . $row1->code . ' - ' . $row1->nama . '</td>';
                         $str .= '</tr>';
                     }
                     $str .= '</tbody></table>';
@@ -102,13 +122,19 @@ class Topik extends BaseController
                 } else {
                     $val[] = '-';
                 }
-                $val[] = '<div style="text-align: center;">'
-                    . '<button type="button" class="btn btn-sm btn-success btn-fw" onclick="subtopik(' . "'" . $row->idtopik . "'" . ')"><i class="fa fa-fw fa-plus-square"></i> Tambah</button>&nbsp;'
+                $val[] = '<div style="text-align: center;" class="d-flex justify-content-center align-items-center ms-3 me-3">'
+                    . '<button type="button" class="btn btn-success" onclick="subtopik(' . "'" . $row->idtopik . "'" . ')"><i class="fa fa-fw fa-plus-square"></i></button>&nbsp;'
                     . '</div>';
-                $val[] = '<div style="text-align: center;">'
-                    . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="ganti(' . "'" . $row->idtopik . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
-                    . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus(' . "'" . $row->idtopik . "'" . ',' . "'" . $row->nama . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>'
-                    . '</div>';
+
+                if ($row->idinstansi == session()->get("idinstansi") && $row->school_name == session()->get("school_name")) {
+                    $val[] = '<div style="text-align: center;" class="d-flex justify-content-center ms-3 me-3">'
+                        . '<button type="button" class="btn btn-primary" onclick="ganti(' . "'" . $row->idtopik . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
+                        . '<button type="button" class="btn btn-danger" onclick="hapus(' . "'" . $row->idtopik . "'" . ',' . "'" . $row->nama . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>'
+                        . '</div>';
+                } else {
+                    $val[] = '<div class="text-center" > -</div>';
+                }
+
                 $data[] = $val;
 
                 $no++;
@@ -122,14 +148,40 @@ class Topik extends BaseController
 
     public function ajax_add()
     {
-        if (session()->get("logged_admin")) {
-            $data = array(
-                'idtopik' => $this->model->autokode("T", "idtopik", "topik", 2, 7),
-                'code' => $this->request->getPost('code'),
-                'best' => $this->request->getPost('best'),
-                'nama' => $this->request->getPost('nama'),
-            );
-            $simpan = $this->model->add("topik", $data);
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
+            $idrole = session()->get("role");
+            $idinstansi = session()->get("idinstansi");
+            $school_name = session()->get("school_name");
+
+            if ($idrole === 'R00004' && $idinstansi === NULL) {
+                $data = array(
+                    'idtopik' => $this->model->autokode("T", "idtopik", "topik", 2, 7),
+                    'code' => $this->request->getPost('code'),
+                    'best' => $this->request->getPost('best'),
+                    'nama' => $this->request->getPost('nama'),
+                    'school_name' => $this->request->getPost('school_name')
+                );
+                $simpan = $this->model->add("topik", $data);
+            } else  if ($idrole === 'R00004' && $school_name === NULL) {
+                $data = array(
+                    'idtopik' => $this->model->autokode("T", "idtopik", "topik", 2, 7),
+                    'code' => $this->request->getPost('code'),
+                    'best' => $this->request->getPost('best'),
+                    'nama' => $this->request->getPost('nama'),
+                    'idinstansi' => $this->request->getPost('idinstansi')
+                );
+                $simpan = $this->model->add("topik", $data);
+            } else {
+
+                $data = array(
+                    'idtopik' => $this->model->autokode("T", "idtopik", "topik", 2, 7),
+                    'code' => $this->request->getPost('code'),
+                    'best' => $this->request->getPost('best'),
+                    'nama' => $this->request->getPost('nama'),
+                );
+                $simpan = $this->model->add("topik", $data);
+            }
             if ($simpan == 1) {
                 $status = "Data tersimpan";
             } else {
@@ -143,7 +195,8 @@ class Topik extends BaseController
 
     public function ganti()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $kondisi['idtopik'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("topik", $kondisi);
             echo json_encode($data);
@@ -154,7 +207,8 @@ class Topik extends BaseController
 
     public function ajax_edit()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $data = array(
                 'code' => $this->request->getPost('code'),
                 'nama' => $this->request->getPost('nama'),
@@ -175,7 +229,8 @@ class Topik extends BaseController
 
     public function hapus()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $kond['idtopik'] = $this->request->getUri()->getSegment(3);
             $hapus = $this->model->delete("topik", $kond);
             if ($hapus == 1) {

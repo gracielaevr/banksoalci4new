@@ -1761,7 +1761,7 @@ tr:first-child > td > .fc-day-grid-event {
 
 /* 1.39 Pricing */
 .pricing {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03); */
   background-color: #fff;
   border-radius: 3px;
   border: none;
@@ -1771,15 +1771,15 @@ tr:first-child > td > .fc-day-grid-event {
   /* letter-spacing: ; */
 }
 .pricing.pricing-highlight .pricing-title {
-  background-color: #6777ef;
+  background-color: #5e93ca;
   color: #fff;
 }
 .pricing.pricing-highlight .pricing-cta a {
-  background-color: #6777ef;
+  background-color: #5e93ca;
   color: #fff;
 }
 .pricing.pricing-highlight .pricing-cta a:hover {
-  background-color: #394eea !important;
+  background-color: #1d4774 !important;
 }
 .pricing .pricing-padding {
   padding: 40px;
@@ -1808,12 +1808,18 @@ tr:first-child > td > .fc-day-grid-event {
 }
 .pricing .pricing-details .pricing-item {
   display: flex;
+  gap:10px;
   margin-bottom: 15px;
+}
+
+.pricing .pricing-details .pricing-item-label {
+  display: flex;
+
 }
 .pricing .pricing-details .pricing-item .pricing-item-icon {
   width: 20px;
   height: 20px;
-  line-height: 250px;
+  line-height: 17px;
   align-items: center;
   border-radius: 50%;
   text-align: center;

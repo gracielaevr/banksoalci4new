@@ -33,25 +33,27 @@ class Test extends BaseController
         $jenis = $this->model->getAllQR("select * from soal where idsubtopik = '" . $kode . "' order by rand() limit 1")->jenis;
         $data['jenis'] = $jenis;
 
-        echo view('front/head');
+        // echo view('front/head');
+        echo view('page/beranda/layout/head');
         if ($subs->narasi == 1) {
             $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $kode . "' order by rand() limit 10");
-            echo view('front/exam/narasi', $data);
+            echo view('page/beranda/exam/narasi', $data);
         } else if ($jenis == 'mg') {
             $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $kode . "' and jenis = '" . $jenis . "'order by rand() limit 10");
-            echo view('front/exam/mg', $data);
+            echo view('page/beranda/exam/mg', $data);
         } else if ($jenis == 'd') {
             $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $kode . "' and jenis = '" . $jenis . "' order by rand() limit 10");
-            echo view('front/exam/drop', $data);
+            echo view('page/beranda/exam/drop', $data);
         } else if ($jenis == 'mc') {
             $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $kode . "' and jenis = '" . $jenis . "' order by rand() limit 10");
-            echo view('front/exam/mc', $data);
+            echo view('page/beranda/exam/mc', $data);
         } else if ($jenis == 'tf') {
             $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $kode . "' and jenis = '" . $jenis . "' order by rand() limit 10");
-            echo view('front/exam/tf', $data);
+            echo view('page/beranda/exam/tf', $data);
         }
 
-        echo view('front/foot');
+        // echo view('front/foot');
+        echo view('page/beranda/layout/foot');
     }
 
     public function narasi()
@@ -385,15 +387,6 @@ class Test extends BaseController
         return $ids;
     }
 
-    public function done()
-    {
-        $kode = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
-        $data['kode'] = $this->modul->enkrip_url($kode);
-
-        echo view('front/head');
-        echo view('front/form/index', $data);
-        echo view('front/foot');
-    }
 
     public function process()
     {
@@ -432,8 +425,16 @@ class Test extends BaseController
         $data['text'] = urlencode($hubungi->text);
         $data['wa'] = $hubungi->wa;
 
-        echo view('front/head');
-        echo view('front/score/index', $data);
-        echo view('front/foot');
+        // echo view('front/head');
+        echo view('page/beranda/layout/head');
+        echo view('page/beranda/score/index', $data);
+        echo view('page/beranda/layout/foot');
+    }
+
+    public function subscribe()
+    {
+        echo view('page/beranda/layout/head');
+        echo view('page/beranda/subscribe/index');
+        echo view('page/beranda/layout/foot');
     }
 }

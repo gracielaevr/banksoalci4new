@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\Mcustom;
 use App\Libraries\Modul;
 
-class HomeInstansi extends BaseController
+class Homeinstansi extends BaseController
 {
 
     private $model;
@@ -19,18 +19,7 @@ class HomeInstansi extends BaseController
 
     public function index()
     {
-        $currentPage = 'Dashboard';
-        $data['current_page'] = $currentPage;
-
         if (session()->get("logged_instansi")) {
-            $db      = \Config\Database::connect();
-            $builder = $db->table('topik');
-            $builder->select('topik.*, COUNT(subtopik.idsubtopik) as jumlah_subtopik');
-            $builder->join('subtopik', 'subtopik.idtopik = topik.idtopik', 'left');
-            $builder->groupBy('topik.idtopik');
-            $query = $builder->get();
-            $data['topik'] = $query->getResult();
-
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
@@ -39,14 +28,14 @@ class HomeInstansi extends BaseController
             $data['menu'] = $this->request->getUri()->getSegment(1);
 
             // membaca foto profile
-            // $def_foto = base_url().'/images/noimg.jpg';
-            // $foto = $this->model->getAllQR("select foto from users where idusers = '".session()->get("idusers")."';")->foto;
-            // if(strlen($foto) > 0){
-            //     if(file_exists($this->modul->getPathApp().$foto)){
-            //         $def_foto = base_url().'/uploads/'.$foto;
-            //     }
-            // }
-            // $data['foto_profile'] = $def_foto;
+            $def_foto = base_url() . 'front/images/noimg.png';
+            $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
+            if (strlen($foto) > 0) {
+                if (file_exists($this->modul->getPathApp() . $foto)) {
+                    $def_foto = base_url() . '/uploads/' . $foto;
+                }
+            }
+            $data['foto_profile'] = $def_foto;
 
             // membaca identitas
             $jml_identitas = $this->model->getAllQR("SELECT count(*) as jml FROM identitas;")->jml;
@@ -71,11 +60,10 @@ class HomeInstansi extends BaseController
                 $data['logo'] = base_url() . '/images/noimg.jpg';
             }
 
-            // echo view('back/head', $data);
-            echo view('back/dashboardinstansisiswa/home', $data);
-            // echo view('back/content');
-            // echo view('back/foot');
-
+            echo view('front/page/layout/head', $data);
+            echo view('front/page/menu_instansi');
+            echo view('front/page/content');
+            echo view('front/page/layout/foot');
         } else {
             $this->modul->halaman('logininstansi');
         }

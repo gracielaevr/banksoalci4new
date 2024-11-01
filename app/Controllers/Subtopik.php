@@ -19,11 +19,13 @@ class Subtopik extends BaseController
 
     public function detil()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
             $data['nm_role'] = session()->get("nama_role");
+            $data['idinstansi'] = session()->get("idinstansi");
+            $data['school_name'] = session()->get("school_name");
             $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
             $data['menu'] = $this->request->getUri()->getSegment(1);
 
@@ -63,10 +65,27 @@ class Subtopik extends BaseController
             $kode = $this->request->getUri()->getSegment(3);
             $data['head'] = $this->model->getAllQR("select * from topik where idtopik = '" . $kode . "';");
 
-            echo view('back/head', $data);
-            echo view('back/menu');
-            echo view('back/subtopik/index');
-            echo view('back/foot');
+            $jml_subtopik = $this->model->getAllQR("SELECT count(*) as jml FROM subtopik WHERE school_name = '" . addslashes(session()->get("school_name")) . "';")->jml;
+            $data['jml_subtopik'] = $jml_subtopik;
+
+
+            $idrole = session()->get('role');
+            if ($idrole === 'R00001') {
+                echo view('page/menu/layout/head', $data);
+                echo view('page/menu/menu_admin');
+                echo view('page/menu/subtopik/index');
+                echo view('page/menu/layout/foot');
+            } else if ($idrole === 'R00004') {
+                echo view('back/head', $data);
+                echo view('back/menu_instansi');
+                echo view('back/subtopik/index', $data);
+                echo view('back/foot');
+            } else {
+                echo view('page/menu/layout/head', $data);
+                echo view('page/menu/menu_guru');
+                echo view('page/menu/subtopik/index');
+                echo view('page/menu/layout/foot');
+            }
         } else {
             $this->modul->halaman('login');
         }
@@ -74,7 +93,7 @@ class Subtopik extends BaseController
 
     public function ajaxdetil()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
             $kode = $this->request->getUri()->getSegment(3);
             $data = array();
             $no = 1;
@@ -85,10 +104,14 @@ class Subtopik extends BaseController
                 $val[] = $row->code;
                 $val[] = $row->nama;
                 $val[] = $row->deskripsi;
-                $val[] = '<div style="text-align: center;">'
-                    . '<button type="button" class="btn btn-sm btn-warning btn-fw" onclick="ganti(' . "'" . $row->idsubtopik . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
-                    . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus(' . "'" . $row->idsubtopik . "'" . ',' . "'" . $row->nama . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>'
-                    . '</div>';
+                if ($row->idinstansi == session()->get("idinstansi") && $row->school_name == session()->get("school_name")) {
+                    $val[] = '<div style="text-align: center;">'
+                        . '<button type="button" class="btn btn-sm btn-primary btn-fw" onclick="ganti(' . "'" . $row->idsubtopik . "'" . ')"><i class="fa fa-fw fa-pencil-square"></i></button>&nbsp;'
+                        . '<button type="button" class="btn btn-sm btn-danger btn-fw" onclick="hapus(' . "'" . $row->idsubtopik . "'" . ',' . "'" . $row->nama . "'" . ')"><i class="fa fa-fw fa-trash"></i></button>'
+                        . '</div>';
+                } else {
+                    $val[] = '<div class="text-center" > -</div>';
+                }
                 $data[] = $val;
 
                 $no++;
@@ -102,16 +125,46 @@ class Subtopik extends BaseController
 
     public function ajax_add()
     {
-        if (session()->get("logged_admin")) {
-            $data = array(
-                'idsubtopik' => $this->model->autokode("S", "idsubtopik", "subtopik", 2, 7),
-                'idtopik' => $this->request->getPost('idtopik'),
-                'nama' => $this->request->getPost('nama'),
-                'deskripsi' => $this->request->getPost('deskripsi'),
-                'code' => $this->request->getPost('code'),
-                'narasi' => $this->request->getPost('narasi'),
-            );
-            $simpan = $this->model->add("subtopik", $data);
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
+            $idrole = session()->get("role");
+            $idinstansi = session()->get("idinstansi");
+            $school_name = session()->get("school_name");
+
+            if ($idrole === 'R00004' && $idinstansi === NULL) {
+                $data = array(
+                    'idsubtopik' => $this->model->autokode("S", "idsubtopik", "subtopik", 2, 7),
+                    'idtopik' => $this->request->getPost('idtopik'),
+                    'nama' => $this->request->getPost('nama'),
+                    'deskripsi' => $this->request->getPost('deskripsi'),
+                    'code' => $this->request->getPost('code'),
+                    'narasi' => $this->request->getPost('narasi'),
+                    'school_name' => $this->request->getPost('school_name')
+                );
+                $simpan = $this->model->add("subtopik", $data);
+            } else  if ($idrole === 'R00004' && $school_name === NULL) {
+                $data = array(
+                    'idsubtopik' => $this->model->autokode("S", "idsubtopik", "subtopik", 2, 7),
+                    'idtopik' => $this->request->getPost('idtopik'),
+                    'nama' => $this->request->getPost('nama'),
+                    'deskripsi' => $this->request->getPost('deskripsi'),
+                    'code' => $this->request->getPost('code'),
+                    'narasi' => $this->request->getPost('narasi'),
+                    'idinstansi' => $this->request->getPost('idinstansi')
+                );
+                $simpan = $this->model->add("subtopik", $data);
+            } else {
+
+                $data = array(
+                    'idsubtopik' => $this->model->autokode("S", "idsubtopik", "subtopik", 2, 7),
+                    'idtopik' => $this->request->getPost('idtopik'),
+                    'nama' => $this->request->getPost('nama'),
+                    'deskripsi' => $this->request->getPost('deskripsi'),
+                    'code' => $this->request->getPost('code'),
+                    'narasi' => $this->request->getPost('narasi'),
+                );
+                $simpan = $this->model->add("subtopik", $data);
+            }
             if ($simpan == 1) {
                 $status = "Data tersimpan";
             } else {
@@ -125,7 +178,7 @@ class Subtopik extends BaseController
 
     public function ganti()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
             $kondisi['idsubtopik'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("subtopik", $kondisi);
             echo json_encode($data);
@@ -136,7 +189,7 @@ class Subtopik extends BaseController
 
     public function ajax_edit()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
             $data = array(
                 'nama' => $this->request->getPost('subtopik'),
                 'deskripsi' => $this->request->getPost('deskripsi'),
@@ -158,7 +211,7 @@ class Subtopik extends BaseController
 
     public function hapus()
     {
-        if (session()->get("logged_admin")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
             $kond['idsubtopik'] = $this->request->getUri()->getSegment(3);
             $hapus = $this->model->delete("subtopik", $kond);
             if ($hapus == 1) {

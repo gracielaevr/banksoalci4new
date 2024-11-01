@@ -15,21 +15,11 @@ class Question extends BaseController
         $this->model = new Mcustom();
         $this->modul = new Modul();
     }
-    // public function index()
-    // {
-    //     echo "Index method is called";
-    // }
 
-
-    public function start($idsubtopik)
+    public function start()
     {
         if (session()->get("logged_siswa")) {
 
-
-            // $kode = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
-            // $data['kode'] = $kode;
-
-            // $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['wa'] = session()->get("wa");
             $data['role'] = session()->get("role");
@@ -64,66 +54,75 @@ class Question extends BaseController
                 $data['foto_profile'] = base_url() . '/images/noimg.jpg';
             }
 
-
-
-            $data['idsubtopik'] = $idsubtopik;
+            $kode = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
+            $data['kode'] = $kode;
 
             $data['model'] = $this->model;
             $data['modul'] = $this->modul;
 
-            $subs = $this->model->getAllQR("select nama, narasi from subtopik where idsubtopik = '" . $idsubtopik . "'");
+            $subs = $this->model->getAllQR("select nama, narasi from subtopik where idsubtopik = '" . $kode . "'");
             $data['subtopik'] = $subs->nama;
-            $topik = $this->model->getAllQR("select t.idtopik, t.nama as nm from subtopik s, topik t where t.idtopik = s.idtopik and s.idsubtopik = '" . $idsubtopik . "'");
+            $topik = $this->model->getAllQR("select t.idtopik, t.nama as nm from subtopik s, topik t where t.idtopik = s.idtopik and s.idsubtopik = '" . $kode . "'");
             $data['topik'] = $topik->nm;
             $data['idtopik'] = $topik->idtopik;
-            $jenis = $this->model->getAllQR("select * from soal where idsubtopik = '" . $idsubtopik . "' order by rand() limit 1")->jenis ?? 'tidak ada soal';
+            $jenis = $this->model->getAllQR("select * from soal where idsubtopik = '" . $kode . "' order by rand() limit 1")->jenis;
             $data['jenis'] = $jenis;
 
             $idusers = session()->get('idusers');
-            $jml_pengerjaan = $this->model->getAllQR("SELECT history_pengerjaan FROM users WHERE idusers = '" . $idusers . "';")->history_pengerjaan;
-            $history_subs = $this->model->getAllQR("SELECT idsubs FROM users WHERE idusers = '" . $idusers . "';")->idsubs;
-
-            if ($jml_pengerjaan >= 3 && $history_subs === NULL) {
-
-                //Kirim pesan jika melampaui batas
-                session()->setFlashdata('error', 'Berlangganan untuk mendapatkan akses tanpa batas.');
-                return redirect()->to(base_url('subscribe/index'));
+            $school = addslashes(session()->get('school_name') && session()->get("siswa_luar") === NULL);
+            if ($school === NULL) {
+                $jml_pengerjaan = $this->model->getAllQR("SELECT history_pengerjaan FROM users WHERE idusers = '" . $idusers . "' AND school_name = '" . $school . "';")->history_pengerjaan;
             } else {
-                // Tambah 1 kali pengerjaan pada history_pengerjaan
-                $newHistoryPengerjaan = $jml_pengerjaan + 1;
+                $jml_pengerjaan = $this->model->getAllQR("SELECT history_pengerjaan FROM users WHERE idusers = '" . $idusers . "';")->history_pengerjaan;
+            }
 
-                $updateData = array(
-                    'history_pengerjaan' => $newHistoryPengerjaan,
-                );
-                $update = $this->model->update("users", $updateData, ['idusers' => $idusers]);
+            $history_subs = $this->model->getAllQR(" SELECT idusers, tgl_berakhir FROM history_subscribe WHERE idusers = '" . $idusers . "' ");
 
-                // Pastikan update berhasil
-                if ($update) {
-                    echo view('back/dashboardsiswa/question/head');
-                    if ($subs->narasi == 1) {
-                        $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' order by rand() limit 10");
-                        echo view('back/dashboardsiswa/question/narasi', $data);
-                    } else if ($jenis == 'mg') {
-                        $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' and jenis = '" . $jenis . "'order by rand() limit 10");
-                        echo view('back/dashboardsiswa/question/mg', $data);
-                    } else if ($jenis == 'd') {
-                        $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' and jenis = '" . $jenis . "' order by rand() limit 10");
-                        echo view('back/dashboardsiswa/question/drop', $data);
-                    } else if ($jenis == 'mc') {
-                        $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' and jenis = '" . $jenis . "' order by rand() limit 10");
-                        echo view('back/dashboardsiswa/question/mc', $data);
-                    } else if ($jenis == 'tf') {
-                        $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $idsubtopik . "' and jenis = '" . $jenis . "' order by rand() limit 10");
-                        echo view('back/dashboardsiswa/question/tf', $data);
-                    }
+            if ($history_subs !== null) {
+                $data['showSessionMenu'] = true;
+            }
+            if ($history_subs === null) {
+                $data['showSessionMenu'] = false;
+            }
+            // $school = session()->get("school_name");
+            $instansi = session()->get("idinstansi");
+            $data['free'] = $instansi === NULL && $history_subs === NULL;
 
-                    echo view('back/dashboardsiswa/question/foot');
+            $newHistoryPengerjaan = $jml_pengerjaan + 1;
+
+            $updateData = array(
+                'history_pengerjaan' => $newHistoryPengerjaan,
+            );
+            $update = $this->model->update("users", $updateData, ['idusers' => $idusers]);
+
+            // Pastikan update berhasil
+            if ($update) {
+                echo view('page/dashboardsiswa/question/head');
+                if ($subs->narasi == 1) {
+                    $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $kode . "' order by rand() limit 10");
+                    echo view('page/dashboardsiswa/question/narasi', $data);
+                } else if ($jenis == 'mg') {
+                    $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $kode . "' and jenis = '" . $jenis . "'order by rand() limit 10");
+                    echo view('page/dashboardsiswa/question/mg', $data);
+                } else if ($jenis == 'd') {
+                    $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $kode . "' and jenis = '" . $jenis . "' order by rand() limit 10");
+                    echo view('page/dashboardsiswa/question/drop', $data);
+                } else if ($jenis == 'mc') {
+                    $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $kode . "' and jenis = '" . $jenis . "' order by rand() limit 10");
+                    echo view('page/dashboardsiswa/question/mc', $data);
+                } else if ($jenis == 'tf') {
+                    $data['soal'] = $this->model->getAllQ("select * from soal where idsubtopik = '" . $kode . "' and jenis = '" . $jenis . "' order by rand() limit 10");
+                    echo view('page/dashboardsiswa/question/tf', $data);
                 }
+
+                echo view('page/dashboardsiswa/question/foot');
             }
         } else {
             $this->modul->halaman('loginsiswa');
         }
     }
+
+
 
     public function narasi()
     {
@@ -144,9 +143,9 @@ class Question extends BaseController
         $data['narasi'] = $n->deskripsi;
         $data['soal'] = $this->model->getAllQ("select * from soal where idnarasi = '" . $idn . "' limit 5");
 
-        echo view('back/dashboardsiswa/question/head');
-        echo view('back/dashboardsiswa/question/narasi', $data);
-        echo view('back/dashboardsiswa/question/foot');
+        echo view('page/dashboardsiswa/question/head');
+        echo view('page/dashboardsiswa/question/narasi', $data);
+        echo view('page/dashboardsiswa/question/foot');
     }
     public function finish()
     {
@@ -410,77 +409,24 @@ class Question extends BaseController
         return $ids;
     }
 
-    // public function done()
-    // {
-    //     $kode = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
-    //     $data['kode'] = $this->modul->enkrip_url($kode);
-
-    //     echo view('front/head');
-    //     echo view('front/form/index', $data);
-    //     echo view('front/foot');
-    // }
-
-    // public function process()
-    // {
-    //     $id = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
-
-    //     $kond['idpeserta'] = $id;
-
-    //     $datape = array(
-    //         'nama' => $this->request->getPost('nama'),
-    //         'email' => $this->request->getPost('email'),
-    //         'nohp' => $this->request->getPost('tlp')
-    //     );
-    //     $update = $this->model->update("peserta", $datape, $kond);
-
-    //     if ($update == 1) {
-    //         $status = "ok";
-    //     } else {
-    //         $status = "Error";
-    //     }
-
-    //     echo json_encode(array("status" => $status, "id" => $this->modul->enkrip_url($id)));
-    // }
-
-
-
-
     public function score()
     {
+        $idusers = session()->get("idusers");
         $data['idusers'] = session()->get("idusers");
         $data['nama'] = session()->get("nama");
         $data['role'] = session()->get("role");
         $data['nm_role'] = session()->get("nama_role");
 
+        $data["pro"] = $this->model->getAllQR("select * from users where idusers = '" . session()->get("idusers") . "'");
 
-        $jml_user = $this->model->getAllQR("SELECT count(*) as jml FROM users WHERE idusers = '" . session()->get("idusers") . "';")->jml;
-
-        if ($jml_user > 0) {
-            $user = $this->model->getAllQR("SELECT * FROM users WHERE idusers = '" . session()->get("idusers") . "';");
-
-            $data['idusers'] = $user->idusers;
-            $data['nama'] = $user->nama;
-            $data['email'] = $user->email;
-            $data['wa'] = $user->wa;
-            $data['idrole'] = $user->idrole;
-
-            $def_foto = base_url() . 'front/images/noimg.png';
-            $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
-            if (strlen($foto) > 0) {
-                if (file_exists($this->modul->getPathApp() . $foto)) {
-                    $def_foto = base_url() . '/uploads/' . $foto;
-                }
+        $def_foto = base_url() . 'front/images/noimg.png';
+        $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
+        if (strlen($foto) > 0) {
+            if (file_exists($this->modul->getPathApp() . $foto)) {
+                $def_foto = base_url() . '/uploads/' . $foto;
             }
-            $data['foto_profile'] = $def_foto;
-        } else {
-            $data['idusers'] = "";
-            $data['nama'] = "";
-            $data['email'] = "";
-            $data['wa'] = "";
-            $data['idrole'] = "";
-            $data['foto_profile'] = base_url() . '/images/noimg.jpg';
         }
-
+        $data['foto_profile'] = $def_foto;
 
         $kode = $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
         $data['kode'] = $kode;
@@ -489,16 +435,39 @@ class Question extends BaseController
         $data['score'] = $this->model->getAllQR("select * from peserta where idpeserta = '" . $kode . "'")->poin;
         $data['idpeserta'] = $this->modul->enkrip_url($kode);
         $idsub = $this->model->getAllQR("select * from peserta where idpeserta = '" . $kode . "'")->idsubtopik;
-        $data['idsub'] = $idsub;
+        $data['idsub'] = $this->modul->enkrip_url($idsub);
+
+        $history_subs = $this->model->getAllQR(" SELECT status, tgl_berakhir, checkout_link FROM history_subscribe WHERE idusers = '" . $idusers . "' ");
+        if ($history_subs !== NULL) {
+            if ($history_subs->status === "Paid") {
+                $data['showSessionMenu'] = true;
+                session()->remove('notification_pending');
+            } else {
+                $notificationMsg = "Complete your payment, <b><a href='{$history_subs->checkout_link}' style='color:#fff'>click here</a></b>";
+                session()->setFlashdata('notification_pending', $notificationMsg);
+
+                $instansi = session()->get("idinstansi");
+                $siswaluar_free = session()->get("school_name") !== NULL && session()->get("siswa_luar") === 1 && $history_subs === NULL || $history_subs->status === 'Pending';
+                $data['free'] = $instansi === NULL && $history_subs === NULL || $history_subs->status === 'Pending' || $siswaluar_free;
+                if ($data['free'] === true) {
+                    $notificationMsg = "You are currently using a free account. Please subscribe to access exclusive feature.";
+                    session()->setFlashdata('notification_free', $notificationMsg);
+                }
+            }
+        }
+        if ($history_subs === null || $history_subs->status === 'Pending') {
+            $data['showSessionMenu'] = false;
+
+        }
+        $instansi = session()->get("idinstansi");
+        $siswaluar_free = session()->get("school_name") !== NULL && session()->get("siswa_luar") === 1 && $history_subs === NULL;
+        $data['free'] = $instansi === NULL && $history_subs === NULL || $siswaluar_free;
 
 
-        $hubungi = $this->model->getAllQR("select * from hubungi limit 1");
-        $data['text'] = urlencode($hubungi->text);
-        $data['wa'] = $hubungi->wa;
 
 
         // echo view('front/head');
-        echo view('back/dashboardsiswa/score/index', $data);
+        echo view('page/dashboardsiswa/score/index', $data);
         // echo view('front/foot');
     }
 }

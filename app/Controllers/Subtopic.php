@@ -27,15 +27,18 @@ class Subtopic extends BaseController
         $data['topik'] = $this->model->getAllQR("select t.nama as nm from subtopik s, topik t where t.idtopik = s.idtopik and s.idsubtopik = '" . $kode . "'")->nm;
         $data['tot'] = $this->model->getAllQR("select count(*) as jml from soal where idsubtopik = '" . $kode . "'")->jml;
 
-        echo view('front/head');
+        // $history_subs = $this->model->getAllQR("SELECT idsubs FROM users WHERE idusers = '" . session()->get("idusers") . "';")->idsubs;
+        // $data['showSessionMenu'] = $history_subs !== null;
+
+        echo view('page/beranda/layout/head');
         if ($subs->narasi == 1) {
             $data['jml'] = 5;
-            echo view('front/start/narasi', $data);
+            echo view('page/beranda/start/narasi', $data);
         } else {
             $data['jml'] = 10;
-            echo view('front/start/index', $data);
+            echo view('page/beranda/start/index', $data);
         }
-        echo view('front/foot');
+        echo view('page/beranda/layout/foot');
     }
 
     public function exam()
@@ -81,23 +84,23 @@ class Subtopic extends BaseController
         echo view('front/foot');
     }
 
-    public function done()
-    {
-        $data['penutup'] = $this->model->getAllQR("select * from penutup limit 1")->deskripsi;
+    // public function done()
+    // {
+    //     $data['penutup'] = $this->model->getAllQR("select * from penutup limit 1")->deskripsi;
 
-        echo view('front/head');
-        echo view('front/exam/done', $data);
-        echo view('front/foot');
-    }
+    //     echo view('front/head');
+    //     echo view('front/exam/done', $data);
+    //     echo view('front/foot');
+    // }
 
-    public function submit()
-    {
-        $data['penutup'] = $this->model->getAllQR("select * from penutup limit 1")->deskripsi;
+    // public function submit()
+    // {
+    //     $data['penutup'] = $this->model->getAllQR("select * from penutup limit 1")->deskripsi;
 
-        echo view('front/head');
-        echo view('front/exam/submit', $data);
-        echo view('front/foot');
-    }
+    //     echo view('front/head');
+    //     echo view('front/exam/submit', $data);
+    //     echo view('front/foot');
+    // }
 
     public function ajaxlist()
     {
@@ -114,18 +117,18 @@ class Subtopic extends BaseController
         foreach ($list->getResult() as $row) {
             if ($id != '') {
                 $hasil .= '<div class="col-sm-4">
-                        <a href="' . base_url() . '/subtopic/start/' . $this->modul->enkrip_url($row->idsubtopik) . '" class="btn">' . $row->ns . '<br>Topic: ' . $row->nt . '</a>
+                        <a href="' . base_url() . 'subtopic/start/' . $this->modul->enkrip_url($row->idsubtopik) . '" class="btn">' . $row->ns . '<br>Topic: ' . $row->nt . '</a>
                     </div>';
             } else {
                 $hasil .= '<div class="col-sm-4">
-                    <a href="' . base_url() . '/subtopic/start/' . $this->modul->enkrip_url($row->idsubtopik) . '" class="btn">' . $row->nama . '</a>
+                    <a href="' . base_url() . 'subtopic/start/' . $this->modul->enkrip_url($row->idsubtopik) . '" class="btn">' . $row->nama . '</a>
                 </div>';
             }
         }
         if ($id != '') {
             foreach ($list2->getResult() as $row) {
                 $hasil .= '<div class="col-sm-4">
-                            <a href="' . base_url() . '/topic/subtopic/' . str_replace(' ', '-', $row->nama) . '" class="btn">' . $row->nama . '</a>
+                            <a href="' . base_url() . 'topic/subtopic/' . str_replace(' ', '-', $row->nama) . '" class="btn">' . $row->nama . '</a>
                         </div>';
             }
         }

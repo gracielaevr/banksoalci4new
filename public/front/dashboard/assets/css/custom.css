@@ -139,11 +139,11 @@ body.sidebar-mini .main-sidebar .sidebar-menu>li.active>a {
 
 /* Card */
 .card-subscribe {
-    margin: 0px 15px 0 15px;
+    margin: 0px 15px 0 20px;
     /* background-color: #E5F2FF; */
     background-color: #58a1eb;
     border-radius: 35px;
-    height: 250px;
+    height: 230px;
     background-image: url('../../../images/icon2_new.png');
     background-size: cover;
     background-position: center center;

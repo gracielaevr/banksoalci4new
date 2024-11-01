@@ -79,7 +79,40 @@
     font-weight: bold;
     font-family: "Poppins", sans-serif;
     text-align: left;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
+}
+
+.input-box .header-regist-instansi {
+    font-size: 24px;
+    color: #104D97;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+@media screen and (max-width: 766px) {
+    .input-box .header-regist-instansi {
+        font-size: 16px;
+        text-align: center;
+        color: #104D97;
+        font-weight: bold;
+        font-family: "Poppins", sans-serif;
+        text-align: left;
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+
+    .input-box .header-regist {
+        font-size: 16px;
+        text-align: center;
+        color: #104D97;
+        font-weight: bold;
+        font-family: "Poppins", sans-serif;
+        text-align: left;
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
 }
 
 .input-box h3 {
@@ -106,7 +139,19 @@
     border-color: transparent;
     background: #FFF;
     box-shadow: -1px 9px 15px 0px rgba(0, 0, 0, 0.25);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+}
+
+.input-instansi {
+    width: 100%;
+    padding: 7px;
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+    border-radius: 32px;
+    border-color: transparent;
+    background: #FFF;
+    box-shadow: -1px 9px 15px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 20px;
 }
 
 .checkbox {
@@ -125,13 +170,13 @@
 }
 
 .input-field input:focus~label {
-    top: -25px;
+    top: -20px;
     font-size: 13px;
     color: #104D97;
 }
 
 .input-field input:valid~label {
-    top: -25px;
+    top: -20px;
     font-size: 13px;
     color: #104D97;
 }
@@ -224,10 +269,10 @@ span a:hover {
         font-size: 16px;
     }
 
-    .row {
+    /* .row {
         max-width: 420px;
         width: 100%;
-    }
+    } */
 }
 
 @media only screen and (max-width: 450px) {

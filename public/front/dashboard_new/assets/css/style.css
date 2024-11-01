@@ -1,58 +1,40 @@
-.btn-score-wa  {
-  font-size: 1rem;
-  color: green;
-  font-family: "Roboto", sans-serif;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  width: 100%;
+#ofBar {
+  /*  */
+  /* z-index: 999999999; */
+  font-size: 16px;
+  padding: 16px 40px;
+  font-weight: 400;
   text-align: center;
-  border-radius: 5px;
-  padding: 10px 25px;
-  font-weight: 700;
-  display: block;
-
-}
-
-.btn-score-wa:hover{
-  background-color: green;
-  color: white;
-}
-
-.btn-score-again  {
-  font-size: 1rem;
-  color: rgb(255, 0, 0);
-  font-family: "Roboto", sans-serif;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* position: fixed; */
+  /* top: 40px; */
   width: 100%;
-  text-align: center;
-  border-radius: 5px;
-  padding: 10px 25px;
-  font-weight: 700;
-  display: block;
-
+  border-radius: 8px;
+  /* left: 0; */
+  /* right: 0; */
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 13px 27px -5px rgba(50,50,93,0.25), 0 8px 16px -8px rgba(0,0,0,0.3), 0 -6px 16px -6px rgba(0,0,0,0.025);
+  margin: 15px 0;
 }
 
-.btn-score-again:hover{
-  background-color: rgb(255, 0, 0);
-  color: white;
+#ofBar-content {
+  display: inline;
+  padding: 0 15px;
 }
 
-.btn-score-back  {
-  font-size: 1rem;
-  color: #1e85ff;
-  font-family: "Roboto", sans-serif;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  width: 100%;
-  text-align: center;
-  border-radius: 5px;
-  padding: 10px 25px;
-  font-weight: 700;
-  display: block;
+#closeOfBar {
+ position: absolute;
+ right: 35px;
+ /* top: 10px; */
+ background: none;
+ border: none;
+ color: #fff;
+ font-size: 20px; 
+  cursor: pointer;
 
-}
-
-.btn-score-back:hover{
-  background-color: #1e85ff;
-  color: white;
 }
 
 .btn-primary-leap {
@@ -62,14 +44,74 @@
 
 .btn-primary-leap:hover {
   background-color: #1d87f1;
-
   color: #ffff;
-
 }
 
 .badges .badge {
   margin: 0 8px 10px 0;
   overflow: hidden;
+}
+
+.btn-score-wa{
+  background-color: transparent;
+  text-align: center;
+  display: block;
+  color:  #007a00;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+  border: 3px solid  #007a00;
+}
+
+.btn-score-wa:hover{
+  background-color: #007a00;
+  color:  #ffffff;
+  border: 3px solid #007a00;
+}
+
+.btn-score-again{
+  text-align: center;
+  display: block;
+  color: #d80000;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+  border: 3px solid  #d80000;
+  background-color: transparent;
+}
+
+.btn-score-again:hover{
+  background-color:#d80000;
+  color:  #ffffff;
+  border: 3px solid #d80000;
+}
+
+.btn-score-back{
+  background-color: transparent;
+  text-align: center;
+  display: block;
+  color: #000dc0;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+  border: 3px solid #000dc0;
+
+}
+
+.btn-score-back:hover{
+  color:  #ffffff;
+  background-color: #000dc0;
+
+  border: 3px solid  #000dc0;
 
 }
 
@@ -84,7 +126,8 @@
 
 
 .badge.badge-warning {
-  color: #fff;
+  background-color: #ffe600;
+
 }
 
 .badge.badge-primary {
@@ -651,9 +694,6 @@ select.form-control:not([size]):not([multiple]) {
 
 
 
-
-
-
 .question {
   margin-bottom: 20px;
 }
@@ -728,14 +768,36 @@ select.form-control:not([size]):not([multiple]) {
   background-color: #e7f0ff;
 }
 
-.side-leap:hover {
+/* .side-leap:hover { */
   /* border: 2px solid #b8bec4; */
-  border-radius: 8px;
-  background-color: #e0e0e0;
+  /* border-radius: 8px;
+  background-color:#314465; */
+/* } */
+
+.sidenav-guru a:hover{
+  background-color:#314465;
+  color: #ffff !important;
+   border-radius: 8px;
 }
 
-.side-leap:is(:link, :active, :visited).active {
-  background-color: #e0e0e0 !important;
+.sidenav-guru a:is(:link, :active, :visited).active {
+ color: white !important;
+  background:#314465 !important;
+  border-radius: 8px;
+
+}
+
+.sidenav-murid a:hover{
+  background-color: #5e93ca;
+  color: #ffff !important;
+   border-radius: 8px;
+}
+
+.sidenav-murid a:is(:link, :active, :visited).active {
+ color: white !important;
+ background-color: #5e93ca;
+ border-radius: 8px;
+
 }
 
 @keyframes moveRight {
@@ -774,9 +836,9 @@ select.form-control:not([size]):not([multiple]) {
     display: none;
   }
 
-  .navbar-nav {
+  /* .navbar-nav {
     justify-content: space-between !important;
-  }
+  } */
 
   .welcome-leap {
     text-align: start !important;
@@ -787,13 +849,6 @@ select.form-control:not([size]):not([multiple]) {
     margin-top: 10px;
   }
 
-  .btn-1 {
-    display: block !important;
-  }
-
-  .btn-2 {
-    display: none;
-  }
 
   .section-title {
     /* width: 100%; */
@@ -822,4 +877,43 @@ select.form-control:not([size]):not([multiple]) {
   .form-profile {
     flex-direction: column !important;
   }
+}
+
+.profile-image-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  /* Membuat elemen mengikuti lebar container */
+  aspect-ratio: 3 / 4;
+  /* Rasio gambar 3x4 */
+}
+
+#profileImage {
+  width: 100%;
+  /* Lebar 100% dari container */
+  height: auto;
+  /* Menjaga rasio aspek */
+  object-fit: cover;
+  /* Agar gambar sesuai dengan ukuran tanpa melar */
+  border-radius: 5px;
+  /* Opsional, membuat ujung gambar sedikit membulat */
+}
+
+.edit-overlay {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: rgba(128, 128, 128, 0.8);
+  /* Abu-abu dengan transparansi */
+  padding: 5px 10px;
+  border-radius: 20px;
+  /* Membuat ujung membulat */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.edit-text {
+  font-size: 0.9rem;
+  /* Ukuran teks */
 }

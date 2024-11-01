@@ -19,21 +19,7 @@ class Login extends BaseController
 
     public function index()
     {
-        $cek = $this->model->getAllQR("SELECT count(*) as jml FROM identitas;")->jml;
-        if ($cek > 0) {
-            $tersimpan = $this->model->getAllQR("SELECT * FROM identitas;");
-            $deflogo = base_url() . '/images/noimg.jpg';
-            if (strlen($tersimpan->logo) > 0) {
-                if (file_exists($this->modul->getPathApp() . $tersimpan->logo)) {
-                    $deflogo = base_url() . '/uploads/' . $tersimpan->logo;
-                }
-            }
-            $data['logo'] = $deflogo;
-        } else {
-            $data['logo'] = base_url() . '/images/noimg.jpg';
-        }
-
-        echo view('back/login', $data);
+        echo view('page/login/loginleap');
     }
 
     public function proses()
@@ -49,41 +35,29 @@ class Login extends BaseController
             if ($jml1 > 0) {
                 $data = $this->model->getAllQR("select a.idusers, a.nama, a.idrole, a.email, b.nama_role from users a, role b where a.idrole = b.idrole and a.email = '" . $user . "';");
                 if ($data->idrole == "R00001") {
-                    // ADMIN
+                    // ADMIN LEAP
                     session()->set([
                         'idusers' => $data->idusers,
                         'nama' => $data->nama,
                         'role' => $data->idrole,
                         'nama_role' => $data->nama_role,
                         'email' => $data->email,
-                        'logged_in' => TRUE,
+                        // 'logged_in' => TRUE,
                         'logged_admin' => TRUE
                     ]);
-                    $pesan = "ok";
+                    $pesan = "ok_admin";
                 } elseif ($data->idrole == "R00002") {
-                    //Guru
+                    //GURU LEAP
                     session()->set([
                         'idusers' => $data->idusers,
                         'nama' => $data->nama,
                         'role' => $data->idrole,
                         'nama_role' => $data->nama_role,
                         'email' => $data->email,
-                        'logged_in' => TRUE,
+                        // 'logged_in' => TRUE,
                         'logged_guru' => TRUE
                     ]);
                     $pesan = "ok_guru";
-                } elseif ($data->idrole == "R00006") {
-                    //SUPER ADMIN
-                    session()->set([
-                        'idusers' => $data->idusers,
-                        'nama' => $data->nama,
-                        'role' => $data->idrole,
-                        'nama_role' => $data->nama_role,
-                        'email' => $data->email,
-                        'logged_in' => TRUE,
-                        'logged_sadmin' => TRUE
-                    ]);
-                    $pesan = "ok_sadmin";
                 } else {
                     $pesan = "Anda tidak berhak mengakses !";
                 }

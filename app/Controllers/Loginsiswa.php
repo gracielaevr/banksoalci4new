@@ -33,8 +33,8 @@ class Loginsiswa extends BaseController
             $data['logo'] = base_url() . '/images/noimg.jpg';
         }
 
-        echo view('front/head2', $data);
-        echo view('back/loginsiswa', $data);
+        echo view('page/login/layout/head', $data);
+        echo view('page/login/loginsiswa', $data);
     }
 
     public function proses()
@@ -48,7 +48,7 @@ class Loginsiswa extends BaseController
         if ($jml > 0) {
             $jml1 = $this->model->getAllQR("select count(*) as jml from users where email = '" . $user . "' and pass = '" . $enkrip_pass . "';")->jml;
             if ($jml1 > 0) {
-                $data = $this->model->getAllQR("select a.idusers, a.nama, a.idrole, a.email, b.nama_role from users a, role b where a.idrole = b.idrole and a.email = '" . $user . "';");
+                $data = $this->model->getAllQR("select a.idusers, a.nama, a.idrole, a.siswa_luar, a.email, a.school_name, a.wa, b.nama_role from users a, role b where a.idrole = b.idrole and a.email = '" . $user . "';");
                 if ($data->idrole == "R00003") {
                     // SISWA
                     session()->set([
@@ -57,7 +57,9 @@ class Loginsiswa extends BaseController
                         'role' => $data->idrole,
                         'nama_role' => $data->nama_role,
                         'email' => $data->email,
-                        'logged_in' => TRUE,
+                        'school_name' => $data->school_name,
+                        'wa' => $data->wa,
+                        'siswa_luar' => $data->siswa_luar,
                         'logged_siswa' => TRUE
                     ]);
                     $pesan = "ok_siswa";

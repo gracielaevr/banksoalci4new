@@ -19,7 +19,8 @@ class Soal extends BaseController
 
     public function index()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
@@ -56,14 +57,31 @@ class Soal extends BaseController
                 $data['logo'] = base_url() . '/images/noimg.jpg';
             }
 
-            echo view('back/head', $data);
-            if ($idrole == "R00001") {
-                echo view('back/menu');
+            // echo view('back/head', $data);
+            // // if ($idrole == "R00001") {
+            // echo view('back/menu');
+            // // } else {
+            // // echo view('back/menu_guru');
+            // // }
+            // echo view('back/soal/index');
+            // echo view('back/foot');
+
+            if ($idrole === "R00001") {
+                echo view('page/menu/layout/head', $data);
+                echo view('page/menu/menu_admin');
+                echo view('page/menu/soal/index', $data);
+                echo view('page/menu/layout/foot');
+            } else if ($idrole === "R00004") {
+                echo view('back/head', $data);
+                echo view('back/menu_instansi');
+                echo view('back/soal/index', $data);
+                echo view('back/foot');
             } else {
+                echo view('back/head', $data);
                 echo view('back/menu_guru');
+                echo view('back/soal/index', $data);
+                echo view('back/foot');
             }
-            echo view('back/soal/index');
-            echo view('back/foot');
         } else {
             $this->modul->halaman('login');
         }
@@ -71,7 +89,8 @@ class Soal extends BaseController
 
     public function ajaxlist()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $data = array();
             $no = 1;
             $list = $this->model->getAll("topik");
@@ -82,7 +101,7 @@ class Soal extends BaseController
                 // membaca jml subtopik
                 $jml_subtopik = $this->model->getAllQR("SELECT count(*) as jml FROM subtopik where idtopik = '" . $row->idtopik . "';")->jml;
                 if ($jml_subtopik > 0) {
-                    $str = '<table class="table table-striped" style="width: 100%;">
+                    $str = '<table  class="table-striped">
                             <thead>                                 
                                 <tr>
                                     <th style="text-align: center;">Subtopik</th>
@@ -99,11 +118,11 @@ class Soal extends BaseController
                         $str .= '<td style="text-align: center;" width="20%">' . $jml . '</td>';
                         if ($row1->narasi == 0) {
                             $str .= '<td><div style="text-align: center;">'
-                                . '<button type="button" class="btn btn-sm btn-success btn-fw" onclick="subtopik(' . "'" . $row1->idsubtopik . "'" . ')"><i class="fa fa-fw fa-plus-square"></i> Buat Soal</button>&nbsp;'
+                                . '<button type="button" class="btn btn-sm mt-3 btn-success btn-fw" onclick="subtopik(' . "'" . $row1->idsubtopik . "'" . ')"><i class="fa fa-fw fa-plus-square"></i> Buat Soal</button>&nbsp;'
                                 . '</div></td>';
                         } else {
                             $str .= '<td><div style="text-align: center;">'
-                                . '<button type="button" class="btn btn-sm btn-primary btn-fw" onclick="soal(' . "'" . $row1->idsubtopik . "'" . ')"><i class="fa fa-fw fa-plus-square"></i> Buat Soal Narasi</button>&nbsp;'
+                                . '<button type="button" class="btn btn-sm mt-3 btn-primary btn-fw" onclick="soal(' . "'" . $row1->idsubtopik . "'" . ')"><i class="fa fa-fw fa-plus-square"></i> Buat Soal Narasi</button>&nbsp;'
                                 . '</div></td>';
                         }
 
@@ -127,7 +146,8 @@ class Soal extends BaseController
 
     public function detil()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
@@ -174,14 +194,32 @@ class Soal extends BaseController
             $kode = $this->request->getUri()->getSegment(3);
             $data['head'] = $this->model->getAllQR("select t.nama as namatopik,s.nama as namasub, idsubtopik from subtopik s, topik t where s.idtopik = t.idtopik AND s.idsubtopik = '" . $kode . "';");
 
-            echo view('back/head', $data);
-            if ($idrole == "R00001") {
-                echo view('back/menu');
+            // echo view('back/head', $data);
+            // if ($idrole == "R00001") {
+            //     echo view('back/menu');
+            // } else {
+            //     echo view('back/menu_guru');
+            // }
+            // echo view('back/soal/detail');
+            // echo view('back/foot');
+
+
+            if ($idrole === "R00001") {
+                echo view('page/menu/layout/head', $data);
+                echo view('page/menu/menu_admin');
+                echo view('page/menu/soal/detail', $data);
+                echo view('page/menu/layout/foot');
+            } else if ($idrole === "R00004") {
+                echo view('back/head', $data);
+                echo view('back/menu_instansi');
+                echo view('back/soal/detail', $data);
+                echo view('back/foot');
             } else {
+                echo view('back/head', $data);
                 echo view('back/menu_guru');
+                echo view('back/soal/detail', $data);
+                echo view('back/foot');
             }
-            echo view('back/soal/detail');
-            echo view('back/foot');
         } else {
             $this->modul->halaman('login');
         }
@@ -189,7 +227,8 @@ class Soal extends BaseController
 
     public function ajax_add()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             if (isset($_FILES['file']['name'])) {
                 if (0 < $_FILES['file']['error']) {
                     $pesan = "Error during file upload " . $_FILES['file']['error'];
@@ -302,7 +341,8 @@ class Soal extends BaseController
 
     public function ganti()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $kondisi['idsoal'] = $this->request->getUri()->getSegment(3);
             $data = $this->model->get_by_id("soal", $kondisi);
             echo json_encode($data);
@@ -313,7 +353,8 @@ class Soal extends BaseController
 
     public function aksespilihan()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $idsoal = $this->request->getUri()->getSegment(3);
             $str = '';
             $counter = 1;
@@ -335,7 +376,8 @@ class Soal extends BaseController
 
     public function aksesjawaban()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $idsoal = $this->request->getUri()->getSegment(3);
             $str = '';
             $counter = 1;
@@ -357,7 +399,8 @@ class Soal extends BaseController
 
     public function ajax_edit()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             if (isset($_FILES['file']['name'])) {
                 if (0 < $_FILES['file']['error']) {
                     $pesan = "Error during file upload " . $_FILES['file']['error'];
@@ -540,7 +583,8 @@ class Soal extends BaseController
 
     public function hapus()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $id = $this->request->getUri()->getSegment(3);
             $lawas = $this->model->getAllQR("SELECT gambar FROM soal where idsoal = '" . $id . "';")->gambar;
             if (strlen($lawas) > 0) {
@@ -563,7 +607,8 @@ class Soal extends BaseController
 
     public function pindah_instansi()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
 
             $data = array(
                 'pindahsoal' => 'ya',
@@ -582,7 +627,8 @@ class Soal extends BaseController
     }
     public function ajaxdetil()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $kode = $this->request->getUri()->getSegment(3);
             $data = array();
             $no = 1;
@@ -669,7 +715,8 @@ class Soal extends BaseController
 
     public function load_gambar()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $kode = $this->request->getUri()->getSegment(3);
 
             $def_foto = base_url() . 'front/images/noimg.png';
@@ -687,7 +734,8 @@ class Soal extends BaseController
 
     public function ajax_upload()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             if (isset($_FILES['file']['name'])) {
                 if (0 < $_FILES['file']['error']) {
                     $pesan = "Error during file upload " . $_FILES['file']['error'];
@@ -877,7 +925,8 @@ class Soal extends BaseController
 
     public function hapussemua()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $hasil = explode(",", $this->request->getPost('hasil'));
 
             $hapus = "";
@@ -907,7 +956,8 @@ class Soal extends BaseController
 
     public function pindah()
     {
-        if (session()->get("logged_in")) {
+        if (session()->get("logged_admin") || session()->get("logged_instansi")) {
+
             $hasil = explode(",", $this->request->getPost('hasil'));
 
             $hapus = "";

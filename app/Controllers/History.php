@@ -22,62 +22,115 @@ class History extends BaseController
         if (session()->get("logged_siswa")) {
 
             $idusers = session()->get("idusers");
+            $data['idusers'] = session()->get("idusers");
             $data['nama'] = session()->get("nama");
             $data['role'] = session()->get("role");
             $data['nm_role'] = session()->get("nama_role");
 
             $data['menu'] = $this->request->getUri()->getSegment(1);
 
-            //ambil history peserta
-            $history_peserta = $this->model->getAllW('peserta', ['idusers' => $idusers])->getResult();
-            if (!empty($history_peserta)) {
-                $idsubtopik = $history_peserta[0]->idsubtopik;
-                $subtopik_nama = $this->model->getAllW('subtopik', ['idsubtopik' => $idsubtopik])->getResult();
-            } else {
-                $subtopik_nama = [];
-                $data['message'] = "Data Is Empty.";
-            }
-
-            $data['history_peserta'] = $history_peserta;
-            $data['subtopik_nama'] = $subtopik_nama;
-
-            $jml_user = $this->model->getAllQR("SELECT count(*) as jml FROM users WHERE idusers = '" . session()->get("idusers") . "';")->jml;
-
-            if ($jml_user > 0) {
-                $user = $this->model->getAllQR("SELECT * FROM users WHERE idusers = '" . session()->get("idusers") . "';");
-
-                $data['idusers'] = $user->idusers;
-                $data['nama'] = $user->nama;
-                $data['email'] = $user->email;
-                $data['wa'] = $user->wa;
-                $data['idrole'] = $user->idrole;
-
-                $def_foto = base_url() . 'front/images/noimg.png';
-                $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
-                if (strlen($foto) > 0) {
-                    if (file_exists($this->modul->getPathApp() . $foto)) {
-                        $def_foto = base_url() . '/uploads/' . $foto;
-                    }
+            $data['pro'] = $this->model->getAllQR("SELECT * FROM users where idusers = '" . session()->get("idusers") . "';");
+            // membaca foto profile
+            $def_foto = base_url() . 'front/images/noimg.png';
+            $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
+            if (strlen($foto) > 0) {
+                if (file_exists($this->modul->getPathApp() . $foto)) {
+                    $def_foto = base_url() . '/uploads/' . $foto;
                 }
-                $data['foto_profile'] = $def_foto;
-            } else {
-                $data['idusers'] = "";
-                $data['nama'] = "";
-                $data['email'] = "";
-                $data['wa'] = "";
-                $data['idrole'] = "";
-                $data['foto_profile'] = base_url() . 'front/images/noimg.png';
+            }
+            $data['foto_profile'] = $def_foto;
+
+            $idusers = session()->get("idusers");
+            $history_subs = $this->model->getAllQR(" SELECT status, tgl_berakhir, checkout_link FROM history_subscribe WHERE idusers = '" . $idusers . "' ");
+            $pakethabis = false;
+            if ($history_subs) {
+                try {
+                    $today = date("Y-m-d");
+                    $tglBerakhir = date("Y-m-d", strtotime($history_subs->tgl_berakhir));
+
+                    $diff = (strtotime($tglBerakhir) - strtotime($today)) / 86400; // 86400 = 1 hari dalam detik
+
+                    $diff = (strtotime($tglBerakhir) - strtotime($today)) / 86400; // 86400 = 1 hari dalam detik
+                    if ($diff < 0) {
+                        $pakethabis = true;
+                    }
+                } catch (\Exception $e) {
+                    // Tangani error jika terjadi masalah
+                    echo "Error: " . $e->getMessage();
+                }
             }
 
-            $history_subs = $this->model->getAllQR("SELECT idsubs FROM users WHERE idusers = '" . session()->get("idusers") . "';")->idsubs;
-            $data['showSessionMenu'] = $history_subs !== null;
+            if ($history_subs !== NULL) {
+                if ($history_subs->status === "Paid") {
+                    $data['showSessionMenu'] = true;
+                    session()->remove('notification_pending');
+                } else {
 
+                    // $notificationMsg = "Complete your payment, <b><a href='{$history_subs->checkout_link}' style='color:#fff'>click here</a></b>";
+                    // session()->setFlashdata('notification_pending', $notificationMsg);
 
-            echo view('back/dashboardsiswa/head', $data);
-            echo view('back/dashboardsiswa/history', $data);
-            echo view('back/dashboardsiswa/foot', $data);
+                    // $instansi = session()->get("idinstansi");
+                    // $siswaluar_free = session()->get("school_name") !== NULL && session()->get("siswa_luar") === 1 && $history_subs === NULL || $history_subs->status === 'Pending';
+                    // $data['free'] = $instansi === NULL && $history_subs === NULL || $history_subs->status === 'Pending' || $siswaluar_free;
+                    // if ($data['free'] === true) {
+                    //     $notificationMsg = "You are currently using a free account. Please subscribe to access exclusive feature.";
+                    //     session()->setFlashdata('notification_free', $notificationMsg);
+                    // }
+                }
+            }
+            if ($history_subs === null || $history_subs->status === 'Pending') {
+                $data['showSessionMenu'] = false;
+
+            }
+            $instansi = session()->get("idinstansi");
+            $siswaluar_free = session()->get("school_name") !== NULL && session()->get("siswa_luar") === 1 && $history_subs === NULL;
+            $data['free'] = $instansi === NULL && $history_subs === NULL || $siswaluar_free;
+            if ($data['free'] === true) {
+                $notificationMsg = "You are currently using a free account. Please subscribe to access exclusive feature.";
+                session()->setFlashdata('notification_free', $notificationMsg);
+            }
+
+            $data['pakethabis'] = $pakethabis;
+
+            echo view('page/dashboardsiswa/layout/head', $data);
+            echo view('page/dashboardsiswa/history', $data);
+            echo view('page/dashboardsiswa/layout/foot', $data);
         } else {
             $this->modul->halaman('loginsiswa');
+        }
+    }
+
+
+    public function ajaxlist()
+    {
+        if (session()->get("logged_siswa")) {
+
+
+            $idusers = session()->get("idusers");
+            $data = array();
+            $no = 1;
+            $list = $this->model->getAllQ("SELECT * FROM peserta WHERE status = 1 AND idusers = '" . $idusers . "' ORDER BY created_at DESC;");
+            foreach ($list->getResult() as $row) {
+                $val = array();
+                $val[] = $no;
+                $val[] = $row->created_at;
+                $subtopik = $this->model->getAllQR("SELECT nama FROM subtopik WHERE idsubtopik = '" . $row->idsubtopik . "'")->nama;
+                $val[] = $subtopik;
+                $val[] = $row->benar;
+                $val[] = $row->salah;
+                $val[] = '<div style="text-align: center;" class="d-flex justify-content-center align-items-center ms-3 me-3">'
+                    . '<button type="button" class="badge badge-sm badge-success">' . $row->poin . '</button>&nbsp;'
+                    . '</div>';
+
+
+                $data[] = $val;
+
+                $no++;
+            }
+            $output = array("data" => $data);
+            echo json_encode($output);
+        } else {
+            $this->modul->halaman('login');
         }
     }
 }

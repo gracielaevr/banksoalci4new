@@ -33,9 +33,13 @@ class Topic extends BaseController
         $data['topik'] = $topik->nama;
         $data['idtopik'] = $topik->idtopik;
 
-        echo view('front/head');
-        echo view('front/subtopik/index', $data);
-        echo view('front/foot');
+        echo view('page/beranda/layout/head');
+        echo view('page/beranda/subtopik/index', $data);
+        echo view('page/beranda/layout/foot');
+
+        // echo view('front/head2');
+        // echo view('front/subtopik/index', $data);
+        // echo view('front/foot');
     }
 
     public function ajaxlist()
@@ -43,26 +47,26 @@ class Topic extends BaseController
         $id = $this->request->getPost('query');
         $limit = $this->request->getPost('limit');
 
-        $maxdb = $this->model->getAllQR("SELECT count(*) as jml FROM topik")->jml;
+        $maxdb = $this->model->getAllQR("SELECT count(*) as jml FROM topik WHERE idinstansi IS NULL and school_name IS NULL")->jml;
         $max = 0;
 
         $hasil = '';
         if ($id != '') {
-            $list = $this->model->getAllQ("SELECT * FROM topik where nama like '%" . $id . "%';");
+            $list = $this->model->getAllQ("SELECT * FROM topik where idinstansi IS NULL and school_name IS NULL and nama like '%" . $id . "%';");
             $list2 = $this->model->getAllQ("SELECT t.nama as nt, s.nama as ns, idsubtopik FROM subtopik s, topik t where s.nama like '%" . $id . "%' and t.idtopik = s.idtopik;");
         } else {
-            $list = $this->model->getAllQ("SELECT * FROM topik order by best desc LIMIT " . $limit . ";");
+            $list = $this->model->getAllQ("SELECT * FROM topik WHERE idinstansi IS NULL and school_name IS NULL order by best desc LIMIT " . $limit . ";");
         }
         foreach ($list->getResult() as $row) {
-            $hasil .= '<div class="col-sm-6">
-                        <a href="' . base_url() . '/topic/subtopic/' . str_replace(' ', '-', $row->nama) . '" class="btn">' . $row->nama . '</a>
+            $hasil .= '<div class="col-sm-4">
+                        <a href="' . base_url() . 'topic/subtopic/' . str_replace(' ', '-', $row->nama) . '" class="btn">' . $row->nama . '</a>
                     </div>';
             $max++;
         }
         if ($id != '') {
             foreach ($list2->getResult() as $row) {
                 $hasil .= '<div class="col-sm-6">
-                            <a href="' . base_url() . '/subtopic/start/' . $this->modul->enkrip_url($row->idsubtopik) . '" class="btn">' . $row->ns . '<br>Topic: ' . $row->nt . '</a>
+                            <a href="' . base_url() . 'subtopic/start/' . $this->modul->enkrip_url($row->idsubtopik) . '" class="btn">' . $row->ns . '<br>Topic: ' . $row->nt . '</a>
                         </div>';
             }
         }

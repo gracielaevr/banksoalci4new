@@ -60,10 +60,10 @@ class Homeguru extends BaseController
                 $data['logo'] = base_url() . '/images/noimg.jpg';
             }
 
-            echo view('back/head', $data);
-            echo view('back/menu_guru');
-            echo view('back/content');
-            echo view('back/foot');
+            echo view('page/menu/layout/head', $data);
+            echo view('page/menu/menu_guru');
+            echo view('page/menu/content');
+            echo view('page/menu/layout/foot');
         } else {
             $this->modul->halaman('login');
         }

@@ -2733,7 +2733,7 @@ progress {
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #d2d6da;
-  appearance: none;
+  /* appearance: none; */
   border-radius: 0.5rem;
   transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
@@ -22541,7 +22541,7 @@ hr.horizontal.gray-light {
 .navbar-vertical.navbar-expand-xs .navbar-collapse {
   display: block;
   overflow: auto;
-  height: calc(100vh - 360px);
+  /* height: calc(100vh - 360px); */
 }
 
 .navbar-vertical.navbar-expand-xs>[class*="container"] {
@@ -23331,24 +23331,36 @@ hr.horizontal.gray-light {
 }
 
 .navbar-vertical.bg-white {
-  box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.50);
 }
 
-.navbar-vertical.bg-white .navbar-nav>.nav-item .nav-link.active {
-  background-color: #f6f9fc;
+/* .navbar-vertical.bg-white .navbar-nav>.nav-item .nav-link.active {
+  background-color: #5e93ca;
   box-shadow: none;
+  color: white;
+}
+
+.navbar-vertical.bg-white .navbar-nav>.nav-item .nav-link:hover {
+  background-color: #5e93ca;
+
+  box-shadow: none;
+  border-radius: 0.5rem;
+  color: white;
+
+
 }
 
 .navbar-vertical .navbar-nav .nav-link.active {
   font-weight: 600;
   box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
   border-radius: 0.5rem;
-}
+  color: white;
 
-.navbar-vertical .navbar-nav>.nav-item .nav-link.active {
-  color: #344767;
-  background-color: rgba(255, 255, 255, 0.13);
-}
+} */
+
+/* .navbar-vertical .navbar-nav>.nav-item .nav-link.active {
+  background-color: red;
+} */
 
 .navbar-main {
   transition: box-shadow 0.25s ease-in, background-color 0.25s ease-in;
@@ -23372,7 +23384,7 @@ hr.horizontal.gray-light {
   font-weight: 700;
   content: "\f107";
   margin-left: auto;
-  color: rgba(33, 37, 41, 0.5);
+  /* color: rgba(33, 37, 41, 0.5); */
   transition: all 0.2s ease-in-out;
 }
 
@@ -26893,17 +26905,15 @@ pre[class*="language-"] {
   position: absolute;
 }
 
-.ps__thumb-y {
+/* .ps__thumb-y {
   background-color: #aaa;
   border-radius: 6px;
   transition: background-color .2s linear, width .2s ease-in-out;
   -webkit-transition: background-color .2s linear, width .2s ease-in-out;
   width: 6px;
-  /* there must be 'right' for ps__thumb-y */
   right: 2px;
-  /* please don't change 'position' */
   position: absolute;
-}
+} */
 
 .ps__rail-x:hover>.ps__thumb-x,
 .ps__rail-x:focus>.ps__thumb-x,

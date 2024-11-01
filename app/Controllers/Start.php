@@ -16,60 +16,58 @@ class Start extends BaseController
         $this->modul = new Modul();
     }
 
-    public function index($idsubtopik): void
+
+
+    public function index()
     {
-        if (session()->get("logged_siswa")) {
-            $kondisi = ['idsubtopik' => $idsubtopik];
-            $subtopicData = $this->model->get_by_id("subtopik", $kondisi);
+        $kode =  $this->modul->dekrip_url($this->request->getUri()->getSegment(3));
+        $data['kode'] = $this->modul->enkrip_url($kode);
+        $subs = $this->model->getAllQR("select nama, narasi from subtopik where idsubtopik = '" . $kode . "'");
+        $data['subtopik'] = $subs->nama;
+        $data['topik'] = $this->model->getAllQR("select t.nama as nm from subtopik s, topik t where t.idtopik = s.idtopik and s.idsubtopik = '" . $kode . "'")->nm;
+        $data['tot'] = $this->model->getAllQR("select count(*) as jml from soal where idsubtopik = '" . $kode . "'")->jml;
 
-            $idtopik = $subtopicData->idtopik;
-            $kondisi2 =  ['idtopik' => $idtopik];
-            $topikData = $this->model->get_by_id("topik", $kondisi2);
+        $idusers = session()->get("idusers");
+        $paketData = $this->model->getAllQR("SELECT paket, sesi, tgl_berakhir FROM history_subscribe WHERE idusers = '" . $idusers . "' AND tgl_berakhir >= CURDATE();");
+        if ($paketData) {
+            try {
+                $today = date("Y-m-d");
+                $tglBerakhir = date("Y-m-d", strtotime($paketData->tgl_berakhir));
 
-            $data['subtopik'] = $subtopicData;
-            $data['topik'] = $topikData;
-            $data['idtopik'] = $idtopik;
+                $diff = (strtotime($tglBerakhir) - strtotime($today)) / 86400; // 86400 = 1 hari dalam detik
 
-
-            $data['idusers'] = session()->get("idusers");
-            $data['nama'] = session()->get("nama");
-            $data['role'] = session()->get("role");
-            $data['nm_role'] = session()->get("nama_role");
-
-            $data['menu'] = $this->request->getUri()->getSegment(1);
-
-            $jml_user = $this->model->getAllQR("SELECT count(*) as jml FROM users WHERE idusers = '" . session()->get("idusers") . "';")->jml;
-
-            if ($jml_user > 0) {
-                $user = $this->model->getAllQR("SELECT * FROM users WHERE idusers = '" . session()->get("idusers") . "';");
-
-                $data['idusers'] = $user->idusers;
-                $data['nama'] = $user->nama;
-                $data['email'] = $user->email;
-                $data['wa'] = $user->wa;
-                $data['idrole'] = $user->idrole;
-
-                $def_foto = base_url() . 'front/images/noimg.png';
-                $foto = $this->model->getAllQR("select foto from users where idusers = '" . session()->get("idusers") . "';")->foto;
-                if (strlen($foto) > 0) {
-                    if (file_exists($this->modul->getPathApp() . $foto)) {
-                        $def_foto = base_url() . '/uploads/' . $foto;
-                    }
+                // Menampilkan notifikasi jika kurang dari 7 hari
+                if ($diff <= 7 && $diff >= 1) {
+                    $notificationMsg = "Your package will expire in $diff days. please renew before " . $paketData->tgl_berakhir . ".";
+                    session()->setFlashdata('notification', $notificationMsg);
                 }
-                $data['foto_profile'] = $def_foto;
-            } else {
-                $data['idusers'] = "";
-                $data['nama'] = "";
-                $data['email'] = "";
-                $data['wa'] = "";
-                $data['idrole'] = "";
-                $data['foto_profile'] = base_url() . '/images/noimg.jpg';
+                if ($diff <= 3 && $diff >= 1) {
+                    session()->setFlashdata('box-subscribe', true);
+                }
+            } catch (\Exception $e) {
+                // Tangani error jika terjadi masalah
+                echo "Error: " . $e->getMessage();
             }
+        }
+
+        $history_subs = $this->model->getAllQR(" SELECT idusers, tgl_berakhir FROM history_subscribe WHERE idusers = '" . $idusers . "' ");
+        if ($history_subs !== null) {
+            $data['showSessionMenu'] = true;
+        }
+        if ($history_subs === null) {
+            $data['showSessionMenu'] = false;
+        }
+        // $school = session()->get("school_name");
+        $instansi = session()->get("idinstansi");
+        $data['free'] = $instansi === NULL && $history_subs === NULL;
 
 
-            echo view('back/dashboardsiswa/start', $data);
+        if ($subs->narasi == 1) {
+            $data['jml'] = 5;
+            echo view('page/dashboardsiswa/narasi', $data);
         } else {
-            $this->modul->halaman('loginsiswa');
+            $data['jml'] = 10;
+            echo view('page/dashboardsiswa/start', $data);
         }
     }
 }
